@@ -1,7 +1,5 @@
 import ingredients from "@/assets/ingredients.json";
-//import flavor from "@/assets/flavors.json";
 import styled from "styled-components";
-import Image from "next/image";
 
 const IngredientsList = () => {
   const flavorColors = {
@@ -26,12 +24,16 @@ const IngredientsList = () => {
           {ingredients.map((ingredient) => (
             <ListItem
               key={ingredient._id}
-              flavor={ingredient.flavor}
-              color={flavorColors[ingredient.flavor]}
+              $color={flavorColors[ingredient.flavor]}
             >
-              <Image1 />
-              <Name>{ingredient.name}</Name>
-              <Flavor>{ingredient.flavor}</Flavor>
+              <ImageWrapper>
+                <StyledImage imgUrl={ingredient.imgUrl} />
+              </ImageWrapper>
+              <StyledContent>
+                <Name>{ingredient.name}</Name>
+                <br></br>
+                <Flavor>{"#" + ingredient.flavor}</Flavor>
+              </StyledContent>
             </ListItem>
           ))}
         </List>
@@ -39,10 +41,8 @@ const IngredientsList = () => {
     </>
   );
 };
+
 const Container = styled.div`
-  /* padding: 20px;
-  max-width: 600px;
-  margin: auto; */
   width: calc(100% - 20px);
   height: 60%;
   padding: 10px;
@@ -51,10 +51,12 @@ const Container = styled.div`
   border-radius: 10px;
   overflow: hidden;
 `;
+
 const Title = styled.h1`
   text-align: center;
   margin-bottom: 20px;
 `;
+
 const List = styled.ul`
   list-style: none;
   padding: 0;
@@ -71,14 +73,12 @@ const List = styled.ul`
   align-items: flex-start;
   justify-content: center;
 `;
+
 const ListItem = styled.li`
-  width: 280px;
-  height: 340px;
+  width: 300px;
+  height: 380px;
   margin: 20px;
-  padding: 5px;
-  border-radius: 10px;
-  justify-content: flex-start;
-  background-color: ${(props) => props.color || "#fff"};
+  background-color: ${(props) => props.$color || "#fff"};
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -93,13 +93,35 @@ const ListItem = styled.li`
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
 `;
+
+const ImageWrapper = styled.div`
+  width: 300px;
+  height: 340px;
+  height: 60%;
+  padding: 5px;
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+const StyledContent = styled.div`
+  padding: 10px;
+  text-align: center;
+`;
+
 const Name = styled.span`
   font-weight: bold;
+  font-size: 16px;
+  text-align: center;
 `;
+
 const Flavor = styled.span`
   font-style: italic;
+  font-size: 14px;
 `;
-const Image1 = styled.div`
+
+const StyledImage = styled.div`
   align-self: stretch;
   height: 210px;
   overflow: hidden;
@@ -109,12 +131,12 @@ const Image1 = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   box-sizing: border-box;
-  background-image: url("assets/Apfel.png.jpg");
+  background-image: url("");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
-  /* border: 1px solid black; */
-  background-color: #fff;
   border-radius: 10px;
+  background-image: url(${(props) => props.imgUrl});
 `;
+
 export default IngredientsList;
