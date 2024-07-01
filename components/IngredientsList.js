@@ -136,10 +136,6 @@ const StyledImage = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   box-sizing: border-box;
-  background-image: url("");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
   border-radius: 10px;
   background-image: url(${(props) => props.imgUrl});
 `;
