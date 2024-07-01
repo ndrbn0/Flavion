@@ -137,7 +137,6 @@ const StyledImage = styled.div`
   justify-content: flex-start;
   box-sizing: border-box;
   border-radius: 10px;
-  background-image: url(${(props) => props.imgUrl});
 `;
 
 export default IngredientsList;
