@@ -37,7 +37,7 @@ const IngredientsList = () => {
               <StyledContent>
                 <Name>{ingredient.name}</Name>
                 <br></br>
-                <Flavor>{"#" + ingredient.flavor}</Flavor>
+                <Flavor>#{ingredient.flavor}</Flavor>
               </StyledContent>
             </ListItem>
           ))}
