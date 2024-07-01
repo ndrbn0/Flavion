@@ -126,7 +126,7 @@ const Flavor = styled.span`
   font-size: 14px;
 `;
 
-const StyledImage = styled.div`
+const StyledImage = styled(Image)`
   align-self: stretch;
   height: 210px;
   overflow: hidden;
