@@ -1,5 +1,6 @@
 import ingredients from "@/assets/ingredients.json";
 import styled from "styled-components";
+import Image from "next/image";
 
 const IngredientsList = () => {
   const flavorColors = {
@@ -27,7 +28,7 @@ const IngredientsList = () => {
               $color={flavorColors[ingredient.flavor]}
             >
               <ImageWrapper>
-<StyledImage
+                <StyledImage
                   src={ingredient.imgUrl}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
