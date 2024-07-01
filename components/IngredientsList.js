@@ -27,7 +27,12 @@ const IngredientsList = () => {
               $color={flavorColors[ingredient.flavor]}
             >
               <ImageWrapper>
-                <StyledImage imgUrl={ingredient.imgUrl} />
+<StyledImage
+                  src={ingredient.imgUrl}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  alt={ingredient.name}
+                />
               </ImageWrapper>
               <StyledContent>
                 <Name>{ingredient.name}</Name>
