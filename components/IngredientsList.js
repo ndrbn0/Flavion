@@ -1,6 +1,7 @@
 import ingredients from "@/assets/ingredients.json";
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 const IngredientsList = () => {
   const flavorColors = {
@@ -23,24 +24,33 @@ const IngredientsList = () => {
       <Container>
         <List>
           {ingredients.map((ingredient) => (
-            <ListItem
+            <Link
+              href={`/ingredient/${ingredient._id}`}
               key={ingredient._id}
-              $color={flavorColors[ingredient.flavor]}
+              passHref
             >
-              <ImageWrapper>
-                <StyledImage
-                  src={ingredient.imgUrl}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  alt={ingredient.name}
-                />
-              </ImageWrapper>
-              <StyledContent>
-                <Name>{ingredient.name}</Name>
-                <br></br>
-                <Flavor>#{ingredient.flavor}</Flavor>
-              </StyledContent>
-            </ListItem>
+              <StyledLink>
+                <ListItem
+                  key={ingredient._id}
+                  $color={flavorColors[ingredient.flavor]}
+                >
+                  <ImageWrapper>
+                    <StyledImage
+                      src={ingredient.imgUrl}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      alt={ingredient.name}
+                    />
+                  </ImageWrapper>
+
+                  <StyledContent>
+                    <Name>{ingredient.name}</Name>
+                    <br></br>
+                    <Flavor>#{ingredient.flavor}</Flavor>
+                  </StyledContent>
+                </ListItem>
+              </StyledLink>
+            </Link>
           ))}
         </List>
       </Container>
@@ -138,6 +148,11 @@ const StyledImage = styled(Image)`
   justify-content: flex-start;
   box-sizing: border-box;
   border-radius: 10px;
+`;
+
+const StyledLink = styled.a`
+  text-decoration: none;
+  color: inherit;
 `;
 
 export default IngredientsList;
