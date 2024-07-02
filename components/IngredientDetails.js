@@ -22,16 +22,7 @@ const IngredientDetails = () => {
 
   const router = useRouter();
   const { id } = router.query;
-  const [ingredient, setIngredient] = useState(null);
-
-  useEffect(() => {
-    if (id) {
-      const foundIngredient = ingredients.find(
-        (ingredient) => ingredient._id === id
-      );
-      setIngredient(foundIngredient);
-    }
-  }, [id]);
+  const ingredient = ingredients.find((ingredient) => ingredient._id === id);
 
   if (!ingredient) {
     return <p>Loading...</p>;
