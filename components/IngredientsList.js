@@ -15,7 +15,16 @@ const IngredientsList = () => {
   useEffect(() => {
     const storedIngredients =
       JSON.parse(localStorage.getItem("ingredients")) || [];
-    setIngredients([...storedIngredients, ...ingredientsData]);
+
+    const allIngredients = [
+      ...new Map(
+        [...storedIngredients, ...ingredientsData].map((item) => [
+          item._id,
+          item,
+        ])
+      ).values(),
+    ];
+    setIngredients(allIngredients);
   }, []);
 
   const addIngredient = (newIngredient) => {
