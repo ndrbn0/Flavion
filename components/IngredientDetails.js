@@ -1,12 +1,25 @@
 import { useRouter } from "next/router";
-import ingredients from "@/assets/ingredients.json";
+import { useEffect, useState } from "react";
+import ingredientsData from "@/assets/ingredients.json";
 import IngredientItem from "@/components/IngredientItem";
 import { Container, BackLink } from "@/_styles";
 
 const IngredientDetails = () => {
   const router = useRouter();
   const { id } = router.query;
-  const ingredient = ingredients.find((ingredient) => ingredient._id === id);
+  const [ingredient, setIngredient] = useState(null);
+
+  useEffect(() => {
+    if (id) {
+      const storedIngredients =
+        JSON.parse(localStorage.getItem("ingredients")) || [];
+      const allIngredients = [...storedIngredients, ...ingredientsData];
+      const foundIngredient = allIngredients.find(
+        (ingredient) => ingredient._id === id
+      );
+      setIngredient(foundIngredient);
+    }
+  }, [id]);
 
   if (!ingredient) {
     return <p>Loading...</p>;
