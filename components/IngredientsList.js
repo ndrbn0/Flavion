@@ -1,6 +1,7 @@
 import ingredients from "@/assets/ingredients.json";
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 const IngredientsList = () => {
   const flavorColors = {
@@ -81,7 +82,7 @@ const List = styled.ul`
   justify-content: center;
 `;
 
-const StyledListItem = styled.a`
+const StyledListItem = styled(Link)`
   text-decoration: none;
   color: inherit;
   width: 300px;

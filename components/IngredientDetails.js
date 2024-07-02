@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import styled from "styled-components";
 import ingredients from "@/assets/ingredients.json";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const IngredientDetails = () => {
   const flavorColors = {
@@ -115,7 +115,7 @@ const Flavor = styled.span`
 const BackLink = styled(Link)`
   cursor: pointer;
   font-size: 16px;
-  color: blue;
+  color: black;
   margin: 32px 16px;
   text-decoration: none;
 `;
