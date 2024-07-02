@@ -1,7 +1,15 @@
 import { useRouter } from "next/router";
 import ingredients from "@/assets/ingredients.json";
-import IngredientItem from "@/components/IngredientItem";
-import { Container, BackLink } from "@/_styles";
+import { flavorColors } from "@/utils";
+import {
+  Container,
+  ImageWrapper,
+  StyledImage,
+  StyledContent,
+  Name,
+  Flavor,
+  BackLink,
+} from "@/_styles";
 
 const IngredientDetails = () => {
   const router = useRouter();
@@ -16,7 +24,21 @@ const IngredientDetails = () => {
     <>
       <BackLink href="/">← Back</BackLink>
       <Container>
-        <IngredientItem ingredient={ingredient} />
+        <ImageWrapper>
+          <StyledImage
+            src={ingredient.imgUrl}
+            alt={ingredient.name}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </ImageWrapper>
+        <StyledContent>
+          <Name>{ingredient.name}</Name>
+          <br />
+          <Flavor $color={flavorColors[ingredient.flavor]}>
+            #{ingredient.flavor}
+          </Flavor>
+        </StyledContent>
       </Container>
     </>
   );

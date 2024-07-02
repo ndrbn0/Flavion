@@ -1,13 +1,23 @@
-import ingredients from "@/assets/ingredients.json";
+// IngredientsList.js
+import { useState } from "react";
+import ingredientsData from "@/assets/ingredients.json";
 import IngredientItem from "@/components/IngredientItem";
+import AddNewIngredientForm from "@/components/AddNewIngredientForm";
 import { Container, List, StyledListItem } from "@/_styles";
 import styled from "styled-components";
 
 const IngredientsList = () => {
+  const [ingredients, setIngredients] = useState(ingredientsData);
+
+  const handleAddIngredient = (newIngredient) => {
+    setIngredients([newIngredient, ...ingredients]);
+  };
+
   return (
     <>
       <Title>Ingredients Overview</Title>
       <Container>
+        <AddNewIngredientForm onAddIngredient={handleAddIngredient} />
         <List>
           {ingredients.map((ingredient) => (
             <StyledListItem
