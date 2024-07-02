@@ -112,7 +112,7 @@ const Flavor = styled.span`
   display: inline-block;
 `;
 
-const BackLink = styled.a`
+const BackLink = styled(Link)`
   cursor: pointer;
   font-size: 16px;
   color: blue;
