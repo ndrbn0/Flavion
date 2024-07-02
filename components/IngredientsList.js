@@ -57,7 +57,6 @@ const Container = styled.div`
   padding: 10px;
   display: flex;
   box-sizing: border-box;
-  /* border-radius: 10px; */
   overflow: hidden;
 `;
 
