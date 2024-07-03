@@ -11,13 +11,7 @@ const flavors = [
 ];
 
 const IngredientsList = () => {
-  const [ingredients, setIngredients] = useState([]);
-  useEffect(() => {
-    const allIngredients = [
-      ...new Map(ingredientsData.map((item) => [item._id, item])).values(),
-    ];
-    setIngredients(allIngredients);
-  }, []);
+  const [ingredients, setIngredients] = useState(ingredientsData);
 
   const addIngredient = (newIngredient) => {
     const updatedIngredients = [{_id: uuidv4(), ...newIngredient}, ...ingredients];
