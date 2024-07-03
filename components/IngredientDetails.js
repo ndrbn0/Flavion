@@ -9,6 +9,11 @@ import {
   Name,
   Flavor,
   BackLink,
+  CardFooter,
+  DetailsCard,
+  DeatailsButtons,
+  ButtonDelete,
+  ButtonEdit,
 } from "@/_styles";
 
 const IngredientDetails = () => {
@@ -24,21 +29,29 @@ const IngredientDetails = () => {
     <>
       <BackLink href="/">← Back</BackLink>
       <Container>
-        <ImageWrapper>
-          <StyledImage
-            src={ingredient.imgUrl}
-            alt={ingredient.name}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        </ImageWrapper>
-        <StyledContent>
-          <Name>{ingredient.name}</Name>
-          <br />
-          <Flavor $color={flavorColors[ingredient.flavor]}>
-            #{ingredient.flavor}
-          </Flavor>
-        </StyledContent>
+        <DetailsCard>
+          <ImageWrapper>
+            <StyledImage
+              src={ingredient.imgUrl}
+              alt={ingredient.name}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </ImageWrapper>
+          <StyledContent>
+            <Name>{ingredient.name}</Name>
+            <br />
+          </StyledContent>
+          <CardFooter>
+            <Flavor $color={flavorColors[ingredient.flavor]}>
+              #{ingredient.flavor}
+            </Flavor>
+          </CardFooter>
+        </DetailsCard>
+        <DeatailsButtons>
+          <ButtonEdit>Edit</ButtonEdit>
+          <ButtonDelete>Delete</ButtonDelete>
+        </DeatailsButtons>
       </Container>
     </>
   );
