@@ -9,8 +9,8 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
   const [flavor, setFlavor] = useState("");
   const [imgUrl, setImgUrl] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const newIngredient = {
       _id: new Date().toISOString(),
       name,
