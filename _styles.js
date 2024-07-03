@@ -206,23 +206,10 @@ export const ConfirmationDialog = styled.div`
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    background-color: #ccc;
 
-    &:first-child {
-      background-color: #ff4d4f;
-      color: white;
-
-      &:hover {
-        background-color: #d43f3a;
-      }
-    }
-
-    &:last-child {
-      background-color: #ccc;
-      color: black;
-
-      &:hover {
-        background-color: #999;
-      }
+    &:hover {
+      background-color: #999;
     }
   }
 `;
