@@ -24,6 +24,7 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <h2>Add New Ingredient</h2>
       <label htmlFor="name"></label>
       <Input
         type="text"
