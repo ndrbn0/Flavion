@@ -20,10 +20,8 @@ const IngredientsList = () => {
   }, []);
 
   const addIngredient = (newIngredient) => {
-    newIngredient._id = uuidv4(); // Assign a unique ID
-    const updatedIngredients = [newIngredient, ...ingredients];
+    const updatedIngredients = [{_id: uuidv4(), ...newIngredient}, ...ingredients];
     setIngredients(updatedIngredients);
-    ingredientsData.push(newIngredient); // Update the ingredientsData array
   };
 
   return (
