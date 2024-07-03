@@ -7,17 +7,7 @@ import { Container, BackLink } from "@/_styles";
 const IngredientDetails = () => {
   const router = useRouter();
   const { id } = router.query;
-  const [ingredient, setIngredient] = useState(null);
-
-  useEffect(() => {
-    if (id) {
-      const allIngredients = ingredientsData;
-      const foundIngredient = allIngredients.find(
-        (ingredient) => ingredient._id === id
-      );
-      setIngredient(foundIngredient);
-    }
-  }, [id]);
+ const ingredient = ingredients.find((ingredient) => ingredientsData._id === id);
 
   if (!ingredient) {
     return <p>Loading...</p>;
