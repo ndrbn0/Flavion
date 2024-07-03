@@ -34,7 +34,7 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
       />
       <Select
         value={flavor}
-        onChange={(e) => setFlavor(e.target.value)}
+        onChange={(event) => setFlavor(event.target.value)}
         required
       >
         <option value="" disabled>
