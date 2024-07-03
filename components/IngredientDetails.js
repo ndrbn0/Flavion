@@ -1,12 +1,21 @@
 import { useRouter } from "next/router";
-import ingredients from "@/assets/ingredients.json";
-import IngredientItem from "@/components/IngredientItem";
-import { Container, BackLink } from "@/_styles";
+import { flavorColors } from "@/utils";
+import {
+  Container,
+  ImageWrapper,
+  StyledImage,
+  StyledContent,
+  Name,
+  Flavor,
+  BackLink,
+  CardFooter,
+  DetailsCard,
+} from "@/_styles";
 
-const IngredientDetails = () => {
+const IngredientDetails = ({ ingredients }) => {
   const router = useRouter();
   const { id } = router.query;
-  const ingredient = ingredients.find((ingredient) => ingredient._id === id);
+  const ingredient = ingredients.find((ingredients) => ingredients._id === id);
 
   if (!ingredient) {
     return <p>Loading...</p>;
@@ -16,7 +25,25 @@ const IngredientDetails = () => {
     <>
       <BackLink href="/">← Back</BackLink>
       <Container>
-        <IngredientItem ingredient={ingredient} />
+        <DetailsCard>
+          <ImageWrapper>
+            <StyledImage
+              src={ingredient.imgUrl}
+              alt={ingredient.name}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </ImageWrapper>
+          <StyledContent>
+            <Name>{ingredient.name}</Name>
+            <br />
+          </StyledContent>
+          <CardFooter>
+            <Flavor $color={flavorColors[ingredient.flavor]}>
+              #{ingredient.flavor}
+            </Flavor>
+          </CardFooter>
+        </DetailsCard>
       </Container>
     </>
   );

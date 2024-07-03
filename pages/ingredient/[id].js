@@ -1,10 +1,10 @@
 import IngredientDetails from "@/components/IngredientDetails";
 import styled from "styled-components";
 
-const IngredientPage = () => {
+const IngredientPage = ({ ingredients }) => {
   return (
     <StyledContainer>
-      <IngredientDetails />
+      <IngredientDetails ingredients={ingredients} />
     </StyledContainer>
   );
 };

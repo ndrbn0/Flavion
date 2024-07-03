@@ -1,9 +1,12 @@
 import IngredientsList from "@/components/IngredientsList";
 
-export default function HomePage() {
+export default function HomePage({ addIngredient, ingredients }) {
   return (
     <div>
-      <IngredientsList />
+      <IngredientsList
+        ingredients={ingredients}
+        addIngredient={addIngredient}
+      />
     </div>
   );
 }
