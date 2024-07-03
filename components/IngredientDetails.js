@@ -23,10 +23,6 @@ const IngredientDetails = () => {
     return <p>Loading...</p>;
   }
 
-  if (!ingredient) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <>
       <BackLink href="/">← Back</BackLink>
