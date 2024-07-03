@@ -4,6 +4,7 @@ import {
   StyledContent,
   Name,
   Flavor,
+  CardFooter,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 
@@ -21,10 +22,12 @@ const IngredientItem = ({ ingredient }) => {
       <StyledContent>
         <Name>{ingredient.name}</Name>
         <br />
+      </StyledContent>
+      <CardFooter>
         <Flavor $color={flavorColors[ingredient.flavor]}>
           #{ingredient.flavor}
         </Flavor>
-      </StyledContent>
+      </CardFooter>
     </>
   );
 };
