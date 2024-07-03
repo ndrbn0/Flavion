@@ -4,6 +4,7 @@ import IngredientItem from "@/components/IngredientItem";
 import NewIngredientForm from "@/components/NewIngredientForm";
 import { Container, List, StyledListItem } from "@/_styles";
 import styled from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 const flavors = [
   ...new Set(ingredientsData.map((ingredient) => ingredient.flavor)),
@@ -11,26 +12,18 @@ const flavors = [
 
 const IngredientsList = () => {
   const [ingredients, setIngredients] = useState([]);
-
   useEffect(() => {
-    const storedIngredients =
-      JSON.parse(localStorage.getItem("ingredients")) || [];
-
     const allIngredients = [
-      ...new Map(
-        [...storedIngredients, ...ingredientsData].map((item) => [
-          item._id,
-          item,
-        ])
-      ).values(),
+      ...new Map(ingredientsData.map((item) => [item._id, item])).values(),
     ];
     setIngredients(allIngredients);
   }, []);
 
   const addIngredient = (newIngredient) => {
+    newIngredient._id = uuidv4(); // Assign a unique ID
     const updatedIngredients = [newIngredient, ...ingredients];
     setIngredients(updatedIngredients);
-    localStorage.setItem("ingredients", JSON.stringify(updatedIngredients));
+    ingredientsData.push(newIngredient); // Update the ingredientsData array
   };
 
   return (

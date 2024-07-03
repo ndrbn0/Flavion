@@ -25,6 +25,7 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
+      <label htmlFor="name"></label>
       <Input
         type="text"
         placeholder="Name"
@@ -32,6 +33,7 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
         onChange={(event) => setName(event.target.value)}
         required
       />
+      <label htmlFor="flavor"></label>
       <Select
         value={flavor}
         onChange={(event) => setFlavor(event.target.value)}

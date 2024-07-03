@@ -11,15 +11,17 @@ const IngredientDetails = () => {
 
   useEffect(() => {
     if (id) {
-      const storedIngredients =
-        JSON.parse(localStorage.getItem("ingredients")) || [];
-      const allIngredients = [...storedIngredients, ...ingredientsData];
+      const allIngredients = ingredientsData;
       const foundIngredient = allIngredients.find(
         (ingredient) => ingredient._id === id
       );
       setIngredient(foundIngredient);
     }
   }, [id]);
+
+  if (!ingredient) {
+    return <p>Loading...</p>;
+  }
 
   if (!ingredient) {
     return <p>Loading...</p>;
