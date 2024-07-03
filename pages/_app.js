@@ -14,6 +14,13 @@ export default function App({ Component, pageProps }) {
     setIngredients(updatedIngredients);
   };
 
+  const deleteIngredient = (id) => {
+    const updatedIngredients = ingredients.filter(
+      (ingredient) => ingredient._id !== id
+    );
+    setIngredients(updatedIngredients);
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -21,6 +28,7 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         ingredients={ingredients}
         addIngredient={addIngredient}
+        deleteIngredient={deleteIngredient}
       />
     </>
   );

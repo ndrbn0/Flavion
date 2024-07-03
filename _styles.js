@@ -168,3 +168,61 @@ export const DetailsCard = styled.div`
     ),
     var(--Primary-primary, #0d1f28);
 `;
+
+export const DeleteButton = styled.button`
+  padding: 10px 20px;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #d43f3a;
+  }
+`;
+
+export const ConfirmationDialog = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+    &:first-child {
+      background-color: #ff4d4f;
+      color: white;
+
+      &:hover {
+        background-color: #d43f3a;
+      }
+    }
+
+    &:last-child {
+      background-color: #ccc;
+      color: black;
+
+      &:hover {
+        background-color: #999;
+      }
+    }
+  }
+`;

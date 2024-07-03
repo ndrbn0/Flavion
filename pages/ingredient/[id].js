@@ -1,10 +1,13 @@
 import IngredientDetails from "@/components/IngredientDetails";
 import styled from "styled-components";
 
-const IngredientPage = ({ ingredients }) => {
+const IngredientPage = ({ ingredients, deleteIngredient }) => {
   return (
     <StyledContainer>
-      <IngredientDetails ingredients={ingredients} />
+      <IngredientDetails
+        ingredients={ingredients}
+        deleteIngredient={deleteIngredient}
+      />
     </StyledContainer>
   );
 };
