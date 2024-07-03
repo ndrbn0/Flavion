@@ -1,26 +1,15 @@
-import { useState } from "react";
 import ingredientsData from "@/assets/ingredients.json";
 import IngredientItem from "@/components/IngredientItem";
 import NewIngredientForm from "@/components/NewIngredientForm";
 import { Container, List, StyledListItem } from "@/_styles";
 import styled from "styled-components";
-import { v4 as uuidv4 } from "uuid";
 
 const flavors = [
   ...new Set(ingredientsData.map((ingredient) => ingredient.flavor)),
 ];
 
-const IngredientsList = () => {
-  const [ingredients, setIngredients] = useState(ingredientsData);
-
-  const addIngredient = (newIngredient) => {
-    const updatedIngredients = [
-      { _id: uuidv4(), ...newIngredient },
-      ...ingredients,
-    ];
-    setIngredients(updatedIngredients);
-  };
-
+const IngredientsList = ({ ingredients, addIngredient }) => {
+  console.log(ingredients);
   return (
     <>
       <Title>Ingredients Overview</Title>

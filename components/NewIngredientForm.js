@@ -12,7 +12,6 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newIngredient = {
-      _id: new Date().toISOString(),
       name,
       flavor,
       imgUrl: imgUrl || placeholderImageUrl,

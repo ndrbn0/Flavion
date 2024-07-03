@@ -1,14 +1,11 @@
 import { useRouter } from "next/router";
-import ingredientsData from "@/assets/ingredients.json";
 import IngredientItem from "@/components/IngredientItem";
 import { Container, BackLink } from "@/_styles";
 
-const IngredientDetails = () => {
+const IngredientDetails = ({ ingredients }) => {
   const router = useRouter();
   const { id } = router.query;
-  const ingredient = ingredientsData.find(
-    (ingredientsData) => ingredientsData._id === id
-  );
+  const ingredient = ingredients.find((ingredients) => ingredients._id === id);
 
   if (!ingredient) {
     return <p>Loading...</p>;
