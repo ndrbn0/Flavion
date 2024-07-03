@@ -50,7 +50,7 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
         type="text"
         placeholder="Image URL"
         value={imgUrl}
-        onChange={(e) => setImgUrl(e.target.value)}
+        onChange={(event) => setImgUrl(event.target.value)}
       />
       <Button type="submit">Add Ingredient</Button>
     </Form>
