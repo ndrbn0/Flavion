@@ -10,9 +10,6 @@ import {
   BackLink,
   CardFooter,
   DetailsCard,
-  DeatailsButtons,
-  ButtonDelete,
-  ButtonEdit,
 } from "@/_styles";
 
 const IngredientDetails = ({ ingredients }) => {
@@ -47,10 +44,6 @@ const IngredientDetails = ({ ingredients }) => {
             </Flavor>
           </CardFooter>
         </DetailsCard>
-        <DeatailsButtons>
-          <ButtonEdit>Edit</ButtonEdit>
-          <ButtonDelete>Delete</ButtonDelete>
-        </DeatailsButtons>
       </Container>
     </>
   );

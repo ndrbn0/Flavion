@@ -26,7 +26,7 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
     <Form onSubmit={handleSubmit}>
       <Headline>Add New Ingredient</Headline>
       <FormField>
-        <Label htmlFor="name"></Label>
+        <Label htmlFor="name">Enter Name:</Label>
         <Input
           type="text"
           placeholder="Name"
@@ -36,7 +36,7 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
         />
       </FormField>
       <FormField>
-        <Label htmlFor="flavor"></Label>
+        <Label htmlFor="flavor">Select a flavor:</Label>
         <Select
           value={flavor}
           onChange={(event) => setFlavor(event.target.value)}

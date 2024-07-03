@@ -168,39 +168,3 @@ export const DetailsCard = styled.div`
     ),
     var(--Primary-primary, #0d1f28);
 `;
-
-export const DeatailsButtons = styled.div`
-  display: flex;
-  padding: 2px 12px 1px 8px;
-  justify-content: center;
-  gap: 25px;
-  flex-direction: column;
-`;
-
-export const ButtonDelete = styled.div`
-  font-style: italic;
-  font-size: 14px;
-  margin-top: 8px;
-  padding: 8px 16px;
-  background-color: #d10f0f;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  color: white;
-`;
-
-export const ButtonEdit = styled.div`
-  font-style: italic;
-  font-size: 14px;
-  margin-top: 8px;
-  padding: 8px 16px;
-  background-color: #0070f3;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  color: white;
-`;
