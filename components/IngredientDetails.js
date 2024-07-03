@@ -11,8 +11,8 @@ import {
   BackLink,
   CardFooter,
   DetailsCard,
-  DeleteButton, // Add this
-  ConfirmationDialog, // Add this
+  DeleteButton,
+  ConfirmationDialog,
 } from "@/_styles";
 
 const IngredientDetails = ({ ingredients, deleteIngredient }) => {
@@ -66,8 +66,12 @@ const IngredientDetails = ({ ingredients, deleteIngredient }) => {
       {showConfirm && (
         <ConfirmationDialog>
           <p>Are you sure you want to delete this ingredient?</p>
-          <button type="button" onClick={confirmDelete}>Yes</button>
-          <button type="button" onClick={cancelDelete}>No</button>
+          <button type="button" onClick={confirmDelete}>
+            Yes
+          </button>
+          <button type="button" onClick={cancelDelete}>
+            No
+          </button>
         </ConfirmationDialog>
       )}
     </>
