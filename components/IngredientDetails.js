@@ -66,8 +66,8 @@ const IngredientDetails = ({ ingredients, deleteIngredient }) => {
       {showConfirm && (
         <ConfirmationDialog>
           <p>Are you sure you want to delete this ingredient?</p>
-          <button onClick={confirmDelete}>Yes</button>
-          <button onClick={cancelDelete}>No</button>
+          <button type="button" onClick={confirmDelete}>Yes</button>
+          <button type="button" onClick={cancelDelete}>No</button>
         </ConfirmationDialog>
       )}
     </>
