@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ingredientsData from "@/assets/ingredients.json";
 import IngredientItem from "@/components/IngredientItem";
 import NewIngredientForm from "@/components/NewIngredientForm";
@@ -14,7 +14,10 @@ const IngredientsList = () => {
   const [ingredients, setIngredients] = useState(ingredientsData);
 
   const addIngredient = (newIngredient) => {
-    const updatedIngredients = [{_id: uuidv4(), ...newIngredient}, ...ingredients];
+    const updatedIngredients = [
+      { _id: uuidv4(), ...newIngredient },
+      ...ingredients,
+    ];
     setIngredients(updatedIngredients);
   };
 

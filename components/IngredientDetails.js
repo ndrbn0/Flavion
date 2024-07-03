@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import ingredientsData from "@/assets/ingredients.json";
 import IngredientItem from "@/components/IngredientItem";
 import { Container, BackLink } from "@/_styles";
@@ -7,7 +6,9 @@ import { Container, BackLink } from "@/_styles";
 const IngredientDetails = () => {
   const router = useRouter();
   const { id } = router.query;
- const ingredient = ingredients.find((ingredient) => ingredientsData._id === id);
+  const ingredient = ingredientsData.find(
+    (ingredientsData) => ingredientsData._id === id
+  );
 
   if (!ingredient) {
     return <p>Loading...</p>;
