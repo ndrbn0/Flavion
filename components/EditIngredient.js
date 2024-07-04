@@ -58,9 +58,9 @@ const EditIngredient = ({ ingredients, updateIngredient, flavors }) => {
     <>
       <BackLink href="/">← Back</BackLink>
       <Container>
-        <h1>Edit Ingredient</h1>
         <StyledContent>
           <EditForm onSubmit={handleSubmit}>
+            <h1>Edit Ingredient</h1>
             <label>
               Name:
               <Input

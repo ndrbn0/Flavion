@@ -309,11 +309,21 @@ export const Button = styled.button`
   }
 `;
 export const EditForm = styled.form`
-  display: flex;
-  flex-direction: column;
   gap: 15px;
   margin-top: 20px;
   width: 300px;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md, 24px);
+  background: linear-gradient(
+      0deg,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 100%
+    ),
+    var(--Primary-primary, #0d1f28);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+  padding: 24px;
 `;
 export const SaveButton = styled.button`
   padding: 10px 20px;
