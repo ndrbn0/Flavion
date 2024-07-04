@@ -12,7 +12,7 @@ import {
   CardFooter,
   DetailsCard,
   DeleteButton,
-  ConfirmationDialog,
+  ConfirmDialog,
   Button,
   EditButton,
 } from "@/_styles";
@@ -66,12 +66,12 @@ const IngredientDetails = ({ ingredients, deleteIngredient }) => {
               #{ingredient.flavor}
             </Flavor>
           </CardFooter>
-          <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
-          <EditButton onClick={handleEdit}>Edit</EditButton>
         </DetailsCard>
+        <EditButton onClick={handleEdit}>Edit</EditButton>
+        <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
       </Container>
       {showConfirm && (
-        <ConfirmationDialog>
+        <ConfirmDialog>
           <p>Are you sure you want to delete this ingredient?</p>
           <Button type="button" onClick={confirmDelete}>
             Yes
@@ -79,7 +79,7 @@ const IngredientDetails = ({ ingredients, deleteIngredient }) => {
           <Button type="button" onClick={cancelDelete}>
             No
           </Button>
-        </ConfirmationDialog>
+        </ConfirmDialog>
       )}
     </>
   );

@@ -179,12 +179,29 @@ export const DeleteButton = styled.button`
 `;
 
 export const ConfirmDialog = styled.div`
-  margin-top: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
   padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  p {
+    margin-bottom: 20px;
+  }
+  button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ccc;
+    &:hover {
+      background-color: #999;
+    }
+  }
 `;
 
 export const DialogButton = styled.button`
