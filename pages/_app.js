@@ -20,9 +20,10 @@ export default function App({ Component, pageProps }) {
     );
     setIngredients(updatedIngredients);
   };
-  const updateIngredient = (updatedIngredient) => {
+  const updateIngredient = (id, updatedIngredient) => {
+    const editedIngredient = { id, ...updatedIngredient };
     const updatedIngredients = ingredients.map((ingredient) =>
-      ingredient._id === updatedIngredient._id ? updatedIngredient : ingredient
+      ingredient._id === editedIngredient.id ? editedIngredient : ingredient
     );
     setIngredients(updatedIngredients);
   };
