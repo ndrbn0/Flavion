@@ -71,15 +71,6 @@ const EditIngredient = ({ ingredients, updateIngredient, flavors }) => {
               />
             </label>
             <label>
-              Image URL:
-              <Input
-                type="text"
-                name="imgUrl"
-                value={formData.imgUrl}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
               Flavor:
               <Select
                 value={formData.flavor}
@@ -95,6 +86,15 @@ const EditIngredient = ({ ingredients, updateIngredient, flavors }) => {
                   </option>
                 ))}
               </Select>
+              <label>
+                Image URL:
+                <Input
+                  type="text"
+                  name="imgUrl"
+                  value={formData.imgUrl}
+                  onChange={handleChange}
+                />
+              </label>
             </label>
             <SaveButton type="submit">Save</SaveButton>
             <CancelButton type="button" onClick={cancelEdit}>
