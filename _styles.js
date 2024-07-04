@@ -74,9 +74,19 @@ export const Flavor = styled.span`
 export const BackLink = styled(Link)`
   cursor: pointer;
   font-size: 16px;
-  color: black;
+  color: white;
   margin: 32px 16px;
   text-decoration: none;
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #000000;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
 `;
 
 export const List = styled.ul`
@@ -176,20 +186,56 @@ export const DeleteButton = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 300px;
+  border-radius: 15px;
+  &:hover {
+    background-color: darkred;
+  }
+`;
+
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
+  z-index: 999; /* Ensure it is above all other content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ConfirmDialog = styled.div`
-  margin-top: 20px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
   padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  z-index: 1000;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
+  p {
+    margin-bottom: 20px;
+  }
+  button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ccc;
+    &:hover {
+      background-color: #999;
+    }
+  }
 `;
 
 export const DialogButton = styled.button`
   padding: 10px 20px;
-  margin: 10px;
+
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -200,10 +246,11 @@ export const DialogButton = styled.button`
 `;
 
 export const CancelButton = styled(DialogButton)`
-  background-color: gray;
-
+  background-color: red;
+  color: white;
+  border-radius: 15px;
   &:hover {
-    background-color: darkgray;
+    background-color: darkred;
   }
 `;
 ////
@@ -216,6 +263,11 @@ export const EditButton = styled.button`
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  width: 300px;
+  border-radius: 15px;
+  &:hover {
+    background-color: darkblue;
+  }
 `;
 
 export const Form = styled.form`
@@ -261,13 +313,17 @@ export const EditForm = styled.form`
   flex-direction: column;
   gap: 15px;
   margin-top: 20px;
+  width: 300px;
 `;
 export const SaveButton = styled.button`
   padding: 10px 20px;
   margin-top: 20px;
-  background-color: red;
+  background-color: blue;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 15px;
   cursor: pointer;
+  &:hover {
+    background-color: darkblue;
+  }
 `;

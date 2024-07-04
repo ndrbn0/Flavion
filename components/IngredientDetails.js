@@ -15,6 +15,7 @@ import {
   ConfirmDialog,
   Button,
   EditButton,
+  Overlay,
 } from "@/_styles";
 
 const IngredientDetails = ({ ingredients, deleteIngredient }) => {
@@ -71,15 +72,17 @@ const IngredientDetails = ({ ingredients, deleteIngredient }) => {
         <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
       </Container>
       {showConfirm && (
-        <ConfirmDialog>
-          <p>Are you sure you want to delete this ingredient?</p>
-          <Button type="button" onClick={confirmDelete}>
-            Yes
-          </Button>
-          <Button type="button" onClick={cancelDelete}>
-            No
-          </Button>
-        </ConfirmDialog>
+        <Overlay>
+          <ConfirmDialog>
+            <p>Are you sure you want to delete this ingredient?</p>
+            <Button type="button" onClick={confirmDelete}>
+              Yes
+            </Button>
+            <Button type="button" onClick={cancelDelete}>
+              No
+            </Button>
+          </ConfirmDialog>
+        </Overlay>
       )}
     </>
   );
