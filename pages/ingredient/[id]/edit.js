@@ -7,6 +7,7 @@ import {
   EditForm,
   Input,
   SaveButton,
+  CancelButton,
 } from "@/_styles.js";
 
 const EditIngredient = ({ ingredients, updateIngredient }) => {
@@ -45,12 +46,15 @@ const EditIngredient = ({ ingredients, updateIngredient }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     updateIngredient(id, formData);
-    router.push(`/ingredients/${id}`);
+    router.push(`/ingredient/${id}`);
   };
-
+  const cancelEdit = () => {
+    setFormData(false);
+    router.push(`/ingredient/${id}`);
+  };
   return (
     <>
-      <BackLink href={`/ingredients/${id}`}>← Back</BackLink>
+      <BackLink href="/">← Back</BackLink>
       <Container>
         <StyledContent>
           <h1>Edit Ingredient</h1>
@@ -83,6 +87,9 @@ const EditIngredient = ({ ingredients, updateIngredient }) => {
               />
             </label>
             <SaveButton type="submit">Save</SaveButton>
+            <CancelButton type="button" onClick={cancelEdit}>
+              Cancel
+            </CancelButton>
           </EditForm>
         </StyledContent>
       </Container>
