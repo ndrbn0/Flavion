@@ -8,9 +8,10 @@ import {
   Input,
   SaveButton,
   CancelButton,
-} from "@/_styles.js";
+  Select,
+} from "@/_styles.js"; // Ensure Select is imported correctly
 
-const EditIngredient = ({ ingredients, updateIngredient }) => {
+const EditIngredient = ({ ingredients, updateIngredient, flavors }) => {
   const router = useRouter();
   const { id } = router.query;
   const ingredient = ingredients.find((ingredient) => ingredient._id === id);
@@ -80,12 +81,20 @@ const EditIngredient = ({ ingredients, updateIngredient }) => {
             </label>
             <label>
               Flavor:
-              <Input
-                type="text"
-                name="flavor"
+              <Select
                 value={formData.flavor}
                 onChange={handleChange}
-              />
+                name="flavor"
+              >
+                <option value="" disabled>
+                  Select Flavor
+                </option>
+                {flavors.map((flavor) => (
+                  <option key={flavor} value={flavor}>
+                    {flavor}
+                  </option>
+                ))}
+              </Select>
             </label>
             <SaveButton type="submit">Save</SaveButton>
             <CancelButton type="button" onClick={cancelEdit}>
