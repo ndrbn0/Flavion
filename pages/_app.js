@@ -20,6 +20,12 @@ export default function App({ Component, pageProps }) {
     );
     setIngredients(updatedIngredients);
   };
+  const updateIngredient = (updatedIngredient) => {
+    const updatedIngredients = ingredients.map((ingredient) =>
+      ingredient._id === updatedIngredient._id ? updatedIngredient : ingredient
+    );
+    setIngredients(updatedIngredients);
+  };
 
   return (
     <>
@@ -29,6 +35,7 @@ export default function App({ Component, pageProps }) {
         ingredients={ingredients}
         addIngredient={addIngredient}
         deleteIngredient={deleteIngredient}
+        updateIngredient={updateIngredient}
       />
     </>
   );

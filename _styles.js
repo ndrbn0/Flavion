@@ -168,48 +168,106 @@ export const DetailsCard = styled.div`
     ),
     var(--Primary-primary, #0d1f28);
 `;
-
 export const DeleteButton = styled.button`
   padding: 10px 20px;
-  background-color: #ff4d4f;
+  margin-top: 20px;
+  background-color: red;
   color: white;
   border: none;
-  border-radius: 15px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1rem;
+`;
+
+export const ConfirmDialog = styled.div`
   margin-top: 20px;
-  transition: background-color 0.3s ease;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+`;
+
+export const DialogButton = styled.button`
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 
   &:hover {
     background-color: #d43f3a;
   }
 `;
 
-export const ConfirmationDialog = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
+export const CancelButton = styled(DialogButton)`
+  background-color: gray;
 
-  p {
-    margin-bottom: 20px;
+  &:hover {
+    background-color: darkgray;
   }
+`;
+////
 
-  button {
-    padding: 10px 20px;
-    margin: 0 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    background-color: #ccc;
+export const EditButton = styled.button`
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
 
-    &:hover {
-      background-color: #999;
-    }
+export const Form = styled.form`
+  margin-top: 20px;
+`;
+
+export const Label = styled.label`
+  display: block;
+  margin-bottom: 8px;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const Select = styled.select`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const Button = styled.button`
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: ${(props) => (props.secondary ? "#6c757d" : "#007bff")};
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => (props.secondary ? "#5a6268" : "#0056b3")};
   }
+`;
+export const EditForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+`;
+export const SaveButton = styled.button`
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 `;

@@ -11,14 +11,16 @@ import {
   BackLink,
   CardFooter,
   DetailsCard,
-  DeleteButton, // Add this
-  ConfirmationDialog, // Add this
+  DeleteButton,
+  ConfirmationDialog,
+  Button,
+  EditButton,
 } from "@/_styles";
 
 const IngredientDetails = ({ ingredients, deleteIngredient }) => {
   const router = useRouter();
   const { id } = router.query;
-  const ingredient = ingredients.find((ingredients) => ingredients._id === id);
+  const ingredient = ingredients.find((ingredient) => ingredient._id === id);
   const [showConfirm, setShowConfirm] = useState(false);
 
   if (!ingredient) {
@@ -36,6 +38,10 @@ const IngredientDetails = ({ ingredients, deleteIngredient }) => {
 
   const cancelDelete = () => {
     setShowConfirm(false);
+  };
+
+  const handleEdit = () => {
+    router.push(`/ingredient/${id}/edit`);
   };
 
   return (
@@ -61,13 +67,18 @@ const IngredientDetails = ({ ingredients, deleteIngredient }) => {
             </Flavor>
           </CardFooter>
           <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
+          <EditButton onClick={handleEdit}>Edit</EditButton>
         </DetailsCard>
       </Container>
       {showConfirm && (
         <ConfirmationDialog>
           <p>Are you sure you want to delete this ingredient?</p>
-          <button type="button" onClick={confirmDelete}>Yes</button>
-          <button type="button" onClick={cancelDelete}>No</button>
+          <Button type="button" onClick={confirmDelete}>
+            Yes
+          </Button>
+          <Button type="button" onClick={cancelDelete}>
+            No
+          </Button>
         </ConfirmationDialog>
       )}
     </>
