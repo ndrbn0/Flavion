@@ -57,8 +57,8 @@ const EditIngredient = ({ ingredients, updateIngredient }) => {
     <>
       <BackLink href="/">← Back</BackLink>
       <Container>
+        <h1>Edit Ingredient</h1>
         <StyledContent>
-          <h1>Edit Ingredient</h1>
           <EditForm onSubmit={handleSubmit}>
             <label>
               Name:
