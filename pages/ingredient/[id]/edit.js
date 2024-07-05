@@ -1,6 +1,6 @@
 import EditIngredient from "@/components/EditIngredient";
 import { useRouter } from "next/router";
-import ingredientsData from "@/assets/ingredients.json"; // Assuming this is where you store your ingredients data
+import ingredientsData from "@/assets/ingredients.json"; 
 
 const EditIngredientPage = (props) => {
   const router = useRouter();
