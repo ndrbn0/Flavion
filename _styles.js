@@ -199,8 +199,8 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
-  z-index: 999; /* Ensure it is above all other content */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -336,4 +336,40 @@ export const SaveButton = styled.button`
   &:hover {
     background-color: darkblue;
   }
+`;
+
+export const FilterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  padding: 32px;
+`;
+
+export const FilterButton = styled.button`
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: ${(props) => (props.active ? props.color : "#f0f0f0")};
+  color: ${(props) => (props.active ? "#fff" : "#333")};
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${(props) => (props.active ? props.color : "#e0e0e0")};
+  }
+`;
+
+export const NoMatchMessage = styled.p`
+  text-align: center;
+  color: #666;
+  margin-top: 20px;
 `;

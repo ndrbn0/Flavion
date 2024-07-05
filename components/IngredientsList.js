@@ -1,21 +1,51 @@
+import { useState } from "react";
 import ingredientsData from "@/assets/ingredients.json";
 import IngredientItem from "@/components/IngredientItem";
 import NewIngredientForm from "@/components/NewIngredientForm";
-import { Container, List, StyledListItem } from "@/_styles";
+import {
+  Container,
+  List,
+  StyledListItem,
+  FilterContainer,
+  FilterButton,
+} from "@/_styles";
 import styled from "styled-components";
+import { flavorColors } from "@/utils"; // Import the flavorColors utility
 
 const flavors = [
   ...new Set(ingredientsData.map((ingredient) => ingredient.flavor)),
 ];
 
 const IngredientsList = ({ ingredients, addIngredient }) => {
+  const [activeFlavor, setActiveFlavor] = useState("");
+
+  const handleFilterClick = (flavor) => {
+    setActiveFlavor(flavor === activeFlavor ? "" : flavor);
+  };
+
+  const filteredIngredients = activeFlavor
+    ? ingredients.filter((ingredient) => ingredient.flavor === activeFlavor)
+    : ingredients;
+
   return (
     <>
       <Title>Ingredients Overview</Title>
       <Container>
         <NewIngredientForm onAddIngredient={addIngredient} flavors={flavors} />
+        <FilterContainer>
+          {flavors.map((flavor) => (
+            <FilterButton
+              key={flavor}
+              onClick={() => handleFilterClick(flavor)}
+              active={flavor === activeFlavor}
+              color={flavorColors[flavor]} // Pass the color to the button
+            >
+              {flavor}
+            </FilterButton>
+          ))}
+        </FilterContainer>
         <List>
-          {ingredients.map((ingredient) => (
+          {filteredIngredients.map((ingredient) => (
             <StyledListItem
               key={ingredient._id}
               href={`/ingredient/${ingredient._id}`}
