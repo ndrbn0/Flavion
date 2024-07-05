@@ -343,6 +343,7 @@ export const FilterContainer = styled.div`
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+
   position: relative;
   align-self: stretch;
   display: flex;

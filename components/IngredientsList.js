@@ -8,6 +8,7 @@ import {
   StyledListItem,
   FilterContainer,
   FilterButton,
+  NoMatchMessage,
 } from "@/_styles";
 import styled from "styled-components";
 import { flavorColors } from "@/utils";
@@ -44,16 +45,23 @@ const IngredientsList = ({ ingredients, addIngredient }) => {
             </FilterButton>
           ))}
         </FilterContainer>
-        <List>
-          {filteredIngredients.map((ingredient) => (
-            <StyledListItem
-              key={ingredient._id}
-              href={`/ingredient/${ingredient._id}`}
-            >
-              <IngredientItem ingredient={ingredient} />
-            </StyledListItem>
-          ))}
-        </List>
+        {filteredIngredients.length > 0 ? (
+          <List>
+            {filteredIngredients.map((ingredient) => (
+              <StyledListItem
+                key={ingredient._id}
+                href={`/ingredient/${ingredient._id}`}
+              >
+                <IngredientItem ingredient={ingredient} />
+              </StyledListItem>
+            ))}
+          </List>
+        ) : (
+          <NoMatchMessage>
+            No ingredients found matching the selected flavor profile. Please
+            try a different selection.
+          </NoMatchMessage>
+        )}
       </Container>
     </>
   );
