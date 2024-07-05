@@ -9,7 +9,7 @@ import {
   SaveButton,
   CancelButton,
   Select,
-} from "@/_styles.js"; // Ensure Select is imported correctly
+} from "@/_styles.js";
 
 const EditIngredient = ({ ingredients, updateIngredient, flavors }) => {
   const router = useRouter();
