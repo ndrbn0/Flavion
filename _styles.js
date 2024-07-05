@@ -360,12 +360,12 @@ export const FilterButton = styled.button`
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  background-color: ${(props) => (props.active ? props.$color : "#f0f0f0")};
+  background-color: ${(props) => (props.$active ? props.$color : "#f0f0f0")};
   color: ${(props) => (props.$active ? "#fff" : "#333")};
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${(props) => (props.active ? props.$color : "#e0e0e0")};
+    background-color: ${(props) => (props.$active ? props.$color : "#e0e0e0")};
   }
 `;
 
