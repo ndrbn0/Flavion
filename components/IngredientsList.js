@@ -38,8 +38,8 @@ const IngredientsList = ({ ingredients, addIngredient }) => {
             <FilterButton
               key={flavor}
               onClick={() => handleFilterClick(flavor)}
-              active={flavor === activeFlavor}
-              color={flavorColors[flavor]}
+              $active={flavor === activeFlavor}
+              $color={flavorColors[flavor]}
             >
               {flavor}
             </FilterButton>
