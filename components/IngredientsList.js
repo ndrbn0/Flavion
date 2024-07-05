@@ -10,7 +10,7 @@ import {
   FilterButton,
 } from "@/_styles";
 import styled from "styled-components";
-import { flavorColors } from "@/utils"; // Import the flavorColors utility
+import { flavorColors } from "@/utils";
 
 const flavors = [
   ...new Set(ingredientsData.map((ingredient) => ingredient.flavor)),
@@ -38,7 +38,7 @@ const IngredientsList = ({ ingredients, addIngredient }) => {
               key={flavor}
               onClick={() => handleFilterClick(flavor)}
               active={flavor === activeFlavor}
-              color={flavorColors[flavor]} // Pass the color to the button
+              color={flavorColors[flavor]}
             >
               {flavor}
             </FilterButton>
