@@ -58,8 +58,8 @@ const IngredientsList = ({ ingredients, addIngredient }) => {
           </List>
         ) : (
           <NoMatchMessage>
-            No ingredients found matching the selected flavor profile. Please
-            try a different selection.
+            No ingredients found for the selected flavor profile. Please try a
+            different selection.
           </NoMatchMessage>
         )}
       </Container>
