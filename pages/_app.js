@@ -21,6 +21,15 @@ export default function App({ Component, pageProps }) {
     setIngredients(updatedIngredients);
   };
 
+  const updateIngredient = (id, updatedIngredient) => {
+    const updatedIngredients = ingredients.map((ingredient) =>
+      ingredient._id === id
+        ? { ...ingredient, ...updatedIngredient }
+        : ingredient
+    );
+    setIngredients(updatedIngredients);
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -29,6 +38,7 @@ export default function App({ Component, pageProps }) {
         ingredients={ingredients}
         addIngredient={addIngredient}
         deleteIngredient={deleteIngredient}
+        updateIngredient={updateIngredient}
       />
     </>
   );

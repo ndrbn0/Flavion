@@ -74,9 +74,19 @@ export const Flavor = styled.span`
 export const BackLink = styled(Link)`
   cursor: pointer;
   font-size: 16px;
-  color: black;
+  color: white;
   margin: 32px 16px;
   text-decoration: none;
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #000000;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
 `;
 
 export const List = styled.ul`
@@ -168,38 +178,48 @@ export const DetailsCard = styled.div`
     ),
     var(--Primary-primary, #0d1f28);
 `;
-
 export const DeleteButton = styled.button`
   padding: 10px 20px;
-  background-color: #ff4d4f;
+  margin-top: 20px;
+  background-color: red;
   color: white;
   border: none;
-  border-radius: 15px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 1rem;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
-
+  width: 300px;
+  border-radius: 15px;
   &:hover {
-    background-color: #d43f3a;
+    background-color: darkred;
   }
 `;
 
-export const ConfirmationDialog = styled.div`
+export const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
+  z-index: 999; /* Ensure it is above all other content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ConfirmDialog = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
   padding: 20px;
+  z-index: 1000;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-
   p {
     margin-bottom: 20px;
   }
-
   button {
     padding: 10px 20px;
     margin: 0 10px;
@@ -207,9 +227,113 @@ export const ConfirmationDialog = styled.div`
     border-radius: 10px;
     cursor: pointer;
     background-color: #ccc;
-
     &:hover {
       background-color: #999;
     }
+  }
+`;
+
+export const DialogButton = styled.button`
+  padding: 10px 20px;
+
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #d43f3a;
+  }
+`;
+
+export const CancelButton = styled(DialogButton)`
+  background-color: red;
+  color: white;
+  border-radius: 15px;
+  &:hover {
+    background-color: darkred;
+  }
+`;
+////
+
+export const EditButton = styled.button`
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 300px;
+  border-radius: 15px;
+  &:hover {
+    background-color: darkblue;
+  }
+`;
+
+export const Form = styled.form`
+  margin-top: 20px;
+`;
+
+export const Label = styled.label`
+  display: block;
+  margin-bottom: 8px;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const Select = styled.select`
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const Button = styled.button`
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: ${(props) => (props.secondary ? "#6c757d" : "#007bff")};
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => (props.secondary ? "#5a6268" : "#0056b3")};
+  }
+`;
+export const EditForm = styled.form`
+  gap: 15px;
+  margin-top: 20px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md, 24px);
+  background: linear-gradient(
+      0deg,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 100%
+    ),
+    var(--Primary-primary, #0d1f28);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+`;
+export const SaveButton = styled.button`
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  &:hover {
+    background-color: darkblue;
   }
 `;
