@@ -10,6 +10,9 @@ const Navigation = () => {
       <NavItem $active={router.pathname === "/"}>
         <Link href="/">I</Link>
       </NavItem>
+      <NavItem $active={router.pathname === "/pairings"}>
+        <Link href="/pairings">P</Link>
+      </NavItem>
     </NavBar>
   );
 };
