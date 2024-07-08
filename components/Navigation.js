@@ -7,12 +7,12 @@ const Navigation = () => {
 
   return (
     <NavBar>
-      <NavItem $active={router.pathname === "/"}>
-        <Link href="/">I</Link>
-      </NavItem>
-      <NavItem $active={router.pathname === "/pairings"}>
-        <Link href="/pairings">P</Link>
-      </NavItem>
+      <StyledLink href="/" $active={router.pathname === "/"}>
+        I
+      </StyledLink>
+      <StyledLink href="/pairings" $active={router.pathname === "/pairings"}>
+        P
+      </StyledLink>
     </NavBar>
   );
 };
@@ -33,7 +33,7 @@ const NavBar = styled.nav`
   padding: 10px 0;
 `;
 
-const NavItem = styled.div`
+const StyledLink = styled(Link)`
   border: 1px solid;
   padding: 10px #007bff;
   border-radius: 50%;
@@ -45,6 +45,7 @@ const NavItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 
   a {
     color: inherit;
