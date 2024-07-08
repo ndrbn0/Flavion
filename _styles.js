@@ -19,6 +19,8 @@ export const Container = styled.div`
   align-self: stretch;
   padding: 8px;
   gap: 5 0px;
+  margin-bottom: 25%;
+  margin-top: 0;
 `;
 
 export const ImageWrapper = styled.div`
@@ -80,6 +82,7 @@ export const BackLink = styled(Link)`
   font-style: italic;
   font-size: 14px;
   margin-top: 8px;
+  margin-left: 8px;
   padding: 8px 16px;
   background-color: #000000;
   border-radius: 15px;

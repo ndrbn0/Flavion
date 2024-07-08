@@ -2,6 +2,7 @@ import GlobalStyle from "../styles";
 import { useState } from "react";
 import ingredientsData from "@/assets/ingredients.json";
 import { nanoid } from "nanoid";
+import Navigation from "@/components/Navigation";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useState(ingredientsData);
@@ -40,6 +41,7 @@ export default function App({ Component, pageProps }) {
         deleteIngredient={deleteIngredient}
         updateIngredient={updateIngredient}
       />
+      <Navigation />
     </>
   );
 }
