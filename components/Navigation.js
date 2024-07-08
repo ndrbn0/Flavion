@@ -7,9 +7,12 @@ const Navigation = () => {
 
   return (
     <NavBar>
-      <NavItem $active={router.pathname === "/"}>
-        <Link href="/">I</Link>
-      </NavItem>
+      <StyledLink href="/" $active={router.pathname === "/"}>
+        I
+      </StyledLink>
+      <StyledLink href="/pairings" $active={router.pathname === "/pairings"}>
+        P
+      </StyledLink>
     </NavBar>
   );
 };
@@ -30,9 +33,9 @@ const NavBar = styled.nav`
   padding: 10px 0;
 `;
 
-const NavItem = styled.div`
-  border: 1px solid;
-  padding: 10px #007bff;
+const StyledLink = styled(Link)`
+  border: 1px solid #007bff;
+  padding: 10px;
   border-radius: 50%;
   background-color: ${({ $active }) => ($active ? "#007bff" : "transparent")};
   color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
