@@ -34,8 +34,8 @@ const NavBar = styled.nav`
 `;
 
 const StyledLink = styled(Link)`
-  border: 1px solid;
-  padding: 10px #007bff;
+  border: 1px solid #007bff;
+  padding: 10px;
   border-radius: 50%;
   background-color: ${({ $active }) => ($active ? "#007bff" : "transparent")};
   color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
