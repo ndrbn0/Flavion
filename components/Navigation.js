@@ -22,9 +22,8 @@ export default Navigation;
 const NavBar = styled.nav`
   position: fixed;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
+  left: 5vw;
+  width: 90vw;
   border-radius: 25px;
   display: flex;
   justify-content: space-around;
@@ -46,11 +45,6 @@ const StyledLink = styled(Link)`
   align-items: center;
   justify-content: center;
   text-decoration: none;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
 
   &:hover {
     background-color: #0056b3;
