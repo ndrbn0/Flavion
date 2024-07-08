@@ -19,7 +19,7 @@ export const Container = styled.div`
   align-self: stretch;
   padding: 8px;
   gap: 5 0px;
-  margin-bottom: 10px;
+  margin-bottom: 25%;
 `;
 
 export const ImageWrapper = styled.div`
