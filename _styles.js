@@ -361,7 +361,7 @@ export const FilterButton = styled.button`
   border-radius: 20px;
   cursor: pointer;
   background-color: ${(props) => (props.$active ? props.$color : "#f0f0f0")};
-  color: ${(props) => (props.$active ? "#fff" : "#333")};
+  color: ${(props) => (props.$active ? "#000000" : "#333")};
   transition: background-color 0.3s ease;
 
   &:hover {
