@@ -11,6 +11,7 @@ import Link from "next/link";
 const SearchComponent = ({ ingredients }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
+  const [selectedResult, setSelectedResult] = useState(null);
   const [fuse, setFuse] = useState(null);
 
   useEffect(() => {
@@ -41,6 +42,11 @@ const SearchComponent = ({ ingredients }) => {
       setResults([]);
     }
   }
+  function handleResultClick(result) {
+    setSelectedResult(result);
+    setSearchTerm("");
+    setResults([]);
+  }
 
   return (
     <SearchContainer>
@@ -55,7 +61,9 @@ const SearchComponent = ({ ingredients }) => {
         <ResultsList>
           {results.map((result, index) => (
             <Link key={index} href={`/ingredient/${result._id}`}>
-              <SearchResult>{result.name}</SearchResult>
+              <SearchResult onClick={() => handleResultClick(result)}>
+                {result.name}
+              </SearchResult>
             </Link>
           ))}
         </ResultsList>
