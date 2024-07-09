@@ -12,7 +12,6 @@ const PairingsPage = () => {
 
   return (
     <Container>
-      <h1>Pairings</h1>
       <PairingsList pairings={pairings} />
     </Container>
   );
