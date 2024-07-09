@@ -10,7 +10,10 @@ const Navigation = () => {
       <StyledLink href="/" $active={router.pathname === "/"}>
         I
       </StyledLink>
-      <StyledLink href="/#">P</StyledLink>
+      <StyledLink href="/pairings" $active={router.pathname === "/pairings"}>
+        P
+      </StyledLink>
+
     </NavBar>
   );
 };
@@ -42,11 +45,7 @@ const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+  text-decoration: none;
 
   &:hover {
     background-color: #0056b3;

@@ -19,8 +19,7 @@ export const Container = styled.div`
   align-self: stretch;
   padding: 8px;
   gap: 5 0px;
-  margin-bottom: 25%;
-  margin-top: 0;
+  margin-bottom: 15%;
 `;
 
 export const ImageWrapper = styled.div`
@@ -376,4 +375,47 @@ export const NoMatchMessage = styled.p`
   text-align: center;
   color: #666;
   margin-top: 20px;
+`;
+
+export const Pairing = styled.li`
+  text-decoration: none;
+  color: inherit;
+  width: 300px;
+  height: 380px;
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: var(--radius-2xl, 48px);
+  background: linear-gradient(
+      0deg,
+      var(--Theme-colors-ui-4, rgba(255, 255, 255, 0.82)) 0%,
+      var(--Theme-colors-ui-4, rgba(255, 255, 255, 0.82)) 100%
+    ),
+    var(--Primary-primary, #153f52);
+  padding: 0px 10px 10px 10px;
+  background: linear-gradient(
+      0deg,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
+      var (--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 100%
+    ),
+    var(--Primary-primary, #0d1f28);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+export const Ingredients = styled.p`
+  font-weight: bold;
+`;
+
+export const Reason = styled.p`
+  margin-top: 5px;
 `;
