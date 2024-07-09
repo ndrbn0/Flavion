@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import Link from "next/link";
 import Fuse from "fuse.js";
 import {
   SearchContainer,
@@ -6,7 +8,6 @@ import {
   SearchInput,
   ResultsList,
 } from "@/_styles";
-import Link from "next/link";
 
 const SearchComponent = ({ ingredients }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -60,11 +61,11 @@ const SearchComponent = ({ ingredients }) => {
       {results.length > 0 && (
         <ResultsList>
           {results.map((result, index) => (
-            <Link key={index} href={`/ingredient/${result._id}`}>
+            <StyledLink key={index} href={`/ingredient/${result._id}`}>
               <SearchResult onClick={() => handleResultClick(result)}>
                 {result.name}
               </SearchResult>
-            </Link>
+            </StyledLink>
           ))}
         </ResultsList>
       )}
@@ -73,3 +74,7 @@ const SearchComponent = ({ ingredients }) => {
 };
 
 export default SearchComponent;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;

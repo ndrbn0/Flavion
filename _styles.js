@@ -422,6 +422,7 @@ export const SearchResult = styled.li`
   padding: 15px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-decoration: none;
 
   &:hover {
     background-color: #f8f8f8;
