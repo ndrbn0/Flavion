@@ -69,8 +69,8 @@ const Container = styled.div`
   min-width: 220px;
   flex-direction: column;
   align-items: center;
-  align-self: stretch;
   padding: 8px;
   gap: 5 0px;
   margin-bottom: 15%;
+  margin-top: -10%;
 `;
