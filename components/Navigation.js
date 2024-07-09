@@ -13,6 +13,7 @@ const Navigation = () => {
       <StyledLink href="/pairings" $active={router.pathname === "/pairings"}>
         P
       </StyledLink>
+
     </NavBar>
   );
 };
@@ -40,7 +41,7 @@ const StyledLink = styled(Link)`
   color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
   width: 50px;
   height: 50px;
-
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;

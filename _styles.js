@@ -81,6 +81,7 @@ export const BackLink = styled(Link)`
   font-style: italic;
   font-size: 14px;
   margin-top: 8px;
+  margin-left: 8px;
   padding: 8px 16px;
   background-color: #000000;
   border-radius: 15px;
