@@ -6,8 +6,10 @@ import {
   SearchInput,
   ResultsList,
 } from "@/_styles";
+import Link from "next/link";
 
 const SearchComponent = ({ ingredients }) => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [fuse, setFuse] = useState(null);
 
@@ -20,13 +22,24 @@ const SearchComponent = ({ ingredients }) => {
   }, [ingredients]);
 
   function handleSearch(event) {
-    if (!fuse) {
-      return;
-    }
     const searchPattern = event.target.value;
-    const searchResult = fuse.search(searchPattern).slice(0, 10);
+    setSearchTerm(searchPattern);
+  }
 
-    setResults(searchResult.map((result) => result.item.name));
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      performSearch();
+    }
+  }
+
+  function performSearch() {
+    if (fuse && searchTerm.trim() !== "") {
+      const searchResult = fuse.search(searchTerm).slice(0, 10);
+      setResults(searchResult.map((result) => result.item));
+    } else {
+      setResults([]);
+    }
   }
 
   return (
@@ -34,12 +47,16 @@ const SearchComponent = ({ ingredients }) => {
       <SearchInput
         type="text"
         placeholder="Search for ingredients..."
+        value={searchTerm}
         onChange={handleSearch}
+        onKeyDown={handleKeyDown}
       />
       {results.length > 0 && (
         <ResultsList>
           {results.map((result, index) => (
-            <SearchResult key={index}>{result}</SearchResult>
+            <Link key={index} href={`/ingredient/${result._id}`}>
+              <SearchResult>{result.name}</SearchResult>
+            </Link>
           ))}
         </ResultsList>
       )}
