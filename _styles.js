@@ -388,6 +388,61 @@ export const NoMatchMessage = styled.p`
   color: #666;
   margin-top: 20px;
 `;
+export const SearchContainer = styled.div`
+  position: relative;
+  max-width: 600px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border-top: 1px solid #e0e0e0;
+  }
+`;
+
+export const SearchInput = styled.input`
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+
+  &::placeholder {
+    color: #aaa;
+  }
+
+  &:focus {
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+`;
+export const ResultsList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+`;
+
+export const SearchResult = styled.li`
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #f8f8f8;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+  }
+`;
 
 export const Pairing = styled.li`
   text-decoration: none;
