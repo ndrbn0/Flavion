@@ -26,6 +26,7 @@ const SearchComponent = ({ ingredients }) => {
   function handleSearch(event) {
     const searchPattern = event.target.value;
     setSearchTerm(searchPattern);
+    performSearch(searchPattern);
   }
 
   function handleKeyDown(event) {
