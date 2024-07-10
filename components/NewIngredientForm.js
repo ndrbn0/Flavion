@@ -8,6 +8,11 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
   const [name, setName] = useState("");
   const [flavor, setFlavor] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,46 +28,57 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Headline>Add New Ingredient</Headline>
-      <FormField>
-        <Label htmlFor="name">Enter Name:</Label>
-        <Input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          required
-        />
-      </FormField>
-      <FormField>
-        <Label htmlFor="flavor">Select a flavor:</Label>
-        <Select
-          value={flavor}
-          onChange={(event) => setFlavor(event.target.value)}
-          required
-        >
-          <option value="" disabled>
-            Select Flavor
-          </option>
-          {flavors.map((flavor) => (
-            <option key={flavor} value={flavor}>
-              {flavor}
-            </option>
-          ))}
-        </Select>
-      </FormField>
-      <FormField>
-        <Label>Image URL:</Label>
-        <Input
-          type="text"
-          value={imgUrl}
-          onChange={(event) => setImgUrl(event.target.value)}
-          placeholder="Enter image URL"
-        />
-      </FormField>
-      <SubmitButton type="submit">Submit</SubmitButton>
-    </Form>
+    <>
+      <Button onClick={togglePopup}>Add Ingredient</Button>
+      {showPopup && (
+        <>
+          <PopupForm>
+            <Headline>Add New Ingredient</Headline>
+            <Form onSubmit={handleSubmit}>
+              <Headline>Add New Ingredient</Headline>
+              <FormField>
+                <Label htmlFor="name">Enter Name:</Label>
+                <Input
+                  type="text"
+                  placeholder="Name"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                  required
+                />
+              </FormField>
+              <FormField>
+                <Label htmlFor="flavor">Select a flavor:</Label>
+                <Select
+                  value={flavor}
+                  onChange={(event) => setFlavor(event.target.value)}
+                  required
+                >
+                  <option value="" disabled>
+                    Select Flavor
+                  </option>
+                  {flavors.map((flavor) => (
+                    <option key={flavor} value={flavor}>
+                      {flavor}
+                    </option>
+                  ))}
+                </Select>
+              </FormField>
+              <FormField>
+                <Label>Image URL:</Label>
+                <Input
+                  type="text"
+                  value={imgUrl}
+                  onChange={(event) => setImgUrl(event.target.value)}
+                  placeholder="Enter image URL"
+                />
+              </FormField>
+              <SubmitButton type="submit">Submit</SubmitButton>
+            </Form>
+          </PopupForm>
+          <OverlayBackground onClick={togglePopup} />
+        </>
+      )}
+    </>
   );
 };
 
@@ -136,4 +152,49 @@ const FormField = styled.div`
   align-items: flex-start;
   gap: 15px;
   align-self: stretch;
+`;
+
+const OverlayBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
+  z-index: 998; /* Ensure it's below the popup */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const PopupForm = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  max-width: 90%;
+  padding: 25px;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+`;
+const Button = styled.button`
+  border: none;
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #0070f3;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  color: white;
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
 `;
