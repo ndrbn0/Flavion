@@ -4,6 +4,7 @@ import ingredientsData from "@/assets/ingredients.json";
 import { nanoid } from "nanoid";
 import Navigation from "@/components/Navigation";
 import SearchComponent from "@/components/SearchComponent";
+import { flavorColors } from "@/utils";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useState(ingredientsData);
