@@ -2,6 +2,7 @@ import styled from "styled-components";
 import PairingItem from "./PairingItem";
 
 const PairingsList = ({ pairings }) => {
+  console.log(pairings);
   return (
     <>
       <Title>Pairings</Title>

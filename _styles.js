@@ -32,15 +32,10 @@ export const ImageWrapper = styled.div`
 `;
 
 export const StyledImage = styled(Image)`
-  align-self: stretch;
-  height: 210px;
-  flex-shrink: 0;
+  height: 180px;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  box-sizing: border-box;
   overflow: hidden;
+  object-fit: cover;
 `;
 
 export const StyledContent = styled.div`
@@ -52,6 +47,12 @@ export const StyledContent = styled.div`
   align-self: stretch;
 `;
 
+export const StyledContent2 = styled.div`
+  display: flex;
+  justify-content: center;
+  object-fit: cover;
+`;
+
 export const Name = styled.span`
   font-weight: bold;
   font-size: 32px;
@@ -61,6 +62,17 @@ export const Name = styled.span`
 `;
 
 export const Flavor = styled.span`
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: ${(props) => props.$color};
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const Flavors = styled.span`
   font-style: italic;
   font-size: 14px;
   margin-top: 8px;
@@ -227,6 +239,7 @@ export const ConfirmDialog = styled.div`
     margin: 0 10px;
     border: none;
     border-radius: 10px;
+    gap: 5px;
     cursor: pointer;
     background-color: #ccc;
     &:hover {
@@ -255,7 +268,6 @@ export const CancelButton = styled(DialogButton)`
     background-color: darkred;
   }
 `;
-////
 
 export const EditButton = styled.button`
   padding: 10px 20px;
@@ -381,7 +393,7 @@ export const Pairing = styled.li`
   text-decoration: none;
   color: inherit;
   width: 300px;
-  height: 380px;
+  height: 440px;
   margin: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -414,8 +426,9 @@ export const Pairing = styled.li`
 
 export const Ingredients = styled.p`
   font-weight: bold;
+  margin-left: 10px;
 `;
 
 export const Reason = styled.p`
-  margin-top: 5px;
+  margin-left: 20px;
 `;

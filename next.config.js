@@ -29,6 +29,9 @@ const nextConfig = {
       "kitchencookbook.net",
       "starranch.com",
       "media1.popsugar-assets.com",
+      "cdn3.delicesdeselena.com",
+      "falasteenifoodie.com",
+      "www.sidechef.com",
     ],
   },
 };
