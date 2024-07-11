@@ -1,19 +1,63 @@
+import { useState } from "react";
 import styled from "styled-components";
 import IngredientItem from "@/components/IngredientItem";
+import PairingItem from "@/components/PairingItem";
 
-const FavoritesPage = ({ favorites }) => {
+// WORK WITH ID
+
+const FavoritesPage = () => {
+  const [favoriteIngredients, setFavoriteIngredients] = useState([]);
+  const [favoritePairings, setFavoritePairings] = useState([]);
+
+  const handleToggleFavoriteIngredient = (_id) => {
+    setFavoriteIngredients((prevFavorites) =>
+      prevFavorites.includes(_id)
+        ? prevFavorites.filter((ing) => ing !== _id)
+        : [...prevFavorites, ingredient]
+    );
+  };
+
+  const handleToggleFavoritePairing = (pairing) => {
+    setFavoritePairings((prevFavorites) =>
+      prevFavorites.includes(pairing)
+        ? prevFavorites.filter((pair) => pair !== pairing)
+        : [...prevFavorites, pairing]
+    );
+  };
+
   return (
     <Container>
       <Title>Favorites</Title>
-      {favorites.length > 0 ? (
-        <StyledList>
-          {favorites.map((ingredient) => (
-            <IngredientItem key={ingredient._id} ingredient={ingredient} />
-          ))}
-        </StyledList>
-      ) : (
-        <NoFavoritesMessage>No favorite ingredients yet.</NoFavoritesMessage>
-      )}
+      <StyledList>
+        {favoriteIngredients.length > 0 ? (
+          favoriteIngredients.map((_id) => (
+            <IngredientItem
+              key={ingredient._id}
+              ingredient={ingredient}
+              isFavorited={favoriteIngredients.includes(_id)}
+              onToggleFavorite={handleToggleFavoriteIngredient}
+            />
+          ))
+        ) : (
+          <NoFavoritesMessage>
+            You have no favorite ingredients yet.
+          </NoFavoritesMessage>
+        )}
+        {favoritePairings.length > 0 ? (
+          favoritePairings.map((pairing) => (
+            <PairingItem
+              key={pairing._id}
+              pairing={pairing}
+              isFavorited={favoritePairings.includes(pairing)}
+              onToggleFavorite={handleToggleFavoritePairing}
+            />
+          ))
+        ) : (
+          <NoFavoritesMessage>
+            You have no favorite pairings yet.
+          </NoFavoritesMessage>
+        )}
+      </StyledList>
     </Container>
   );
 };

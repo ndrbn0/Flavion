@@ -57,7 +57,6 @@ export default function App({ Component, pageProps }) {
         deleteIngredient={deleteIngredient}
         updateIngredient={updateIngredient}
         toggleFavorite={toggleFavorite}
-        favorites={favorites}
       />
       <Navigation />
     </>
