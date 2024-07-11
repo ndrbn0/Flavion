@@ -1,13 +1,14 @@
 import GlobalStyle from "../styles";
 import { useState } from "react";
 import ingredientsData from "@/assets/ingredients.json";
+import flavorsData from "@/assets/flavors.json";
 import { nanoid } from "nanoid";
 import Navigation from "@/components/Navigation";
 import SearchComponent from "@/components/SearchComponent";
-import { flavorColors } from "@/utils";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useState(ingredientsData);
+  const [flavors, setFlavors] = useState(flavorsData);
 
   const addIngredient = (newIngredient) => {
     const updatedIngredients = [
@@ -36,7 +37,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
-      <SearchComponent ingredients={ingredients} />
+      <SearchComponent ingredients={ingredients} flavors={flavors} />
       <Component
         {...pageProps}
         ingredients={ingredients}
