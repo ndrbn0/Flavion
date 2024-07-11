@@ -487,3 +487,22 @@ export const Ingredients = styled.p`
 export const Reason = styled.p`
   margin-left: 20px;
 `;
+
+export const FavoriteButton = styled.button`
+  display: flex;
+  position: relative;
+  margin-left: 85%;
+  margin-top: 15px;
+  background-color: ${({ isFavorite }) => (isFavorite ? "#dc3545" : "#007bff")};
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: ${({ isFavorite }) =>
+      isFavorite ? "#a71d2a" : "#0056b3"};
+  }
+`;

@@ -5,10 +5,19 @@ import {
   Name,
   Flavor,
   CardFooter,
+  FavoriteButton,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
+import { useState } from "react";
 
 const IngredientItem = ({ ingredient }) => {
+  const [favorited, setFavorited] = useState(false);
+
+  const toggleFavorite = (event) => {
+    setFavorited(!favorited);
+    event.preventDefault();
+  };
+
   return (
     <>
       <ImageWrapper>
@@ -19,6 +28,9 @@ const IngredientItem = ({ ingredient }) => {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           loading="lazy"
         />
+        <FavoriteButton onClick={toggleFavorite}>
+          {favorited ? "★" : "☆"}
+        </FavoriteButton>
       </ImageWrapper>
       <StyledContent>
         <Name>{ingredient.name}</Name>

@@ -7,6 +7,7 @@ import SearchComponent from "@/components/SearchComponent";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useState(ingredientsData);
+  const [favorites, setFavorites] = useState([]);
 
   const addIngredient = (newIngredient) => {
     const updatedIngredients = [
@@ -32,6 +33,18 @@ export default function App({ Component, pageProps }) {
     setIngredients(updatedIngredients);
   };
 
+  const toggleFavorite = (id) => {
+    const index = favorites.findIndex((item) => item._id === id);
+    if (index === -1) {
+      const favoriteIngredient = ingredients.find((item) => item._id === id);
+      setFavorites([...favorites, favoriteIngredient]);
+    } else {
+      const updatedFavorites = [...favorites];
+      updatedFavorites.splice(index, 1);
+      setFavorites(updatedFavorites);
+    }
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -42,6 +55,8 @@ export default function App({ Component, pageProps }) {
         addIngredient={addIngredient}
         deleteIngredient={deleteIngredient}
         updateIngredient={updateIngredient}
+        toggleFavorite={toggleFavorite}
+        favorites={favorites}
       />
       <Navigation />
     </>

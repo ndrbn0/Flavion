@@ -7,15 +7,22 @@ import {
   StyledContent2,
   Flavors,
   CardFooter,
+  FavoriteButton,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
+import { useState } from "react";
 
 const PairingItem = ({ pairing }) => {
+  const [favorited, setFavorited] = useState(false);
   const ingredients = pairing.ingredients.map((id) => {
     const ingredient = ingredientsData.find((ing) => ing._id === id);
     return ingredient;
   });
+
+  const toggleFavorite = () => {
+    setFavorited(!favorited);
+  };
 
   return (
     <Pairing>
@@ -26,6 +33,9 @@ const PairingItem = ({ pairing }) => {
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
+        <FavoriteButton onClick={toggleFavorite}>
+          {favorited ? "★" : "☆"}
+        </FavoriteButton>
       </ImageWrapper>
       <StyledContent2>
         <Ingredients>
