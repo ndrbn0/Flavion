@@ -1,5 +1,5 @@
 import GlobalStyle from "../styles";
-import { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import ingredientsData from "@/assets/ingredients.json";
 import { nanoid } from "nanoid";
 import Navigation from "@/components/Navigation";
@@ -8,6 +8,10 @@ import SearchComponent from "@/components/SearchComponent";
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useState(ingredientsData);
   const [favorites, setFavorites] = useState([]);
+  const [ingredients, setIngredients] = useLocalStorageState("ingredients", {
+    defaultValue: ingredientsData,
+  });
+
 
   const addIngredient = (newIngredient) => {
     const updatedIngredients = [
