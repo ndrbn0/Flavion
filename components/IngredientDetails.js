@@ -16,9 +16,15 @@ import {
   Button,
   EditButton,
   Overlay,
+  FavoriteButton,
 } from "@/_styles";
 
-const IngredientDetails = ({ ingredients, deleteIngredient }) => {
+const IngredientDetails = ({
+  ingredients,
+  deleteIngredient,
+  toggleFavorite,
+  favorites,
+}) => {
   const router = useRouter();
   const { id } = router.query;
   const ingredient = ingredients.find((ingredient) => ingredient._id === id);
@@ -45,6 +51,10 @@ const IngredientDetails = ({ ingredients, deleteIngredient }) => {
     router.push(`/ingredient/${id}/edit`);
   };
 
+  const isFavorite = favorites.find(
+    (favorite) => favorite._id === ingredient._id
+  )?.isFavorite;
+
   return (
     <>
       <BackLink href="/">← Back</BackLink>
@@ -57,6 +67,11 @@ const IngredientDetails = ({ ingredients, deleteIngredient }) => {
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
+            <FavoriteButton
+              onClick={(event) => toggleFavorite(event, ingredient._id)}
+            >
+              {isFavorite ? "★" : "☆"}
+            </FavoriteButton>
           </ImageWrapper>
           <StyledContent>
             <Name>{ingredient.name}</Name>

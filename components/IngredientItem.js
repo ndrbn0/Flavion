@@ -8,16 +8,8 @@ import {
   FavoriteButton,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
-import { useState } from "react";
 
-const IngredientItem = ({ ingredient }) => {
-  const [favorited, setFavorited] = useState(false);
-
-  const toggleFavorite = (event) => {
-    setFavorited(!favorited);
-    event.preventDefault();
-  };
-
+const IngredientItem = ({ ingredient, toggleFavorite, isFavorite }) => {
   return (
     <>
       <ImageWrapper>
@@ -28,8 +20,10 @@ const IngredientItem = ({ ingredient }) => {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
         />
-        <FavoriteButton onClick={toggleFavorite}>
-          {favorited ? "★" : "☆"}
+        <FavoriteButton
+          onClick={(event) => toggleFavorite(event, ingredient._id)}
+        >
+          {isFavorite ? "★" : "☆"}
         </FavoriteButton>
       </ImageWrapper>
       <StyledContent>

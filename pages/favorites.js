@@ -1,40 +1,49 @@
-import { useState } from "react";
 import styled from "styled-components";
 import IngredientItem from "@/components/IngredientItem";
 import PairingItem from "@/components/PairingItem";
 
-const FavoritesPage = ({ favorites, toggleFavorite }) => {
+const FavoritesPage = ({ favorites, toggleFavorite, ingredients }) => {
+  const favoriteIngredients = ingredients.filter((ingredient) =>
+    favorites.find(
+      (favorite) => favorite._id === ingredient._id && favorite.isFavorite
+    )
+  );
+
   return (
     <Container>
       <Title>Favorites</Title>
       <StyledList>
-        {favorites.length > 0 ? (
-          favorites.map((favorite) => {
-            if (favorite.ingredients) {
-              return (
-                <PairingItem
-                  key={favorite._id}
-                  pairing={favorite}
-                  isFavorited={true}
-                  onToggleFavorite={toggleFavorite}
-                />
-              );
-            } else {
-              return (
-                <IngredientItem
-                  key={favorite._id}
-                  ingredient={favorite}
-                  isFavorited={true}
-                  onToggleFavorite={toggleFavorite}
-                />
-              );
-            }
-          })
+        {favoriteIngredients.length > 0 ? (
+          favoriteIngredients.map((ingredient) => (
+            <IngredientItem
+              key={ingredient._id}
+              ingredient={ingredient}
+              isFavorite={
+                favorites.find((favorite) => favorite._id === ingredient._id)
+                  ?.isFavorite
+              }
+              toggleFavorite={toggleFavorite}
+            />
+          ))
         ) : (
           <NoFavoritesMessage>
-            You have no favorite ingredients or pairings yet.
+            You have no favorite ingredients yet.
           </NoFavoritesMessage>
         )}
+        {/* {favoritePairings.length > 0 ? (
+          favoritePairings.map((pairing) => (
+            <PairingItem
+              key={pairing._id}
+              pairing={pairing}
+              isFavorited={favoritePairings.includes(pairing)}
+              onToggleFavorite={handleToggleFavoritePairing}
+            />
+          ))
+        ) : (
+          <NoFavoritesMessage>
+            You have no favorite pairings yet.
+          </NoFavoritesMessage>
+        )} */}
       </StyledList>
     </Container>
   );

@@ -11,23 +11,24 @@ export default function App({ Component, pageProps }) {
     defaultValue: ingredientsData,
   });
 
-  const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useState([]); // to generic
 
-  const toggleFavorite = (id) => {
-    const index = favorites.findIndex((ingredient) => ingredient._id === id);
+  const toggleFavorite = (event, _id) => {
+    event.preventDefault();
+    const favoriteIngredient = favorites.find(
+      (ingredient) => ingredient._id === _id
+    );
 
-    if (index === -1) {
-      const favoriteIngredient = ingredients.find(
-        (ingredient) => ingredient._id === id
+    if (favoriteIngredient) {
+      setFavorites(
+        favorites.map((favorite) =>
+          favorite._id === favoriteIngredient._id
+            ? { ...favorite, isFavorite: !favorite.isFavorite }
+            : favorite
+        )
       );
-      if (favoriteIngredient) {
-        setFavorites([...favorites, favoriteIngredient]);
-      }
     } else {
-      const updatedFavorites = favorites.filter(
-        (ingredient) => ingredient._id !== id
-      );
-      setFavorites(updatedFavorites);
+      setFavorites([...favorites, { _id, isFavorite: true }]);
     }
   };
 
@@ -44,11 +45,6 @@ export default function App({ Component, pageProps }) {
       (ingredient) => ingredient._id !== id
     );
     setIngredients(updatedIngredients);
-
-    const updatedFavorites = favorites.filter(
-      (ingredient) => ingredient._id !== id
-    );
-    setFavorites(updatedFavorites);
   };
 
   const updateIngredient = (id, updatedIngredient) => {
@@ -58,13 +54,6 @@ export default function App({ Component, pageProps }) {
         : ingredient
     );
     setIngredients(updatedIngredients);
-
-    const updatedFavorites = favorites.map((ingredient) =>
-      ingredient._id === _id
-        ? { ...ingredient, ...updatedIngredient }
-        : ingredient
-    );
-    setFavorites(updatedFavorites);
   };
 
   return (
