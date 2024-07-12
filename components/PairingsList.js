@@ -1,14 +1,23 @@
 import styled from "styled-components";
 import PairingItem from "./PairingItem";
 
-const PairingsList = ({ pairings }) => {
+const PairingsList = ({ pairings, toggleFavoritePairing, pairingsInfo }) => {
   return (
     <>
       <Title>Pairings</Title>
       <Container>
         <StyledList>
           {pairings.map((pairing) => (
-            <PairingItem key={pairing._id} pairing={pairing} />
+            <PairingItem
+              key={pairing._id}
+              pairing={pairing}
+              toggleFavoritePairing={toggleFavoritePairing}
+              isFavorite={
+                pairingsInfo.find(
+                  (pairingInfo) => pairingInfo._id === pairing._id
+                )?.isFavorite
+              }
+            />
           ))}
         </StyledList>
       </Container>

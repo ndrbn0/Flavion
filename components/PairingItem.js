@@ -11,18 +11,12 @@ import {
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
-import { useState } from "react";
 
-const PairingItem = ({ pairing }) => {
-  const [favorited, setFavorited] = useState(false);
+const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
   const ingredients = pairing.ingredients.map((id) => {
     const ingredient = ingredientsData.find((ing) => ing._id === id);
     return ingredient;
   });
-
-  const toggleFavorite = () => {
-    setFavorited(!favorited);
-  };
 
   return (
     <Pairing>
@@ -32,10 +26,9 @@ const PairingItem = ({ pairing }) => {
           alt={pairing.reason}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          priority
         />
-        <FavoriteButton onClick={toggleFavorite}>
-          {favorited ? "★" : "☆"}
+        <FavoriteButton onClick={() => toggleFavoritePairing(pairing._id)}>
+          {isFavorite ? "★" : "☆"}
         </FavoriteButton>
       </ImageWrapper>
       <StyledContent2>

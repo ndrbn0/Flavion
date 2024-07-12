@@ -4,6 +4,7 @@ import ingredientsData from "@/assets/ingredients.json";
 import { nanoid } from "nanoid";
 import Navigation from "@/components/Navigation";
 import SearchComponent from "@/components/SearchComponent";
+import pairingsData from "../assets/pairings.json";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useLocalStorageState("ingredients", {
@@ -13,6 +14,13 @@ export default function App({ Component, pageProps }) {
   const [favorites, setFavorites] = useLocalStorageState("favorite", {
     defaultValue: [],
   }); // to generic
+
+  const [pairings, setPairings] = useLocalStorageState("parings", {
+    defaultValue: pairingsData,
+  });
+  const [pairingsInfo, setPairingsInfo] = useLocalStorageState("pairingsInfo", {
+    defaultValue: [],
+  });
 
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
@@ -57,6 +65,22 @@ export default function App({ Component, pageProps }) {
     setIngredients(updatedIngredients);
   };
 
+  function toggleFavoritePairing(_id) {
+    const foundPairing = pairingsInfo.find((pairing) => pairing._id === _id);
+
+    if (foundPairing) {
+      setPairingsInfo(
+        pairingsInfo.map((pairing) =>
+          pairing._id === foundPairing._id
+            ? { ...pairing, isFavorite: !pairing.isFavorite }
+            : pairing
+        )
+      );
+    } else {
+      setPairingsInfo([...pairingsInfo, { _id, isFavorite: true }]);
+    }
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -69,6 +93,9 @@ export default function App({ Component, pageProps }) {
         updateIngredient={updateIngredient}
         toggleFavorite={toggleFavorite}
         favorites={favorites}
+        pairings={pairings}
+        toggleFavoritePairing={toggleFavoritePairing}
+        pairingsInfo={pairingsInfo}
       />
       <Navigation />
     </>

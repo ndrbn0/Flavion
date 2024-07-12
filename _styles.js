@@ -479,9 +479,11 @@ export const Pairing = styled.li`
   }
 `;
 
-export const Ingredients = styled.p`
+export const Ingredients = styled.ul`
   font-weight: bold;
   margin-left: 10px;
+  padding: 0;
+  list-style: none;
 `;
 
 export const Reason = styled.p`

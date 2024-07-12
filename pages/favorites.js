@@ -1,11 +1,26 @@
 import styled from "styled-components";
-import IngredientItem from "@/components/IngredientItem";
 import PairingItem from "@/components/PairingItem";
+import IngredientItem from "@/components/IngredientItem"; // Ensure this import is correct
 
-const FavoritesPage = ({ favorites, toggleFavorite, ingredients }) => {
+const FavoritesPage = ({
+  favorites,
+  toggleFavorite,
+  ingredients,
+  toggleFavoritePairing,
+  pairingsInfo,
+  pairings,
+}) => {
+  // Filter favorite ingredients
   const favoriteIngredients = ingredients.filter((ingredient) =>
     favorites.find(
       (favorite) => favorite._id === ingredient._id && favorite.isFavorite
+    )
+  );
+
+  // Filter favorite pairings
+  const favoritePairings = pairings.filter((pairing) =>
+    pairingsInfo.find(
+      (pairingInfo) => pairingInfo._id === pairing._id && pairingInfo.isFavorite
     )
   );
 
@@ -30,20 +45,33 @@ const FavoritesPage = ({ favorites, toggleFavorite, ingredients }) => {
             You have no favorite ingredients yet.
           </NoFavoritesMessage>
         )}
-        {/* {favoritePairings.length > 0 ? (
-          favoritePairings.map((pairing) => (
-            <PairingItem
-              key={pairing._id}
-              pairing={pairing}
-              isFavorited={favoritePairings.includes(pairing)}
-              onToggleFavorite={handleToggleFavoritePairing}
-            />
-          ))
+
+        {favoritePairings.length > 0 ? (
+          favoritePairings.map((favorite) => {
+            const pairing = pairings.find(
+              (pairing) => pairing._id === favorite._id
+            );
+            if (pairing) {
+              return (
+                <PairingItem
+                  key={pairing._id}
+                  pairing={pairing}
+                  toggleFavoritePairing={toggleFavoritePairing}
+                  isFavorite={
+                    pairingsInfo.find(
+                      (pairingInfo) => pairingInfo._id === pairing._id
+                    )?.isFavorite
+                  }
+                />
+              );
+            }
+            return null;
+          })
         ) : (
           <NoFavoritesMessage>
             You have no favorite pairings yet.
           </NoFavoritesMessage>
-        )} */}
+        )}
       </StyledList>
     </Container>
   );
