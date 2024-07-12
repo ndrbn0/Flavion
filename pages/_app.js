@@ -11,6 +11,10 @@ export default function App({ Component, pageProps }) {
     defaultValue: ingredientsData,
   });
 
+  const [comments, setComments] = useLocalStorageState("comment", {
+    defaultValue: [],
+  }); // to generic
+
   const addIngredient = (newIngredient) => {
     const updatedIngredients = [
       { _id: nanoid(), ...newIngredient },
@@ -45,6 +49,7 @@ export default function App({ Component, pageProps }) {
         addIngredient={addIngredient}
         deleteIngredient={deleteIngredient}
         updateIngredient={updateIngredient}
+        comments={comments}
       />
       <Navigation />
     </>

@@ -4,6 +4,7 @@ export default function HomePage({
   addIngredient,
   ingredients,
   updateIngredient,
+  comments,
 }) {
   return (
     <div>
@@ -11,6 +12,7 @@ export default function HomePage({
         ingredients={ingredients}
         addIngredient={addIngredient}
         updateIngredient={updateIngredient}
+        comments={comments}
       />
     </div>
   );

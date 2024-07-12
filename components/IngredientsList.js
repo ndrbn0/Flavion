@@ -17,7 +17,7 @@ const flavors = [
   ...new Set(ingredientsData.map((ingredient) => ingredient.flavor)),
 ];
 
-const IngredientsList = ({ ingredients, addIngredient }) => {
+const IngredientsList = ({ ingredients, addIngredient, comments }) => {
   const [activeFlavor, setActiveFlavor] = useState("");
 
   const handleFilterClick = (flavor) => {
@@ -52,7 +52,7 @@ const IngredientsList = ({ ingredients, addIngredient }) => {
                 key={ingredient._id}
                 href={`/ingredient/${ingredient._id}`}
               >
-                <IngredientItem ingredient={ingredient} />
+                <IngredientItem ingredient={ingredient} comments={comments} />
               </StyledListItem>
             ))}
           </List>
