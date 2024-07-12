@@ -38,11 +38,13 @@ const PairingItem = ({ pairing }) => {
         </FavoriteButton>
       </ImageWrapper>
       <StyledContent2>
-        <Ingredients>
-          {ingredients.map((ingredient) => {
-            return <li key={ingredient._id}>{ingredient.name}</li>;
-          })}
-        </Ingredients>
+        <ul>
+          <Ingredients>
+            {ingredients.map((ingredient) => {
+              return <li key={ingredient._id}>{ingredient.name}</li>;
+            })}
+          </Ingredients>
+        </ul>
         <Reason>{pairing.reason}</Reason>
       </StyledContent2>
       <CardFooter>
