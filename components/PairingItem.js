@@ -32,6 +32,7 @@ const PairingItem = ({ pairing }) => {
           alt={pairing.reason}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
         />
         <FavoriteButton onClick={toggleFavorite}>
           {favorited ? "★" : "☆"}
