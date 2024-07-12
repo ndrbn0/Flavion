@@ -4,6 +4,8 @@ export default function HomePage({
   addIngredient,
   ingredients,
   updateIngredient,
+  toggleFavorite,
+  favorites,
 }) {
   return (
     <div>
@@ -11,6 +13,8 @@ export default function HomePage({
         ingredients={ingredients}
         addIngredient={addIngredient}
         updateIngredient={updateIngredient}
+        toggleFavorite={toggleFavorite}
+        favorites={favorites}
       />
     </div>
   );

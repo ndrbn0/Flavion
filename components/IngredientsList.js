@@ -17,7 +17,12 @@ const flavors = [
   ...new Set(ingredientsData.map((ingredient) => ingredient.flavor)),
 ];
 
-const IngredientsList = ({ ingredients, addIngredient }) => {
+const IngredientsList = ({
+  ingredients,
+  addIngredient,
+  toggleFavorite,
+  favorites,
+}) => {
   const [activeFlavor, setActiveFlavor] = useState("");
 
   const handleFilterClick = (flavor) => {
@@ -52,7 +57,16 @@ const IngredientsList = ({ ingredients, addIngredient }) => {
                 key={ingredient._id}
                 href={`/ingredient/${ingredient._id}`}
               >
-                <IngredientItem ingredient={ingredient} />
+                <IngredientItem
+                  key={ingredient._id}
+                  ingredient={ingredient}
+                  toggleFavorite={toggleFavorite}
+                  isFavorite={
+                    favorites.find(
+                      (favorite) => favorite._id === ingredient._id
+                    )?.isFavorite
+                  }
+                />
               </StyledListItem>
             ))}
           </List>

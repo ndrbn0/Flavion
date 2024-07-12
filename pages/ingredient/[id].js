@@ -5,6 +5,8 @@ const IngredientPage = ({
   ingredients,
   deleteIngredient,
   updateIngredient,
+  toggleFavorite,
+  favorites,
 }) => {
   return (
     <StyledContainer>
@@ -12,6 +14,8 @@ const IngredientPage = ({
         ingredients={ingredients}
         deleteIngredient={deleteIngredient}
         updateIngredient={updateIngredient}
+        toggleFavorite={toggleFavorite}
+        favorites={favorites}
       />
     </StyledContainer>
   );

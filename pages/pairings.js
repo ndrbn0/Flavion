@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import pairingsData from "../assets/pairings.json";
 import PairingsList from "@/components/PairingsList";
 
-const PairingsPage = () => {
-  const [pairings, setPairings] = useState([]);
-
-  useEffect(() => {
-    setPairings(pairingsData);
-  }, []);
-
+const PairingsPage = ({ toggleFavoritePairing, pairingsInfo, pairings }) => {
   return (
     <Container>
-      <PairingsList pairings={pairings} />
+      <PairingsList
+        pairings={pairings}
+        toggleFavoritePairing={toggleFavoritePairing}
+        pairingsInfo={pairingsInfo}
+      />
     </Container>
   );
 };

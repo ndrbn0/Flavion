@@ -1,24 +1,27 @@
+import React from "react";
 import {
-  Pairing,
+  Card,
   Ingredients,
   Reason,
   ImageWrapper,
   StyledImage,
-  StyledContent2,
+  StyledContent,
   Flavors,
   CardFooter,
+  FavoriteButton,
+  Ingredient,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
 
-const PairingItem = ({ pairing }) => {
+const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
   const ingredients = pairing.ingredients.map((id) => {
     const ingredient = ingredientsData.find((ing) => ing._id === id);
     return ingredient;
   });
 
   return (
-    <Pairing>
+    <Card>
       <ImageWrapper>
         <StyledImage
           src={pairing.imgUrl}
@@ -26,15 +29,22 @@ const PairingItem = ({ pairing }) => {
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
+        <FavoriteButton onClick={() => toggleFavoritePairing(pairing._id)}>
+          {isFavorite ? "★" : "☆"}
+        </FavoriteButton>
       </ImageWrapper>
-      <StyledContent2>
-        <Ingredients>
-          {ingredients.map((ingredient) => {
-            return <li key={ingredient._id}>{ingredient.name}</li>;
-          })}
-        </Ingredients>
+      <StyledContent>
+        <ul>
+          <Ingredients>
+            {ingredients.map((ingredient) => {
+              return (
+                <Ingredient key={ingredient._id}>{ingredient.name}</Ingredient>
+              );
+            })}
+          </Ingredients>
+        </ul>
         <Reason>{pairing.reason}</Reason>
-      </StyledContent2>
+      </StyledContent>
       <CardFooter>
         {ingredients.map((ingredient) => {
           return (
@@ -47,7 +57,7 @@ const PairingItem = ({ pairing }) => {
           );
         })}
       </CardFooter>
-    </Pairing>
+    </Card>
   );
 };
 

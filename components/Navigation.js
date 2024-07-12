@@ -13,7 +13,9 @@ const Navigation = () => {
       <StyledLink href="/pairings" $active={router.pathname === "/pairings"}>
         P
       </StyledLink>
-
+      <StyledLink href="/favorites" $active={router.pathname === "/favorites"}>
+        F
+      </StyledLink>
     </NavBar>
   );
 };

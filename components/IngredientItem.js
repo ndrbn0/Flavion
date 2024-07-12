@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ImageWrapper,
   StyledImage,
@@ -5,20 +6,27 @@ import {
   Name,
   Flavor,
   CardFooter,
+  FavoriteButton,
+  Card,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 
-const IngredientItem = ({ ingredient }) => {
+const IngredientItem = ({ ingredient, toggleFavorite, isFavorite }) => {
   return (
-    <>
+    <Card>
       <ImageWrapper>
         <StyledImage
           src={ingredient.imgUrl}
           alt={ingredient.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          loading="lazy"
+          priority
         />
+        <FavoriteButton
+          onClick={(event) => toggleFavorite(event, ingredient._id)}
+        >
+          {isFavorite ? "★" : "☆"}
+        </FavoriteButton>
       </ImageWrapper>
       <StyledContent>
         <Name>{ingredient.name}</Name>
@@ -29,7 +37,7 @@ const IngredientItem = ({ ingredient }) => {
           #{ingredient.flavor}
         </Flavor>
       </CardFooter>
-    </>
+    </Card>
   );
 };
 
