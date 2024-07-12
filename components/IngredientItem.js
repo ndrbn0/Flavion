@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ImageWrapper,
   StyledImage,
@@ -6,13 +7,13 @@ import {
   Flavor,
   CardFooter,
   FavoriteButton,
-  Ingredient,
+  Card,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 
 const IngredientItem = ({ ingredient, toggleFavorite, isFavorite }) => {
   return (
-    <Ingredient>
+    <Card>
       <ImageWrapper>
         <StyledImage
           src={ingredient.imgUrl}
@@ -36,7 +37,7 @@ const IngredientItem = ({ ingredient, toggleFavorite, isFavorite }) => {
           #{ingredient.flavor}
         </Flavor>
       </CardFooter>
-    </Ingredient>
+    </Card>
   );
 };
 

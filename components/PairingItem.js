@@ -1,13 +1,15 @@
+import React from "react";
 import {
-  Pairing,
+  Card,
   Ingredients,
   Reason,
   ImageWrapper,
   StyledImage,
-  StyledContent2,
+  StyledContent,
   Flavors,
   CardFooter,
   FavoriteButton,
+  Ingredient,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
@@ -19,7 +21,7 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
   });
 
   return (
-    <Pairing>
+    <Card>
       <ImageWrapper>
         <StyledImage
           src={pairing.imgUrl}
@@ -31,16 +33,18 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
           {isFavorite ? "★" : "☆"}
         </FavoriteButton>
       </ImageWrapper>
-      <StyledContent2>
+      <StyledContent>
         <ul>
           <Ingredients>
             {ingredients.map((ingredient) => {
-              return <li key={ingredient._id}>{ingredient.name}</li>;
+              return (
+                <Ingredient key={ingredient._id}>{ingredient.name}</Ingredient>
+              );
             })}
           </Ingredients>
         </ul>
         <Reason>{pairing.reason}</Reason>
-      </StyledContent2>
+      </StyledContent>
       <CardFooter>
         {ingredients.map((ingredient) => {
           return (
@@ -53,7 +57,7 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
           );
         })}
       </CardFooter>
-    </Pairing>
+    </Card>
   );
 };
 
