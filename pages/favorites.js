@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import PairingItem from "@/components/PairingItem";
-import IngredientItem from "@/components/IngredientItem"; // Ensure this import is correct
+import IngredientItem from "@/components/IngredientItem";
 
 const FavoritesPage = ({
   favorites,
@@ -107,7 +107,10 @@ const StyledList = styled.ul`
   overflow: hidden;
   position: relative;
   align-self: stretch;
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: center;
 `;
 

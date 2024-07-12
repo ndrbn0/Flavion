@@ -6,12 +6,13 @@ import {
   Flavor,
   CardFooter,
   FavoriteButton,
+  Ingredient,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 
 const IngredientItem = ({ ingredient, toggleFavorite, isFavorite }) => {
   return (
-    <>
+    <Ingredient>
       <ImageWrapper>
         <StyledImage
           src={ingredient.imgUrl}
@@ -35,7 +36,7 @@ const IngredientItem = ({ ingredient, toggleFavorite, isFavorite }) => {
           #{ingredient.flavor}
         </Flavor>
       </CardFooter>
-    </>
+    </Ingredient>
   );
 };
 

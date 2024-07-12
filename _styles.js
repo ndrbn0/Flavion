@@ -508,3 +508,38 @@ export const FavoriteButton = styled.button`
       isFavorite ? "#a71d2a" : "#0056b3"};
   }
 `;
+
+export const Ingredient = styled.li`
+  text-decoration: none;
+  color: inherit;
+  width: 300px;
+  height: 440px;
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: var(--radius-2xl, 48px);
+  background: linear-gradient(
+      0deg,
+      var(--Theme-colors-ui-4, rgba(255, 255, 255, 0.82)) 0%,
+      var(--Theme-colors-ui-4, rgba(255, 255, 255, 0.82)) 100%
+    ),
+    var(--Primary-primary, #153f52);
+  padding: 0px 10px 10px 10px;
+  background: linear-gradient(
+      0deg,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
+      var (--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 100%
+    ),
+    var(--Primary-primary, #0d1f28);
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+`;

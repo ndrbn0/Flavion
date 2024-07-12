@@ -58,6 +58,7 @@ const IngredientsList = ({
                 href={`/ingredient/${ingredient._id}`}
               >
                 <IngredientItem
+                  key={ingredient._id}
                   ingredient={ingredient}
                   toggleFavorite={toggleFavorite}
                   isFavorite={
