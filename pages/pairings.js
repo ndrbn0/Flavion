@@ -1,18 +1,33 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import pairingsData from "../assets/pairings.json";
 import PairingsList from "@/components/PairingsList";
 
 const PairingsPage = () => {
-  const [pairings, setPairings] = useState([]);
+  const [pairings, setPairings] = useState(pairingsData);
 
-  useEffect(() => {
-    setPairings(pairingsData);
-  }, []);
+  const toggleFavorite = (event, _id) => {
+    event.preventDefault();
+    const favoritePairing = favorites.find(
+      (ingredient) => ingredient._id === _id
+    );
+
+    if (favoriteIngredient) {
+      setFavorites(
+        favorites.map((favorite) =>
+          favorite._id === favoritePairing._id
+            ? { ...favorite, isFavorite: !favorite.isFavorite }
+            : favorite
+        )
+      );
+    } else {
+      setFavorites([...favorites, { _id, isFavorite: true }]);
+    }
+  };
 
   return (
     <Container>
-      <PairingsList pairings={pairings} />
+      <PairingsList pairings={pairings} toggleFavorite={toggleFavorite} />
     </Container>
   );
 };

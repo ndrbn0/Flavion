@@ -4,14 +4,15 @@ import ingredientsData from "@/assets/ingredients.json";
 import { nanoid } from "nanoid";
 import Navigation from "@/components/Navigation";
 import SearchComponent from "@/components/SearchComponent";
-import { useState } from "react";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useLocalStorageState("ingredients", {
     defaultValue: ingredientsData,
   });
 
-  const [favorites, setFavorites] = useState([]); // to generic
+  const [favorites, setFavorites] = useLocalStorageState("favorite", {
+    defaultValue: [],
+  }); // to generic
 
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
