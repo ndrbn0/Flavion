@@ -41,6 +41,10 @@ export default function App({ Component, pageProps }) {
     }
   };
 
+  const [comments, setComments] = useLocalStorageState("comment", {
+    defaultValue: [],
+  }); // to generic
+
   const addIngredient = (newIngredient) => {
     const updatedIngredients = [
       { _id: nanoid(), ...newIngredient },
@@ -96,6 +100,7 @@ export default function App({ Component, pageProps }) {
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
+        comments={comments}
       />
       <Navigation />
     </>

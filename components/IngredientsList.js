@@ -22,6 +22,7 @@ const IngredientsList = ({
   addIngredient,
   toggleFavorite,
   favorites,
+  comments,
 }) => {
   const [activeFlavor, setActiveFlavor] = useState("");
 
@@ -66,6 +67,7 @@ const IngredientsList = ({
                       (favorite) => favorite._id === ingredient._id
                     )?.isFavorite
                   }
+                  comments={comments}
                 />
               </StyledListItem>
             ))}

@@ -6,6 +6,7 @@ export default function HomePage({
   updateIngredient,
   toggleFavorite,
   favorites,
+  comments,
 }) {
   return (
     <div>
@@ -15,6 +16,7 @@ export default function HomePage({
         updateIngredient={updateIngredient}
         toggleFavorite={toggleFavorite}
         favorites={favorites}
+        comments={comments}
       />
     </div>
   );
