@@ -1,10 +1,10 @@
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
+import { useEffect } from "react";
 import ingredientsData from "@/assets/ingredients.json";
-import { nanoid } from "nanoid";
+import pairingsData from "../assets/pairings.json";
 import Navigation from "@/components/Navigation";
 import SearchComponent from "@/components/SearchComponent";
-import pairingsData from "../assets/pairings.json";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useLocalStorageState("ingredients", {
@@ -13,14 +13,32 @@ export default function App({ Component, pageProps }) {
 
   const [favorites, setFavorites] = useLocalStorageState("favorite", {
     defaultValue: [],
-  }); // to generic
-
-  const [pairings, setPairings] = useLocalStorageState("parings", {
-    defaultValue: pairingsData,
   });
+
+  const [pairings, setPairings] = useLocalStorageState("pairings", {
+    defaultValue: pairingsData.map((pairing) => ({
+      ...pairing,
+      rating: 0,
+      totalRatings: 0,
+    })),
+  });
+
   const [pairingsInfo, setPairingsInfo] = useLocalStorageState("pairingsInfo", {
     defaultValue: [],
   });
+
+  const [comments, setComments] = useLocalStorageState("comment", {
+    defaultValue: [],
+  });
+
+  useEffect(() => {
+    // Initialize pairings from localStorage on app load
+    const storedPairings = JSON.parse(localStorage.getItem("pairings"));
+
+    if (storedPairings) {
+      setPairings(storedPairings);
+    }
+  }, []);
 
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
@@ -40,10 +58,6 @@ export default function App({ Component, pageProps }) {
       setFavorites([...favorites, { _id, isFavorite: true }]);
     }
   };
-
-  const [comments, setComments] = useLocalStorageState("comment", {
-    defaultValue: [],
-  }); // to generic
 
   const addIngredient = (newIngredient) => {
     const updatedIngredients = [
@@ -69,7 +83,7 @@ export default function App({ Component, pageProps }) {
     setIngredients(updatedIngredients);
   };
 
-  function toggleFavoritePairing(_id) {
+  const toggleFavoritePairing = (_id) => {
     const foundPairing = pairingsInfo.find((pairing) => pairing._id === _id);
 
     if (foundPairing) {
@@ -83,7 +97,24 @@ export default function App({ Component, pageProps }) {
     } else {
       setPairingsInfo([...pairingsInfo, { _id, isFavorite: true }]);
     }
-  }
+  };
+
+  const updatePairingRating = (_id, newRating) => {
+    const updatedPairings = pairings.map((pairing) =>
+      pairing._id === _id
+        ? {
+            ...pairing,
+            totalRatings: pairing.totalRatings + 1,
+            rating:
+              (pairing.rating * pairing.totalRatings + newRating) /
+              (pairing.totalRatings + 1),
+          }
+        : pairing
+    );
+
+    setPairings(updatedPairings);
+    localStorage.setItem("pairings", JSON.stringify(updatedPairings));
+  };
 
   return (
     <>
@@ -99,6 +130,7 @@ export default function App({ Component, pageProps }) {
         favorites={favorites}
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
+        updatePairingRating={updatePairingRating}
         pairingsInfo={pairingsInfo}
         comments={comments}
       />

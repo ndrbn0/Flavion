@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 import {
@@ -16,11 +16,34 @@ import {
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
 import CommentPopup from "@/components/CommentPopup";
+import useLocalStorageState from "use-local-storage-state";
+
+const StarRating = ({ rating, onRate }) => {
+  const [hoverRating, setHoverRating] = useState(0);
+
+  return (
+    <Stars>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <Star
+          key={star}
+          filled={star <= (hoverRating || rating)}
+          onClick={() => onRate(star)}
+          onMouseEnter={() => setHoverRating(star)}
+          onMouseLeave={() => setHoverRating(0)}
+        >
+          ★
+        </Star>
+      ))}
+    </Stars>
+  );
+};
 
 const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
+  const [rating, setRating] = useState(pairing.rating || 0);
+  const [totalRatings, setTotalRatings] = useState(pairing.totalRatings || 0);
 
   const ingredients = pairing.ingredients.map((id) => {
     const ingredient = ingredientsData.find((ing) => ing._id === id);
@@ -51,6 +74,13 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
   const handleDelete = (commentId) => {
     const updatedComments = comments.filter((c) => c.id !== commentId);
     setComments(updatedComments);
+  };
+
+  const handleRate = (newRating) => {
+    const updatedRating =
+      (rating * totalRatings + newRating) / (totalRatings + 1);
+    setRating(updatedRating);
+    setTotalRatings(totalRatings + 1);
   };
 
   return (
@@ -92,6 +122,7 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
         <CommentEmoji onClick={() => setShowCommentPopup(true)}>
           💬
         </CommentEmoji>
+        <StarRating rating={rating} onRate={handleRate} />
       </CardFooter>
       <CommentPopup
         show={showCommentPopup}
@@ -167,5 +198,22 @@ const EditButton = styled.button`
 
   &:active {
     background-color: #0056b3;
+  }
+`;
+
+const Stars = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+`;
+
+const Star = styled.span`
+  font-size: 24px;
+  cursor: pointer;
+  color: ${(props) => (props.filled ? "#FFD700" : "#E0E0E0")};
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.2);
   }
 `;
