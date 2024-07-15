@@ -25,6 +25,7 @@ const CommentPopup = ({ show, onClose, onSubmit, commentToEdit, onDelete }) => {
         </Header>
         <Content>
           <TextArea
+            label="Comment"
             value={comment}
             onChange={(event) => setComment(event.target.value)}
             placeholder="Write your comment..."
@@ -47,7 +48,7 @@ const CommentPopup = ({ show, onClose, onSubmit, commentToEdit, onDelete }) => {
 
 export default CommentPopup;
 
-const Overlay = styled.div`
+const Overlay = styled.aside`
   position: fixed;
   top: 0;
   left: 0;
@@ -59,7 +60,7 @@ const Overlay = styled.div`
   align-items: center;
 `;
 
-const Popup = styled.div`
+const Popup = styled.section`
   background: #fff;
   padding: 20px;
   border-radius: 12px;
@@ -93,7 +94,7 @@ const CloseButton = styled.button`
   }
 `;
 
-const Content = styled.div`
+const Content = styled.section`
   margin: 20px 0;
 `;
 
@@ -113,7 +114,7 @@ const TextArea = styled.textarea`
   }
 `;
 
-const Footer = styled.div`
+const Footer = styled.section`
   display: flex;
   justify-content: flex-end;
   align-items: center;

@@ -1,6 +1,5 @@
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
-import { useEffect } from "react";
 import ingredientsData from "@/assets/ingredients.json";
 import pairingsData from "../assets/pairings.json";
 import Navigation from "@/components/Navigation";
@@ -31,14 +30,6 @@ export default function App({ Component, pageProps }) {
   const [comments, setComments] = useLocalStorageState("comment", {
     defaultValue: [],
   });
-
-  useEffect(() => {
-    const storedPairings = JSON.parse(localStorage.getItem("pairings"));
-
-    if (storedPairings) {
-      setPairings(storedPairings);
-    }
-  }, []);
 
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
