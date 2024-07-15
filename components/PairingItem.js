@@ -52,7 +52,7 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite, updatePairing
   };
 
   const handleDelete = (commentId) => {
-    const updatedComments = comments.filter((c) => c.id !== commentId);
+    const updatedComments = comments.filter((comment) => comment.id !== commentId);
     setComments(updatedComments);
   };
 
