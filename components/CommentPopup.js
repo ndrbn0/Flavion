@@ -25,7 +25,7 @@ const CommentPopup = ({ show, onClose, onSubmit, commentToEdit, onDelete }) => {
         <Body>
           <Textarea
             value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            onChange={(event) => setComment(event.target.value)}
             placeholder="Write a comment..."
           />
         </Body>

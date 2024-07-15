@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 import {
-  Pairing,
+  Card,
   Ingredients,
   Reason,
   ImageWrapper,
   StyledImage,
-  StyledContent2,
+  StyledContent,
   Flavors,
   CardFooter,
   FavoriteButton,
@@ -38,7 +38,9 @@ const PairingItem = ({ pairing }) => {
   const handleCommentSubmit = (comment, commentId) => {
     if (commentId) {
       setComments(
-        comments.map((c) => (c.id === commentId ? { ...c, text: comment } : c))
+        comments.map((comment) =>
+          comment.id === commentId ? { ...comment, text: comment } : c
+        )
       );
     } else {
       const newComment = { id: nanoid(), text: comment };
@@ -49,18 +51,18 @@ const PairingItem = ({ pairing }) => {
   };
 
   const handleEdit = (commentId) => {
-    const commentToEdit = comments.find((c) => c.id === commentId);
+    const commentToEdit = comments.find((comment) => comment.id === commentId);
     setEditingComment(commentToEdit);
     setShowCommentPopup(true);
   };
 
   const handleDelete = (commentId) => {
-    setComments(comments.filter((c) => c.id !== commentId));
+    setComments(comments.filter((comment) => comment.id !== commentId));
+    setShowCommentPopup(false);
   };
-  console.log(comments);
 
   return (
-    <Pairing>
+    <Card>
       <ImageWrapper>
         <StyledImage
           src={pairing.imgUrl}
@@ -73,14 +75,14 @@ const PairingItem = ({ pairing }) => {
           {favorited ? "★" : "☆"}
         </FavoriteButton>
       </ImageWrapper>
-      <StyledContent2>
+      <StyledContent>
         <Ingredients>
           {ingredients.map((ingredient) => (
             <li key={ingredient._id}>{ingredient.name}</li>
           ))}
         </Ingredients>
         <Reason>{pairing.reason}</Reason>
-      </StyledContent2>
+      </StyledContent>
       <CardFooter>
         {ingredients.map((ingredient) => (
           <Flavors
@@ -94,6 +96,14 @@ const PairingItem = ({ pairing }) => {
           💬
         </CommentEmoji>
       </CardFooter>
+      <CommentsSection>
+        {comments.map((comment) => (
+          <Comment key={comment.id}>
+            {comment.text}{" "}
+            <EditButton onClick={() => handleEdit(comment.id)}>Edit</EditButton>
+          </Comment>
+        ))}
+      </CommentsSection>
       <CommentPopup
         show={showCommentPopup}
         onClose={() => {
@@ -104,7 +114,7 @@ const PairingItem = ({ pairing }) => {
         commentToEdit={editingComment}
         onDelete={handleDelete}
       />
-    </Pairing>
+    </Card>
   );
 };
 
@@ -113,4 +123,42 @@ export default PairingItem;
 const CommentEmoji = styled.span`
   cursor: pointer;
   margin-left: auto;
+`;
+
+const CommentsSection = styled.div`
+  margin-top: 20px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+`;
+
+const Comment = styled.div`
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const EditButton = styled.button`
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  margin-left: 8px;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+  &:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+  }
+  &:active {
+    background-color: #0056b3;
+  }
 `;

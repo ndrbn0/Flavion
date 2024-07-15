@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import PairingItem from "./PairingItem";
+import CommentsListPopup from "./CommentsListPopup";
 
 const PairingsList = ({
   pairings,
@@ -25,6 +26,7 @@ const PairingsList = ({
               updatePairingRating={updatePairingRating}
             />
           ))}
+          <CommentsListPopup></CommentsListPopup>
         </StyledList>
       </Container>
     </>
