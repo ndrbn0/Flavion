@@ -56,12 +56,6 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite, updatePairing
     setComments(updatedComments);
   };
 
-  const handleRate = (newRating) => {
-    const updatedRating =
-      (rating * totalRatings + newRating) / (totalRatings + 1);
-    setRating(updatedRating);
-    setTotalRatings(totalRatings + 1);
-  };
 
   return (
     <Card>
