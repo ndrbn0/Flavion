@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import PairingItem from "./PairingItem";
 
-const PairingsList = ({ pairings, toggleFavoritePairing, pairingsInfo }) => {
+const PairingsList = ({
+  pairings,
+  toggleFavoritePairing,
+  pairingsInfo,
+  updatePairingRating,
+}) => {
   return (
     <>
       <Title>Pairings</Title>
@@ -17,6 +22,7 @@ const PairingsList = ({ pairings, toggleFavoritePairing, pairingsInfo }) => {
                   (pairingInfo) => pairingInfo._id === pairing._id
                 )?.isFavorite
               }
+              updatePairingRating={updatePairingRating}
             />
           ))}
         </StyledList>

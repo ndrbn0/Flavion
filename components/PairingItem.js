@@ -1,40 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 import {
-  Card,
+  Pairing,
   Ingredients,
   Reason,
   ImageWrapper,
   StyledImage,
-  StyledContent,
+  StyledContent2,
   Flavors,
   CardFooter,
   FavoriteButton,
-  Ingredient,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
-import CommentPopup from "@/components/CommentPopup";
+import CommentPopup from "./CommentPopup";
 
-const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
+const PairingItem = ({ pairing }) => {
+  const [favorited, setFavorited] = useState(false);
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
 
-  const ingredients = pairing.ingredients.map((id) => {
-    const ingredient = ingredientsData.find((ing) => ing._id === id);
-    return ingredient;
-  });
+  const [ingredients, setIngredients] = useState([]);
+
+  useEffect(() => {
+    const ingredientData = pairing.ingredients.map((id) =>
+      ingredientsData.find((ing) => ing._id === id)
+    );
+    setIngredients(ingredientData);
+  }, [pairing.ingredients]);
+
+  const toggleFavorite = () => {
+    setFavorited(!favorited);
+  };
 
   const handleCommentSubmit = (comment, commentId) => {
     if (commentId) {
-      const updatedComments = comments.map((c) =>
-        c.id === commentId ? { ...c, text: comment } : c
+      setComments(
+        comments.map((c) => (c.id === commentId ? { ...c, text: comment } : c))
       );
-      setComments(updatedComments);
     } else {
-      setComments([...comments, { id: nanoid(), text: comment }]);
+      const newComment = { id: nanoid(), text: comment };
+      setComments([...comments, newComment]);
     }
     setShowCommentPopup(false);
     setEditingComment(null);
@@ -42,54 +50,46 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
 
   const handleEdit = (commentId) => {
     const commentToEdit = comments.find((c) => c.id === commentId);
-    if (commentToEdit) {
-      setEditingComment(commentToEdit);
-      setShowCommentPopup(true);
-    }
+    setEditingComment(commentToEdit);
+    setShowCommentPopup(true);
   };
 
   const handleDelete = (commentId) => {
-    const updatedComments = comments.filter((c) => c.id !== commentId);
-    setComments(updatedComments);
-    setShowCommentPopup(false);
+    setComments(comments.filter((c) => c.id !== commentId));
   };
+  console.log(comments);
 
   return (
-    <Card>
+    <Pairing>
       <ImageWrapper>
         <StyledImage
           src={pairing.imgUrl}
           alt={pairing.reason}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority
         />
-        <FavoriteButton onClick={() => toggleFavoritePairing(pairing._id)}>
-          {isFavorite ? "★" : "☆"}
+        <FavoriteButton onClick={toggleFavorite}>
+          {favorited ? "★" : "☆"}
         </FavoriteButton>
       </ImageWrapper>
-      <StyledContent>
-        <ul>
-          <Ingredients>
-            {ingredients.map((ingredient) => {
-              return (
-                <Ingredient key={ingredient._id}>{ingredient.name}</Ingredient>
-              );
-            })}
-          </Ingredients>
-        </ul>
+      <StyledContent2>
+        <Ingredients>
+          {ingredients.map((ingredient) => (
+            <li key={ingredient._id}>{ingredient.name}</li>
+          ))}
+        </Ingredients>
         <Reason>{pairing.reason}</Reason>
-      </StyledContent>
+      </StyledContent2>
       <CardFooter>
-        {ingredients.map((ingredient) => {
-          return (
-            <Flavors
-              $color={flavorColors[ingredient.flavor]}
-              key={ingredient._id}
-            >
-              #{ingredient.flavor}
-            </Flavors>
-          );
-        })}
+        {ingredients.map((ingredient) => (
+          <Flavors
+            $color={flavorColors[ingredient.flavor]}
+            key={ingredient._id}
+          >
+            #{ingredient.flavor}
+          </Flavors>
+        ))}
         <CommentEmoji onClick={() => setShowCommentPopup(true)}>
           💬
         </CommentEmoji>
@@ -104,15 +104,7 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
         commentToEdit={editingComment}
         onDelete={handleDelete}
       />
-      <Comments>
-        {comments.map((comment) => (
-          <Comment key={comment.id}>
-            {comment.text}
-            <EditButton onClick={() => handleEdit(comment.id)}>Edit</EditButton>
-          </Comment>
-        ))}
-      </Comments>
-    </Card>
+    </Pairing>
   );
 };
 
@@ -121,52 +113,4 @@ export default PairingItem;
 const CommentEmoji = styled.span`
   cursor: pointer;
   margin-left: auto;
-  font-size: 24px;
-  transition: transform 0.3s, color 0.3s;
-
-  &:hover {
-    transform: scale(1.2);
-    color: #007bff;
-  }
-`;
-
-const Comments = styled.div`
-  margin-top: 20px;
-  padding: 10px;
-  background: #f9f9f9;
-  border-radius: 8px;
-`;
-
-const Comment = styled.div`
-  background: #ffffff;
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const EditButton = styled.button`
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  margin-left: 8px;
-  font-size: 14px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    background-color: #007bff;
-    color: #fff;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
-  }
-
-  &:active {
-    background-color: #0056b3;
-  }
 `;
