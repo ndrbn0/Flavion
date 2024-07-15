@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-const StarRating = ({ rating, onRate }) => {
+const StarRating = ({ rating, onRate, id }) => {
   const [hoverRating, setHoverRating] = useState(0);
 
   return (
@@ -10,7 +10,7 @@ const StarRating = ({ rating, onRate }) => {
         <Star
           key={star}
           filled={star <= (hoverRating || rating)}
-          onClick={() => onRate(star)}
+          onClick={() => onRate(id, star)}
           onMouseEnter={() => setHoverRating(star)}
           onMouseLeave={() => setHoverRating(0)}
         >

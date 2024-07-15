@@ -18,7 +18,7 @@ import ingredientsData from "@/assets/ingredients.json";
 import CommentPopup from "@/components/CommentPopup";
 import StarRating from "./RatingStar";
 
-const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
+const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite, updatePairingRating }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
@@ -30,21 +30,21 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
     return ingredient;
   });
 
-  const handleCommentSubmit = (comment, commentId) => {
+  const handleCommentSubmit = (commentText, commentId) => {
     if (commentId) {
-      const updatedComments = comments.map((c) =>
-        c.id === commentId ? { ...c, text: comment } : c
+      const updatedComments = comments.map((comment) =>
+        comment.id === commentId ? { ...comment, text: commentText } : comment
       );
       setComments(updatedComments);
     } else {
-      setComments([...comments, { id: nanoid(), text: comment }]);
+      setComments([...comments, { id: nanoid(), text: commentText }]);
     }
     setShowCommentPopup(false);
     setEditingComment(null);
   };
 
   const handleEdit = (commentId) => {
-    const commentToEdit = comments.find((c) => c.id === commentId);
+    const commentToEdit = comments.find((comment) => comment.id === commentId);
     if (commentToEdit) {
       setEditingComment(commentToEdit);
       setShowCommentPopup(true);
@@ -52,17 +52,11 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
   };
 
   const handleDelete = (commentId) => {
-    const updatedComments = comments.filter((c) => c.id !== commentId);
+    const updatedComments = comments.filter((comment) => comment.id !== commentId);
     setComments(updatedComments);
     setShowCommentPopup(false);
   };
 
-  const handleRate = (newRating) => {
-    const updatedRating =
-      (rating * totalRatings + newRating) / (totalRatings + 1);
-    setRating(updatedRating);
-    setTotalRatings(totalRatings + 1);
-  };
 
   return (
     <Card>
@@ -103,7 +97,7 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
         <CommentEmoji onClick={() => setShowCommentPopup(true)}>
           💬
         </CommentEmoji>
-        <StarRating rating={rating} onRate={handleRate} />
+        <StarRating rating={pairing.rating || 0} onRate={updatePairingRating} id={pairing._id} />
       </CardFooter>
       <CommentPopup
         show={showCommentPopup}
