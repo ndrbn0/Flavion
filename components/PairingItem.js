@@ -18,7 +18,12 @@ import ingredientsData from "@/assets/ingredients.json";
 import CommentPopup from "@/components/CommentPopup";
 import StarRating from "./RatingStar";
 
-const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite, updatePairingRating }) => {
+const PairingItem = ({
+  pairing,
+  toggleFavoritePairing,
+  isFavorite,
+  updatePairingRating,
+}) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
@@ -52,11 +57,12 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite, updatePairing
   };
 
   const handleDelete = (commentId) => {
-    const updatedComments = comments.filter((comment) => comment.id !== commentId);
+    const updatedComments = comments.filter(
+      (comment) => comment.id !== commentId
+    );
     setComments(updatedComments);
     setShowCommentPopup(false);
   };
-
 
   return (
     <Card>
@@ -97,7 +103,11 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite, updatePairing
         <CommentEmoji onClick={() => setShowCommentPopup(true)}>
           💬
         </CommentEmoji>
-        <StarRating rating={pairing.rating || 0} onRate={updatePairingRating} id={pairing._id} />
+        <StarRating
+          rating={pairing.rating || 0}
+          onRate={updatePairingRating}
+          id={pairing._id}
+        />
       </CardFooter>
       <CommentPopup
         show={showCommentPopup}
