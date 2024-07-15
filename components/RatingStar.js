@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 const StarRating = ({ rating, onRate }) => {
   const [hoverRating, setHoverRating] = useState(0);
