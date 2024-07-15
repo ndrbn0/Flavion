@@ -30,14 +30,14 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
     return ingredient;
   });
 
-  const handleCommentSubmit = (comment, commentId) => {
+  const handleCommentSubmit = (commentText, commentId) => {
     if (commentId) {
-      const updatedComments = comments.map((c) =>
-        c.id === commentId ? { ...c, text: comment } : c
+      const updatedComments = comments.map((comment) =>
+        comment.id === commentId ? { ...comment, text: commentText } : comment
       );
       setComments(updatedComments);
     } else {
-      setComments([...comments, { id: nanoid(), text: comment }]);
+      setComments([...comments, { id: nanoid(), text: commentText }]);
     }
     setShowCommentPopup(false);
     setEditingComment(null);
