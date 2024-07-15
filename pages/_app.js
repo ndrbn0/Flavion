@@ -5,6 +5,7 @@ import ingredientsData from "@/assets/ingredients.json";
 import pairingsData from "../assets/pairings.json";
 import Navigation from "@/components/Navigation";
 import SearchComponent from "@/components/SearchComponent";
+import { nanoid } from "nanoid";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useLocalStorageState("ingredients", {
