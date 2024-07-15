@@ -96,7 +96,7 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite, updatePairing
         <CommentEmoji onClick={() => setShowCommentPopup(true)}>
           💬
         </CommentEmoji>
-        <StarRating rating={rating} onRate={handleRate} />
+        <StarRating rating={pairing.rating || 0} onRate={updatePairingRating} id={pairing._id} />
       </CardFooter>
       <CommentPopup
         show={showCommentPopup}
