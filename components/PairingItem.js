@@ -18,7 +18,7 @@ import ingredientsData from "@/assets/ingredients.json";
 import CommentPopup from "@/components/CommentPopup";
 import StarRating from "./RatingStar";
 
-const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
+const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite, updatePairingRating }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
