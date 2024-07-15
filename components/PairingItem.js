@@ -51,6 +51,7 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
   const handleDelete = (commentId) => {
     const updatedComments = comments.filter((c) => c.id !== commentId);
     setComments(updatedComments);
+    setShowCommentPopup(false);
   };
 
   return (
