@@ -10,7 +10,7 @@ const StarRating = ({ rating, onRate, id }) => {
         <Star
           key={star}
           filled={star <= (hoverRating || rating)}
-          onClick={() => onRate(star)}
+          onClick={() => onRate(id, star)}
           onMouseEnter={() => setHoverRating(star)}
           onMouseLeave={() => setHoverRating(0)}
         >
