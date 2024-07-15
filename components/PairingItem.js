@@ -44,7 +44,7 @@ const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
   };
 
   const handleEdit = (commentId) => {
-    const commentToEdit = comments.find((c) => c.id === commentId);
+    const commentToEdit = comments.find((comment) => comment.id === commentId);
     if (commentToEdit) {
       setEditingComment(commentToEdit);
       setShowCommentPopup(true);
