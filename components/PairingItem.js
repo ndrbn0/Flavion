@@ -22,13 +22,11 @@ const PairingItem = ({
   pairing,
   toggleFavoritePairing,
   isFavorite,
-  updatePairingRating,
+  updatePairingRating, // prop
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
-  const [rating, setRating] = useState(pairing.rating || 0);
-  const [totalRatings, setTotalRatings] = useState(pairing.totalRatings || 0);
 
   const ingredients = pairing.ingredients.map((id) => {
     const ingredient = ingredientsData.find((ing) => ing._id === id);
@@ -105,8 +103,8 @@ const PairingItem = ({
         </CommentEmoji>
         <StarRating
           rating={pairing.rating || 0}
-          onRate={updatePairingRating}
           id={pairing._id}
+          updatePairingRating={updatePairingRating} // prop
         />
       </CardFooter>
       <CommentPopup

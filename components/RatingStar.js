@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 
-const StarRating = ({ rating, onRate, id }) => {
+const StarRating = ({ rating, updatePairingRating, id }) => {
   const [hoverRating, setHoverRating] = useState(0);
 
   return (
@@ -9,8 +9,8 @@ const StarRating = ({ rating, onRate, id }) => {
       {[1, 2, 3, 4, 5].map((star) => (
         <Star
           key={star}
-          filled={star <= (hoverRating || rating)}
-          onClick={() => onRate(id, star)}
+          $filled={star <= (hoverRating || rating)}
+          onClick={() => updatePairingRating(id, star)}
           onMouseEnter={() => setHoverRating(star)}
           onMouseLeave={() => setHoverRating(0)}
         >
@@ -32,7 +32,7 @@ const Stars = styled.div`
 const Star = styled.span`
   font-size: 24px;
   cursor: pointer;
-  color: ${(props) => (props.filled ? "#FFD700" : "#E0E0E0")};
+  color: ${(props) => (props.$filled ? "#FFD700" : "#E0E0E0")};
   transition: transform 0.2s;
 
   &:hover {

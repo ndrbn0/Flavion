@@ -9,15 +9,14 @@ const FavoritesPage = ({
   toggleFavoritePairing,
   pairingsInfo,
   pairings,
+  updatePairingRating, // Destr. prop
 }) => {
-  // Filter favorite ingredients
   const favoriteIngredients = ingredients.filter((ingredient) =>
     favorites.find(
       (favorite) => favorite._id === ingredient._id && favorite.isFavorite
     )
   );
 
-  // Filter favorite pairings
   const favoritePairings = pairings.filter((pairing) =>
     pairingsInfo.find(
       (pairingInfo) => pairingInfo._id === pairing._id && pairingInfo.isFavorite
@@ -38,6 +37,7 @@ const FavoritesPage = ({
                   ?.isFavorite
               }
               toggleFavorite={toggleFavorite}
+              updatePairingRating={updatePairingRating} //  prop
             />
           ))
         ) : (
@@ -62,6 +62,7 @@ const FavoritesPage = ({
                       (pairingInfo) => pairingInfo._id === pairing._id
                     )?.isFavorite
                   }
+                  updatePairingRating={updatePairingRating} //  prop
                 />
               );
             }

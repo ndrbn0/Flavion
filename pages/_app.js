@@ -113,7 +113,6 @@ export default function App({ Component, pageProps }) {
     );
 
     setPairings(updatedPairings);
-    localStorage.setItem("pairings", JSON.stringify(updatedPairings));
   };
 
   return (
@@ -130,9 +129,9 @@ export default function App({ Component, pageProps }) {
         favorites={favorites}
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
-        updatePairingRating={updatePairingRating}
         pairingsInfo={pairingsInfo}
         comments={comments}
+        updatePairingRating={updatePairingRating} // prop
       />
       <Navigation />
     </>

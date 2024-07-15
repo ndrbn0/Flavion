@@ -7,7 +7,7 @@ export default function HomePage({
   toggleFavorite,
   favorites,
   comments,
-  updatePairingRating,
+  updatePairingRating, // destr. prop
 }) {
   return (
     <div>
@@ -18,7 +18,7 @@ export default function HomePage({
         toggleFavorite={toggleFavorite}
         favorites={favorites}
         comments={comments}
-        updatePairingRating={updatePairingRating}
+        updatePairingRating={updatePairingRating} // prop
       />
     </div>
   );
