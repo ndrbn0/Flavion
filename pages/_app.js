@@ -32,7 +32,6 @@ export default function App({ Component, pageProps }) {
   });
 
   useEffect(() => {
-    // Initialize pairings from localStorage on app load
     const storedPairings = JSON.parse(localStorage.getItem("pairings"));
 
     if (storedPairings) {
