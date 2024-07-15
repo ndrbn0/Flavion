@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 import {
@@ -16,27 +16,7 @@ import {
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
 import CommentPopup from "@/components/CommentPopup";
-import useLocalStorageState from "use-local-storage-state";
-
-const StarRating = ({ rating, onRate }) => {
-  const [hoverRating, setHoverRating] = useState(0);
-
-  return (
-    <Stars>
-      {[1, 2, 3, 4, 5].map((star) => (
-        <Star
-          key={star}
-          filled={star <= (hoverRating || rating)}
-          onClick={() => onRate(star)}
-          onMouseEnter={() => setHoverRating(star)}
-          onMouseLeave={() => setHoverRating(0)}
-        >
-          ★
-        </Star>
-      ))}
-    </Stars>
-  );
-};
+import StarRating from "./RatingStar";
 
 const PairingItem = ({ pairing, toggleFavoritePairing, isFavorite }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
@@ -198,22 +178,5 @@ const EditButton = styled.button`
 
   &:active {
     background-color: #0056b3;
-  }
-`;
-
-const Stars = styled.div`
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-`;
-
-const Star = styled.span`
-  font-size: 24px;
-  cursor: pointer;
-  color: ${(props) => (props.filled ? "#FFD700" : "#E0E0E0")};
-  transition: transform 0.2s;
-
-  &:hover {
-    transform: scale(1.2);
   }
 `;
