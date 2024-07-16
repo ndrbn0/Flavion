@@ -160,7 +160,7 @@ export const Card = styled.li`
 export const CardFooter = styled.div`
   display: flex;
   padding: 8px 12px 12px 8px;
-  justify-content: start;
+  justify-content: flex-end;
   align-items: center;
   gap: 8px;
   align-self: stretch;

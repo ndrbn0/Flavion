@@ -1,10 +1,10 @@
 import GlobalStyle from "../styles";
 import useLocalStorageState from "use-local-storage-state";
 import ingredientsData from "@/assets/ingredients.json";
-import { nanoid } from "nanoid";
+import pairingsData from "../assets/pairings.json";
 import Navigation from "@/components/Navigation";
 import SearchComponent from "@/components/SearchComponent";
-import pairingsData from "../assets/pairings.json";
+import { nanoid } from "nanoid";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useLocalStorageState("ingredients", {
@@ -13,12 +13,21 @@ export default function App({ Component, pageProps }) {
 
   const [favorites, setFavorites] = useLocalStorageState("favorite", {
     defaultValue: [],
-  }); // to generic
-
-  const [pairings, setPairings] = useLocalStorageState("parings", {
-    defaultValue: pairingsData,
   });
+
+  const [pairings, setPairings] = useLocalStorageState("pairings", {
+    defaultValue: pairingsData.map((pairing) => ({
+      ...pairing,
+      rating: 0,
+      totalRatings: 0,
+    })),
+  });
+
   const [pairingsInfo, setPairingsInfo] = useLocalStorageState("pairingsInfo", {
+    defaultValue: [],
+  });
+
+  const [comments, setComments] = useLocalStorageState("comment", {
     defaultValue: [],
   });
 
@@ -65,7 +74,7 @@ export default function App({ Component, pageProps }) {
     setIngredients(updatedIngredients);
   };
 
-  function toggleFavoritePairing(_id) {
+  const toggleFavoritePairing = (_id) => {
     const foundPairing = pairingsInfo.find((pairing) => pairing._id === _id);
 
     if (foundPairing) {
@@ -79,7 +88,23 @@ export default function App({ Component, pageProps }) {
     } else {
       setPairingsInfo([...pairingsInfo, { _id, isFavorite: true }]);
     }
-  }
+  };
+
+  const updatePairingRating = (_id, newRating) => {
+    const updatedPairings = pairings.map((pairing) =>
+      pairing._id === _id
+        ? {
+            ...pairing,
+            totalRatings: pairing.totalRatings + 1,
+            rating:
+              (pairing.rating * pairing.totalRatings + newRating) /
+              (pairing.totalRatings + 1),
+          }
+        : pairing
+    );
+
+    setPairings(updatedPairings);
+  };
 
   return (
     <>
@@ -96,6 +121,8 @@ export default function App({ Component, pageProps }) {
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
+        comments={comments}
+        updatePairingRating={updatePairingRating} // prop
       />
       <Navigation />
     </>
