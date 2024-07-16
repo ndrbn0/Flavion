@@ -122,7 +122,7 @@ export default function App({ Component, pageProps }) {
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
         comments={comments}
-        updatePairingRating={updatePairingRating} // prop
+        updatePairingRating={updatePairingRating}
       />
       <Navigation />
     </>

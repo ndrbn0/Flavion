@@ -33,7 +33,6 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
       {showPopup && (
         <>
           <PopupForm>
-            <Headline>Add New Ingredient</Headline>
             <Form onSubmit={handleSubmit}>
               <Headline>Add New Ingredient</Headline>
               <FormField>
@@ -72,7 +71,9 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
                   placeholder="Enter image URL"
                 />
               </FormField>
-              <SubmitButton type="submit">Submit</SubmitButton>
+              <SubmitButton type="submit" onClick={onclose}>
+                Submit
+              </SubmitButton>
             </Form>
           </PopupForm>
           <OverlayBackground onClick={togglePopup} />

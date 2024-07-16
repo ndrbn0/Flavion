@@ -5,7 +5,7 @@ const PairingsPage = ({
   toggleFavoritePairing,
   pairingsInfo,
   pairings,
-  updatePairingRating, // destr. prop
+  updatePairingRating,
 }) => {
   return (
     <Container>
@@ -13,7 +13,7 @@ const PairingsPage = ({
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
-        updatePairingRating={updatePairingRating} //  prop
+        updatePairingRating={updatePairingRating}
       />
     </Container>
   );
