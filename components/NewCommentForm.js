@@ -7,13 +7,17 @@ const NewCommentForm = ({
   onSubmit,
   commentToEdit,
   onDelete,
+  pairingsInfo,
 }) => {
-  const [comment, setComment] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
+
+  const [comment, setComment] = useState(
+    commentToEdit ? commentToEdit.text : ""
+  );
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,30 +29,39 @@ const NewCommentForm = ({
   }
 
   return (
-    <Overlay onClick={togglePopup}>
-      <Popup>
-        <Header>
-          <Title>{commentToEdit ? "Edit Comment" : "Add Comment"}</Title>
-          <CloseButton onClick={onClose}>✕</CloseButton>
-        </Header>
-        <Content>
-          <TextArea
-            value={comment}
-            onChange={(event) => setComment(event.target.value)}
-            placeholder="Write a comment..."
-            label="Comment"
-          />
-        </Content>
-        <Footer>
-          {commentToEdit && (
-            <DeleteButton onClick={() => onDelete(commentToEdit.id)}>
-              Delete
-            </DeleteButton>
-          )}
-          <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
-        </Footer>
-      </Popup>
-    </Overlay>
+    <>
+      <Overlay onClick={togglePopup}>
+        <Popup>
+          <Header>
+            <Title>{commentToEdit ? "Edit Comment" : "Add Comment"}</Title>
+            <CloseButton onClick={onClose}>✕</CloseButton>
+          </Header>
+          <Content>
+            <TextArea
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+              placeholder="Write a comment..."
+              label="Comment"
+            />
+          </Content>
+          <Footer>
+            {commentToEdit && (
+              <DeleteButton onClick={() => onDelete(commentToEdit.id)}>
+                Delete
+              </DeleteButton>
+            )}
+            <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+          </Footer>
+          <CommentsList>
+            {pairingsInfo.map((pairing) => (
+              <Comment key={pairing._id}>
+                <CommentText>{pairing.text}</CommentText>
+              </Comment>
+            ))}
+          </CommentsList>
+        </Popup>
+      </Overlay>
+    </>
   );
 };
 export default NewCommentForm;
@@ -145,4 +158,17 @@ const SubmitButton = styled.button`
   &:hover:not(:disabled) {
     background: #0056b3;
   }
+`;
+const CommentsList = styled.div`
+  margin-top: 20px;
+`;
+
+const Comment = styled.div`
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+`;
+
+const CommentText = styled.p`
+  margin: 0;
 `;

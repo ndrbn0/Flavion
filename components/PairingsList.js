@@ -2,44 +2,42 @@ import styled from "styled-components";
 import PairingItem from "./PairingItem";
 import NewCommentForm from "./NewCommentForm";
 import { useState } from "react";
-import { nanoid } from "nanoid";
 
 const PairingsList = ({
   pairings,
   toggleFavoritePairing,
   pairingsInfo,
   updatePairingRating,
-  onAddComment,
+  handleCommentSubmit,
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
-  const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
+  const [currentPairingId, setCurrentPairingId] = useState(null);
 
-  const handleCommentSubmit = (comment, commentId) => {
-    if (commentId) {
-      setComments(
-        comments.map((comment) =>
-          comment.id === commentId ? { ...comment, text: comment } : c
-        )
-      );
-    } else {
-      const newComment = { id: nanoid(), text: comment };
-      setComments([...comments, newComment]);
-    }
+  const handleCommentSubmitLocal = (comment, commentId) => {
+    handleCommentSubmit(comment, currentPairingId, commentId);
     setShowCommentPopup(false);
     setEditingComment(null);
+    setCurrentPairingId(null);
+    console.log("Comment submitted:", comment);
   };
 
-  const handleEdit = (commentId) => {
-    const commentToEdit = comments.find((comment) => comment.id === commentId);
+  const handleEdit = (commentId, pairingId) => {
+    const pairing = pairingsInfo.find((p) => p._id === pairingId);
+    const commentToEdit = pairing.comments.find(
+      (comment) => comment.id === commentId
+    );
     setEditingComment(commentToEdit);
     setShowCommentPopup(true);
+    setCurrentPairingId(pairingId);
   };
 
-  const handleDelete = (commentId) => {
-    setComments(comments.filter((comment) => comment.id !== commentId));
-    setShowCommentPopup(false);
-  };
+  /*const handlePairingDelete = (_id) => {
+    const updatedPairingsInfo = pairingsInfo.filter(
+      (pairing) => pairing._id !== _id
+    );
+    handleDelete(updatedPairingsInfo);
+  };*/
   return (
     <>
       <Title>Pairings</Title>
@@ -56,29 +54,25 @@ const PairingsList = ({
                 )?.isFavorite
               }
               updatePairingRating={updatePairingRating}
+              handleCommentSubmit={handleCommentSubmitLocal}
               setShow={setShowCommentPopup}
+              comments={
+                pairingsInfo.find((pairing) => pairing._id === pairing._id)
+                  ?.comments || []
+              }
+              handleEdit={handleEdit}
             />
           ))}
-          <CommentsSection>
-            {comments.map((comment) => (
-              <Comment key={comment.id}>
-                {comment.text}{" "}
-                <EditButton onClick={() => handleEdit(comment.id)}>
-                  Edit
-                </EditButton>
-              </Comment>
-            ))}
-          </CommentsSection>
           <NewCommentForm
             show={showCommentPopup}
             onClose={() => {
               setShowCommentPopup(false);
               setEditingComment(null);
+              setCurrentPairingId(null);
             }}
-            onSubmit={handleCommentSubmit}
+            onSubmit={handleCommentSubmitLocal}
             commentToEdit={editingComment}
-            onDelete={handleDelete}
-            onAddComment={onAddComment}
+            pairingsInfo={pairingsInfo}
           />
         </StyledList>
       </Container>

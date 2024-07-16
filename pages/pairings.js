@@ -1,13 +1,19 @@
 import styled from "styled-components";
 import PairingsList from "@/components/PairingsList";
 
-const PairingsPage = ({ toggleFavoritePairing, pairingsInfo, pairings }) => {
+const PairingsPage = ({
+  toggleFavoritePairing,
+  pairingsInfo,
+  pairings,
+  handleCommentSubmit,
+}) => {
   return (
     <Container>
       <PairingsList
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
+        handleCommentSubmit={handleCommentSubmit}
       />
     </Container>
   );

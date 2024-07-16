@@ -18,9 +18,32 @@ export default function App({ Component, pageProps }) {
   const [pairings, setPairings] = useLocalStorageState("parings", {
     defaultValue: pairingsData,
   });
+
   const [pairingsInfo, setPairingsInfo] = useLocalStorageState("pairingsInfo", {
-    defaultValue: [],
+    defaultValue: pairingsData.map((pairing) => ({
+      ...pairing,
+      isFavorite: false,
+      comments: [],
+    })),
   });
+
+  const handleCommentSubmit = (comment, pairingId, commentId) => {
+    const updatedPairingsInfo = pairingsInfo.map((pairing) => {
+      if (pairing._id === pairingId) {
+        if (commentId) {
+          const updatedComments = pairing.comments.map((com) =>
+            comment.id === commentId ? { ...comment, text: comment } : comment
+          );
+          return { ...pairing, comments: updatedComments };
+        } else {
+          const newComment = { id: nanoid(), text: comment };
+          return { ...pairing, comments: [...pairing.comments, newComment] };
+        }
+      }
+      return pairing;
+    });
+    setPairingsInfo(updatedPairingsInfo);
+  };
 
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
@@ -40,10 +63,6 @@ export default function App({ Component, pageProps }) {
       setFavorites([...favorites, { _id, isFavorite: true }]);
     }
   };
-
-  const [comments, setComments] = useLocalStorageState("comment", {
-    defaultValue: [],
-  }); // to generic
 
   const addIngredient = (newIngredient) => {
     const updatedIngredients = [
@@ -69,21 +88,14 @@ export default function App({ Component, pageProps }) {
     setIngredients(updatedIngredients);
   };
 
-  function toggleFavoritePairing(_id) {
-    const foundPairing = pairingsInfo.find((pairing) => pairing._id === _id);
-
-    if (foundPairing) {
-      setPairingsInfo(
-        pairingsInfo.map((pairing) =>
-          pairing._id === foundPairing._id
-            ? { ...pairing, isFavorite: !pairing.isFavorite }
-            : pairing
-        )
-      );
-    } else {
-      setPairingsInfo([...pairingsInfo, { _id, isFavorite: true }]);
-    }
-  }
+  const toggleFavoritePairing = (_id) => {
+    const updatedPairingsInfo = pairingsInfo.map((pairing) =>
+      pairing._id === _id
+        ? { ...pairing, isFavorite: !pairing.isFavorite }
+        : pairing
+    );
+    setPairingsInfo(updatedPairingsInfo);
+  };
 
   return (
     <>
@@ -100,7 +112,7 @@ export default function App({ Component, pageProps }) {
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
-        comments={comments}
+        handleCommentSubmit={handleCommentSubmit}
       />
       <Navigation />
     </>
