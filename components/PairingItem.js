@@ -22,7 +22,7 @@ const PairingItem = ({
   pairing,
   toggleFavoritePairing,
   isFavorite,
-  updatePairingRating, // prop
+  updatePairingRating,
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [comments, setComments] = useState([]);
@@ -104,7 +104,7 @@ const PairingItem = ({
         <StarRating
           rating={pairing.rating || 0}
           id={pairing._id}
-          updatePairingRating={updatePairingRating} // prop
+          updatePairingRating={updatePairingRating}
         />
       </CardFooter>
       <CommentPopup
