@@ -14,7 +14,9 @@ export default function App({ Component, pageProps }) {
   const [favorites, setFavorites] = useLocalStorageState("favorite", {
     defaultValue: [],
   });
-
+  const [pairings, setPairings] = useLocalStorageState("parings", {
+    defaultValue: pairingsData,
+  });
   const [pairingsInfo, setPairingsInfo] = useLocalStorageState("pairingsInfo", {
     defaultValue: pairingsData.map((pairing) => ({
       ...pairing,

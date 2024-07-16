@@ -47,7 +47,6 @@ const PairingsList = ({
             <PairingItem
               key={pairing._id}
               pairing={pairing}
-              onRate={onRate}
               updatePairingRating={updatePairingRating}
               toggleFavoritePairing={toggleFavoritePairing}
               isFavorite={
@@ -55,7 +54,6 @@ const PairingsList = ({
                   (pairingInfo) => pairingInfo._id === pairing._id
                 )?.isFavorite
               }
-              updatePairingRating={updatePairingRating}
               handleCommentSubmit={handleCommentSubmitLocal}
               setShow={setShowCommentPopup}
               comments={
