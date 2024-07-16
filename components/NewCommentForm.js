@@ -1,3 +1,4 @@
+import { EditButton } from "@/_styles";
 import { useState } from "react";
 import styled from "styled-components";
 
@@ -10,20 +11,35 @@ const NewCommentForm = ({
   pairingsInfo,
 }) => {
   const [showPopup, setShowPopup] = useState(false);
+  const [comments, setComments] = useState(pairingsInfo || []);
+  const [comment, setComment] = useState(
+    commentToEdit ? commentToEdit.text : ""
+  );
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
 
-  const [comment, setComment] = useState(
-    commentToEdit ? commentToEdit.text : ""
-  );
-
   const handleSubmit = (event) => {
     event.preventDefault();
+    const newComment = {
+      text: comment,
+      id: commentToEdit ? commentToEdit.id : new Date().getTime(),
+    };
     onSubmit(comment, commentToEdit ? commentToEdit.id : null);
+    setComments((prevComments) =>
+      commentToEdit
+        ? prevComments.map((c) => (c.id === newComment.id ? newComment : c))
+        : [...prevComments, newComment]
+    );
     setComment("");
   };
+
+  const handleDelete = (id) => {
+    onDelete(id);
+    setComments((prevComments) => prevComments.filter((c) => c.id !== id));
+  };
+
   if (!show) {
     return null;
   }
@@ -46,14 +62,14 @@ const NewCommentForm = ({
           </Content>
           <Footer>
             {commentToEdit && (
-              <DeleteButton onClick={() => onDelete(commentToEdit.id)}>
+              <DeleteButton onClick={() => handleDelete(commentToEdit.id)}>
                 Delete
               </DeleteButton>
             )}
             <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
           </Footer>
           <CommentsList>
-            {pairingsInfo.map((pairing) => (
+            {comments.map((pairing) => (
               <Comment key={pairing._id}>
                 <CommentText>{pairing.text}</CommentText>
               </Comment>
