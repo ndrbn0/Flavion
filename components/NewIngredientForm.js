@@ -71,9 +71,7 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
                   placeholder="Enter image URL"
                 />
               </FormField>
-              <SubmitButton type="submit" onClick={onclose}>
-                Submit
-              </SubmitButton>
+              <SubmitButton type="submit">Submit</SubmitButton>
             </Form>
           </PopupForm>
           <OverlayBackground onClick={togglePopup} />
