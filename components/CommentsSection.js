@@ -8,7 +8,7 @@ const CommentsSection = ({ comments, handleEdit }) => {
     setShowPopup(!showPopup);
   };
 
-  // Placeholder function for editing comments
+  // comment
   const editComment = (commentId) => {
     handleEdit(commentId);
     setShowPopup(true);
