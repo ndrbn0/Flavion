@@ -29,7 +29,9 @@ const NewCommentForm = ({
     onSubmit(comment, commentToEdit ? commentToEdit.id : null);
     setComments((prevComments) =>
       commentToEdit
-        ? prevComments.map((c) => (c.id === newComment.id ? newComment : c))
+        ? prevComments.map((comment) =>
+            comment.id === newComment.id ? newComment : comment
+          )
         : [...prevComments, newComment]
     );
     setComment("");
@@ -37,7 +39,9 @@ const NewCommentForm = ({
 
   const handleDelete = (id) => {
     onDelete(id);
-    setComments((prevComments) => prevComments.filter((c) => c.id !== id));
+    setComments((prevComments) =>
+      prevComments.filter((comment) => comment.id !== id)
+    );
   };
 
   if (!show) {
