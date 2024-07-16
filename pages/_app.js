@@ -15,21 +15,31 @@ export default function App({ Component, pageProps }) {
     defaultValue: [],
   });
 
-  const [pairings, setPairings] = useLocalStorageState("pairings", {
+  const [pairingsInfo, setPairingsInfo] = useLocalStorageState("pairingsInfo", {
     defaultValue: pairingsData.map((pairing) => ({
       ...pairing,
-      rating: 0,
-      totalRatings: 0,
+      isFavorite: false,
+      comments: [],
     })),
   });
 
-  const [pairingsInfo, setPairingsInfo] = useLocalStorageState("pairingsInfo", {
-    defaultValue: [],
-  });
-
-  const [comments, setComments] = useLocalStorageState("comment", {
-    defaultValue: [],
-  });
+  const handleCommentSubmit = (comment, pairingId, commentId) => {
+    const updatedPairingsInfo = pairingsInfo.map((pairing) => {
+      if (pairing._id === pairingId) {
+        if (commentId) {
+          const updatedComments = pairing.comments.map((com) =>
+            comment.id === commentId ? { ...comment, text: comment } : comment
+          );
+          return { ...pairing, comments: updatedComments };
+        } else {
+          const newComment = { id: nanoid(), text: comment };
+          return { ...pairing, comments: [...pairing.comments, newComment] };
+        }
+      }
+      return pairing;
+    });
+    setPairingsInfo(updatedPairingsInfo);
+  };
 
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
@@ -75,35 +85,12 @@ export default function App({ Component, pageProps }) {
   };
 
   const toggleFavoritePairing = (_id) => {
-    const foundPairing = pairingsInfo.find((pairing) => pairing._id === _id);
-
-    if (foundPairing) {
-      setPairingsInfo(
-        pairingsInfo.map((pairing) =>
-          pairing._id === foundPairing._id
-            ? { ...pairing, isFavorite: !pairing.isFavorite }
-            : pairing
-        )
-      );
-    } else {
-      setPairingsInfo([...pairingsInfo, { _id, isFavorite: true }]);
-    }
-  };
-
-  const updatePairingRating = (_id, newRating) => {
-    const updatedPairings = pairings.map((pairing) =>
+    const updatedPairingsInfo = pairingsInfo.map((pairing) =>
       pairing._id === _id
-        ? {
-            ...pairing,
-            totalRatings: pairing.totalRatings + 1,
-            rating:
-              (pairing.rating * pairing.totalRatings + newRating) /
-              (pairing.totalRatings + 1),
-          }
+        ? { ...pairing, isFavorite: !pairing.isFavorite }
         : pairing
     );
-
-    setPairings(updatedPairings);
+    setPairingsInfo(updatedPairingsInfo);
   };
 
   return (
@@ -121,8 +108,7 @@ export default function App({ Component, pageProps }) {
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
-        comments={comments}
-        updatePairingRating={updatePairingRating}
+        handleCommentSubmit={handleCommentSubmit}
       />
       <Navigation />
     </>
