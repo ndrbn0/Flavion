@@ -8,8 +8,6 @@ import {
   ImageWrapper,
   StyledImage,
   StyledContent,
-  Flavors,
-  CardFooter,
   FavoriteButton,
   Ingredient,
 } from "@/_styles";
@@ -95,25 +93,31 @@ const PairingItem = ({
         <Reason>{pairing.reason}</Reason>
       </StyledContent>
       <CardFooter>
-        {ingredients.map((ingredient) => {
-          return (
-            <Flavors
-              $color={flavorColors[ingredient.flavor]}
-              key={ingredient._id}
-            >
-              #{ingredient.flavor}
-            </Flavors>
-          );
-        })}
-        <CommentEmoji onClick={() => setShowCommentPopup(true)}>
-          💬
-        </CommentEmoji>
-        <StarRating
-          rating={pairing.rating || 0}
-          id={pairing._id}
-          updatePairingRating={updatePairingRating}
-        />
-        <DeleteButton onClick={() => setShowDeletePopup(true)}>🗑️</DeleteButton>
+        <FlavorContainer>
+          {ingredients.map((ingredient) => {
+            return (
+              <Flavors
+                $color={flavorColors[ingredient.flavor]}
+                key={ingredient._id}
+              >
+                #{ingredient.flavor}
+              </Flavors>
+            );
+          })}
+        </FlavorContainer>
+        <FooterActions>
+          <StarRating
+            rating={pairing.rating || 0}
+            id={pairing._id}
+            updatePairingRating={updatePairingRating}
+          />
+          <CommentEmoji onClick={() => setShowCommentPopup(true)}>
+            💬
+          </CommentEmoji>
+          <DeleteButton onClick={() => setShowDeletePopup(true)}>
+            🗑️
+          </DeleteButton>
+        </FooterActions>
       </CardFooter>
       <CommentPopup
         show={showCommentPopup}
@@ -152,9 +156,41 @@ const PairingItem = ({
 
 export default PairingItem;
 
+const CardFooter = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  border-top: 1px solid #e0e0e0;
+  background: #f9f9f9;
+`;
+
+const FlavorContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+`;
+
+const Flavors = styled.span`
+  background-color: ${(props) => props.$color || "#ccc"};
+  color: #fff;
+  border-radius: 8px;
+  padding: 4px 8px;
+  margin: 4px 4px 0 0;
+  font-size: 12px;
+  white-space: nowrap;
+`;
+
+const FooterActions = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+`;
+
 const CommentEmoji = styled.span`
   cursor: pointer;
-  margin-left: auto;
+  margin-left: 10px;
   font-size: 24px;
   transition: transform 0.3s, color 0.3s;
 
