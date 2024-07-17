@@ -6,7 +6,6 @@ const placeholderImageUrl =
   "https://static.vecteezy.com/system/resources/previews/003/170/825/original/isolated-food-plate-fork-and-spoon-design-free-vector.jpg";
 
 const NewPairingForm = ({ onAddPairing, ingredients }) => {
-  // Accept ingredients as a prop
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [reason, setReason] = useState("");
   const [imgUrl, setImgUrl] = useState("");
@@ -45,9 +44,9 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
       ingredients: selectedIngredients.map((ingredient) => ingredient._id),
       reason: reason,
       imgUrl: imgUrl || placeholderImageUrl,
-      rating: 0, // Assuming initial rating
-      comments: [], // Assuming no comments initially
-      isFavorite: false, // Assuming it's not a favorite initially
+      rating: 0,
+      comments: [],
+      isFavorite: false,
     };
 
     onAddPairing(newPairing);
@@ -70,22 +69,18 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
               <FormField>
                 <Label htmlFor="ingredients">Select Ingredients:</Label>
                 <Multiselect>
-                  {ingredients.map(
-                    (
-                      ingredient // Use ingredients from props
-                    ) => (
-                      <CheckboxLabel key={ingredient._id}>
-                        <Checkbox
-                          type="checkbox"
-                          onChange={() => handleIngredientToggle(ingredient)}
-                          checked={selectedIngredients.some(
-                            (ing) => ing._id === ingredient._id
-                          )}
-                        />
-                        {ingredient.name}
-                      </CheckboxLabel>
-                    )
-                  )}
+                  {ingredients.map((ingredient) => (
+                    <CheckboxLabel key={ingredient._id}>
+                      <Checkbox
+                        type="checkbox"
+                        onChange={() => handleIngredientToggle(ingredient)}
+                        checked={selectedIngredients.some(
+                          (ing) => ing._id === ingredient._id
+                        )}
+                      />
+                      {ingredient.name}
+                    </CheckboxLabel>
+                  ))}
                 </Multiselect>
               </FormField>
               <FormField>
