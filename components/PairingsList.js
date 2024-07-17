@@ -5,8 +5,8 @@ const PairingsList = ({
   pairings,
   toggleFavoritePairing,
   pairingsInfo,
-  onRate, // destr.
-  updatePairingRating, // destr.
+  onRate,
+  updatePairingRating,
 }) => {
   return (
     <>

@@ -1,19 +1,22 @@
 import styled from "styled-components";
 import PairingsList from "@/components/PairingsList";
+import NewPairingForm from "@/components/NewPairingForm";
 
 const PairingsPage = ({
   toggleFavoritePairing,
   pairingsInfo,
   pairings,
-  updatePairingRating, // destr. prop
+  updatePairingRating,
+  onAddPairing, // Add this prop
 }) => {
   return (
     <Container>
+      <NewPairingForm onAddPairing={onAddPairing} />
       <PairingsList
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
-        updatePairingRating={updatePairingRating} //  prop
+        updatePairingRating={updatePairingRating}
       />
     </Container>
   );
