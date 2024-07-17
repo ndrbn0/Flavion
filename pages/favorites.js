@@ -10,6 +10,7 @@ const FavoritesPage = ({
   pairingsInfo,
   pairings,
   updatePairingRating,
+  onDeletePairing,
 }) => {
   const favoriteIngredients = ingredients.filter((ingredient) =>
     favorites.find(
@@ -63,6 +64,7 @@ const FavoritesPage = ({
                     )?.isFavorite
                   }
                   updatePairingRating={updatePairingRating}
+                  onDeletePairing={onDeletePairing}
                 />
               );
             }

@@ -6,6 +6,7 @@ const PairingsPage = ({
   pairingsInfo,
   pairings,
   updatePairingRating,
+  onDeletePairing,
 }) => {
   return (
     <Container>
@@ -14,6 +15,7 @@ const PairingsPage = ({
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
         updatePairingRating={updatePairingRating}
+        onDeletePairing={onDeletePairing} // Pass the delete function
       />
     </Container>
   );

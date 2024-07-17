@@ -23,8 +23,10 @@ const PairingItem = ({
   toggleFavoritePairing,
   isFavorite,
   updatePairingRating,
+  onDeletePairing,
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
 
@@ -54,12 +56,17 @@ const PairingItem = ({
     }
   };
 
-  const handleDelete = (commentId) => {
+  const handleDeleteComment = (commentId) => {
     const updatedComments = comments.filter(
       (comment) => comment.id !== commentId
     );
     setComments(updatedComments);
     setShowCommentPopup(false);
+  };
+
+  const handleDeletePairing = () => {
+    onDeletePairing(pairing._id);
+    setShowDeletePopup(false);
   };
 
   return (
@@ -106,6 +113,7 @@ const PairingItem = ({
           id={pairing._id}
           updatePairingRating={updatePairingRating}
         />
+        <DeleteButton onClick={() => setShowDeletePopup(true)}>🗑️</DeleteButton>
       </CardFooter>
       <CommentPopup
         show={showCommentPopup}
@@ -115,8 +123,21 @@ const PairingItem = ({
         }}
         onSubmit={handleCommentSubmit}
         commentToEdit={editingComment}
-        onDelete={handleDelete}
+        onDelete={handleDeleteComment}
       />
+      {showDeletePopup && (
+        <DeletePopup>
+          <DeleteMessage>
+            Are you sure you want to delete this pairing?
+          </DeleteMessage>
+          <ButtonGroup>
+            <ConfirmButton onClick={handleDeletePairing}>Yes</ConfirmButton>
+            <CancelButton onClick={() => setShowDeletePopup(false)}>
+              No
+            </CancelButton>
+          </ButtonGroup>
+        </DeletePopup>
+      )}
       <Comments>
         {comments.map((comment) => (
           <Comment key={comment.id}>
@@ -181,5 +202,98 @@ const EditButton = styled.button`
 
   &:active {
     background-color: #0056b3;
+  }
+`;
+
+const DeleteButton = styled.button`
+  background: none;
+  border: none;
+  color: #ff0000;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 24px;
+  transition: transform 0.3s, color 0.3s;
+
+  &:hover {
+    transform: scale(1.2);
+    color: #cc0000;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5);
+  }
+
+  &:active {
+    color: #990000;
+  }
+`;
+
+const DeletePopup = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 1000;
+`;
+
+const DeleteMessage = styled.p`
+  font-size: 16px;
+  margin-bottom: 20px;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+const ConfirmButton = styled.button`
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #cc0000;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5);
+  }
+
+  &:active {
+    background-color: #990000;
+  }
+`;
+
+const CancelButton = styled.button`
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #bbb;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(200, 200, 200, 0.5);
+  }
+
+  &:active {
+    background-color: #aaa;
   }
 `;

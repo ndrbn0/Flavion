@@ -106,6 +106,11 @@ export default function App({ Component, pageProps }) {
     setPairings(updatedPairings);
   };
 
+  const deletePairing = (id) => {
+    const updatedPairings = pairings.filter((pairing) => pairing._id !== id);
+    setPairings(updatedPairings);
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -123,6 +128,7 @@ export default function App({ Component, pageProps }) {
         pairingsInfo={pairingsInfo}
         comments={comments}
         updatePairingRating={updatePairingRating}
+        onDeletePairing={deletePairing} // Pass the delete function
       />
       <Navigation />
     </>
