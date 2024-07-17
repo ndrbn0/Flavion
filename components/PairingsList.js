@@ -8,41 +8,21 @@ const PairingsList = ({
   toggleFavoritePairing,
   pairingsInfo,
   updatePairingRating,
-  handleCommentSubmit,
+  handleAddComment,
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
-  const [editingComment, setEditingComment] = useState(null);
   const [currentPairingId, setCurrentPairingId] = useState(null);
-  const [currentPairing, setCurrentPairing] = useState();
 
-  const handleCommentSubmitLocal = (comment, commentId) => {
-    handleCommentSubmit(comment, currentPairingId, commentId);
+  const handleCommentSubmitLocal = (comment) => {
+    handleAddComment(currentPairingId, comment);
     setShowCommentPopup(false);
-    setEditingComment(null);
     setCurrentPairingId(null);
-    console.log("Comment submitted:", comment);
   };
 
-  const handleEdit = (commentId, pairingId) => {
-    const pairing = pairingsInfo.find((p) => p._id === pairingId);
-    const commentToEdit = pairing.comments.find(
-      (comment) => comment.id === commentId
-    );
-    setEditingComment(commentToEdit);
-    setShowCommentPopup(true);
-    setCurrentPairingId(pairingId);
-  };
+  const comments = pairingsInfo.find(
+    (pairing) => pairing._id === currentPairingId
+  )?.comments;
 
-  const handleClick = (pairing) => {
-    setCurrentPairing(pairing);
-  };
-
-  /*const handlePairingDelete = (_id) => {
-    const updatedPairingsInfo = pairingsInfo.filter(
-      (pairing) => pairing._id !== _id
-    );
-    handleDelete(updatedPairingsInfo);
-  };*/
   return (
     <>
       <Title>Pairings</Title>
@@ -52,41 +32,75 @@ const PairingsList = ({
             <PairingItem
               key={pairing._id}
               pairing={pairing}
-              updatePairingRating={updatePairingRating}
               toggleFavoritePairing={toggleFavoritePairing}
               isFavorite={
                 pairingsInfo.find(
                   (pairingInfo) => pairingInfo._id === pairing._id
                 )?.isFavorite
               }
-              handleCommentSubmit={handleCommentSubmitLocal}
+              updatePairingRating={updatePairingRating}
               setShow={setShowCommentPopup}
-              comments={
-                pairingsInfo.find((pairing) => pairing._id === pairing._id)
-                  ?.comments || []
-              }
-              handleEdit={handleEdit}
-              handleClick={handleClick}
+              onCommentButtonClick={() => {
+                setCurrentPairingId(
+                  pairingsInfo.find(
+                    (pairingInfo) => pairingInfo._id === pairing._id
+                  )._id
+                );
+              }}
             />
           ))}
-          <NewCommentForm
-            show={showCommentPopup}
-            onClose={() => {
-              setShowCommentPopup(false);
-              setEditingComment(null);
-              setCurrentPairingId(null);
-            }}
-            onSubmit={handleCommentSubmitLocal}
-            commentToEdit={editingComment}
-            currentPairing={currentPairing}
-          />
         </StyledList>
+
+        {showCommentPopup && (
+          <Overlay
+            onClick={(event) => {
+              if (event.target === event.currentTarget) {
+                setShowCommentPopup(!showCommentPopup);
+              }
+            }}
+          >
+            <Popup>
+              <NewCommentForm
+                onSubmit={handleCommentSubmitLocal}
+                onClose={() => setShowCommentPopup(false)}
+              />
+              <CommentsList>
+                {comments.length > 0 &&
+                  comments.map((comment) => (
+                    <Comment key={comment._id}>
+                      <CommentText>{comment.text}</CommentText>
+                    </Comment>
+                  ))}
+              </CommentsList>
+            </Popup>
+          </Overlay>
+        )}
       </Container>
     </>
   );
 };
 
 export default PairingsList;
+
+const Overlay = styled.aside`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Popup = styled.section`
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
 
 const StyledList = styled.ul`
   list-style: none;
@@ -137,14 +151,12 @@ const Container = styled.div`
   gap: 5px;
   margin-bottom: 15%;
 `;
-const CommentsSection = styled.div`
+
+const CommentsList = styled.ul`
   margin-top: 20px;
-  padding: 10px;
-  background: #f9f9f9;
-  border-radius: 8px;
 `;
 
-const Comment = styled.div`
+const Comment = styled.li`
   background: #ffffff;
   padding: 12px;
   border-radius: 8px;
@@ -152,25 +164,6 @@ const Comment = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 `;
 
-const EditButton = styled.button`
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  margin-left: 8px;
-  font-size: 14px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s;
-  &:hover {
-    background-color: #007bff;
-    color: #fff;
-  }
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
-  }
-  &:active {
-    background-color: #0056b3;
-  }
+const CommentText = styled.p`
+  margin: 0;
 `;

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   Card,
@@ -14,21 +13,16 @@ import {
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
 
-const PairingItem = ({ pairing, setShow, handleClick }) => {
-  const [favorited, setFavorited] = useState(false);
-
-  const [ingredients, setIngredients] = useState([]);
-
-  useEffect(() => {
-    const ingredientData = pairing.ingredients.map((id) =>
-      ingredientsData.find((ing) => ing._id === id)
-    );
-    setIngredients(ingredientData);
-  }, [pairing.ingredients]);
-
-  const toggleFavorite = () => {
-    setFavorited(!favorited);
-  };
+const PairingItem = ({
+  pairing,
+  setShow,
+  onCommentButtonClick,
+  isFavorite,
+  toggleFavoritePairing,
+}) => {
+  const ingredientData = pairing.ingredients.map((id) =>
+    ingredientsData.find((ing) => ing._id === id)
+  );
 
   return (
     <Card>
@@ -40,20 +34,20 @@ const PairingItem = ({ pairing, setShow, handleClick }) => {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
         />
-        <FavoriteButton onClick={toggleFavorite}>
-          {favorited ? "★" : "☆"}
+        <FavoriteButton onClick={toggleFavoritePairing}>
+          {isFavorite ? "★" : "☆"}
         </FavoriteButton>
       </ImageWrapper>
       <StyledContent>
         <Ingredients>
-          {ingredients.map((ingredient) => (
+          {ingredientData.map((ingredient) => (
             <li key={ingredient._id}>{ingredient.name}</li>
           ))}
         </Ingredients>
         <Reason>{pairing.reason}</Reason>
       </StyledContent>
       <CardFooter>
-        {ingredients.map((ingredient) => (
+        {ingredientData.map((ingredient) => (
           <Flavors
             $color={flavorColors[ingredient.flavor]}
             key={ingredient._id}
@@ -64,7 +58,7 @@ const PairingItem = ({ pairing, setShow, handleClick }) => {
         <CommentEmoji
           onClick={() => {
             setShow(true);
-            handleClick(pairing);
+            onCommentButtonClick();
           }}
         >
           💬

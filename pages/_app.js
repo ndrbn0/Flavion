@@ -25,24 +25,23 @@ export default function App({ Component, pageProps }) {
     })),
   });
 
-  const handleCommentSubmit = (comment, pairingId, commentId) => {
-    const updatedPairingsInfo = pairingsInfo.map((pairing) => {
-      if (pairing._id === pairingId) {
-        if (commentId) {
-          const updatedComments = pairing.comments.map((com) =>
-            com.id === com ? { ...com, text: comment } : com
-          );
-          return { ...pairing, comments: updatedComments };
+  function handleAddComment(pairingId, newComment) {
+    setPairingsInfo(
+      pairingsInfo.map((pairing) => {
+        if (pairingId === pairing._id) {
+          return {
+            ...pairing,
+            comments: [
+              ...pairing.comments,
+              { _id: nanoid(), text: newComment },
+            ],
+          };
         } else {
-          const newComment = { id: nanoid(), text: comment };
-          return { ...pairing, comments: [...pairing.comments, newComment] };
+          return pairing;
         }
-      }
-      return pairing;
-    });
-    setPairingsInfo(updatedPairingsInfo);
-  };
-  console.log(pairingsInfo);
+      })
+    );
+  }
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
     const favoriteIngredient = favorites.find(
@@ -110,7 +109,7 @@ export default function App({ Component, pageProps }) {
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
-        handleCommentSubmit={handleCommentSubmit}
+        handleAddComment={handleAddComment}
       />
       <Navigation />
     </>

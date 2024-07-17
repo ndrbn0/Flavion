@@ -1,88 +1,30 @@
-import { EditButton } from "@/_styles";
-import { useState } from "react";
 import styled from "styled-components";
 
-const NewCommentForm = ({
-  show,
-  onClose,
-  onSubmit,
-  commentToEdit,
-  onDelete,
-  currentPairing,
-}) => {
-  const [showPopup, setShowPopup] = useState(false);
-  const [comments, setComments] = useState(currentPairing?.comments || []);
-  const [comment, setComment] = useState(
-    commentToEdit ? commentToEdit.text : ""
-  );
-
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
+const NewCommentForm = ({ onSubmit, onClose }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
-    const newComment = {
-      text: comment,
-      _id: commentToEdit ? commentToEdit.id : new Date().getTime(),
-    };
-    onSubmit(comment, commentToEdit ? commentToEdit.id : null);
-    setComments((prevComments) =>
-      commentToEdit
-        ? prevComments.map((comment) =>
-            comment.id === newComment.id ? newComment : comment
-          )
-        : [...prevComments, newComment]
-    );
-    setComment("");
+
+    const comment = event.target.elements.comment.value;
+
+    onSubmit(comment);
   };
 
-  const handleDelete = (id) => {
-    onDelete(id);
-    setComments((prevComments) =>
-      prevComments.filter((comment) => comment.id !== id)
-    );
-  };
-
-  if (!show) {
-    return null;
-  }
-  console.log(currentPairing);
   return (
     <>
-      <Overlay onClick={togglePopup}>
-        <Popup>
-          <Header>
-            <Title>{commentToEdit ? "Edit Comment" : "Add Comment"}</Title>
-            <CloseButton onClick={onClose}>✕</CloseButton>
-          </Header>
-          <Content>
-            <TextArea
-              value={comment}
-              onChange={(event) => setComment(event.target.value)}
-              placeholder="Write a comment..."
-              label="Comment"
-            />
-          </Content>
-          <Footer>
-            {commentToEdit && (
-              <DeleteButton onClick={() => handleDelete(commentToEdit.id)}>
-                Delete
-              </DeleteButton>
-            )}
-            <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
-          </Footer>
-          <CommentsList>
-            {currentPairing?.comments?.map((pairing) => (
-              <Comment key={pairing._id}>
-                <CommentText>{pairing.text}</CommentText>
-              </Comment>
-            ))}
-          </CommentsList>
-        </Popup>
-      </Overlay>
+      <Header>
+        <Title>Add Coment</Title>
+        <CloseButton onClick={onClose}>✕</CloseButton>
+      </Header>
+      <form onSubmit={handleSubmit}>
+        <Content>
+          <TextArea placeholder="Write a comment..." name="comment" />
+        </Content>
+        <Footer>
+          <SubmitButton type="submit">Submit</SubmitButton>
+        </Footer>
+      </form>
     </>
-  ); // hello
+  );
 };
 export default NewCommentForm;
 
