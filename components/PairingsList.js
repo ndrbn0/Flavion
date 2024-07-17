@@ -29,6 +29,14 @@ const PairingsList = ({
     setCommentText("");
   };
 
+  const handleDeleteCommentLocal = (pairingId, commentId) => {
+    handleDeleteComment(pairingId, commentId);
+    if (comments.length === 1) {
+      setShowCommentPopup(false);
+      setCurrentPairingId(null);
+    }
+  };
+
   const comments = pairingsInfo.find(
     (pairing) => pairing._id === currentPairingId
   )?.comments;
@@ -103,7 +111,10 @@ const PairingsList = ({
                           </EditButton>
                           <DeleteButton
                             onClick={() =>
-                              handleDeleteComment(currentPairingId, comment._id)
+                              handleDeleteCommentLocal(
+                                currentPairingId,
+                                comment._id
+                              )
                             }
                           >
                             Delete
