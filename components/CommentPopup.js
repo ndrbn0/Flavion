@@ -25,7 +25,6 @@ const CommentPopup = ({ show, onClose, onSubmit, commentToEdit, onDelete }) => {
         </Header>
         <Content>
           <TextArea
-            label="Comment"
             value={comment}
             onChange={(event) => setComment(event.target.value)}
             placeholder="Write your comment..."
