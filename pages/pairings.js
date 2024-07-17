@@ -54,6 +54,12 @@ const Title = styled.h1`
   text-align: center;
   margin-bottom: 20px;
   border-radius: var(--radius-2xl, 48px);
+  background: linear-gradient(
+      0deg,
+      var(--Theme-colors-ui-4, rgba(255, 255, 255, 0.82)) 0%,
+      var(--Theme-colors-ui-4, rgba(255, 255, 255, 0.82)) 100%
+    ),
+    var(--Primary-primary, #153f52);
   padding: 10px;
   background: linear-gradient(
       0deg,
