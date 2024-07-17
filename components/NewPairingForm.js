@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ingredientsData from "@/assets/ingredients.json";
+import { nanoid } from "nanoid";
+
+const placeholderImageUrl =
+  "https://static.vecteezy.com/system/resources/previews/003/170/825/original/isolated-food-plate-fork-and-spoon-design-free-vector.jpg";
 
 const NewPairingForm = ({ onAddPairing }) => {
   const [ingredients, setIngredients] = useState([]);
   const [reason, setReason] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState("");
 
@@ -15,8 +19,8 @@ const NewPairingForm = ({ onAddPairing }) => {
   };
 
   const handleIngredientToggle = (ingredient) => {
-    if (ingredients.includes(ingredient)) {
-      setIngredients(ingredients.filter((item) => item !== ingredient));
+    if (ingredients.some((ing) => ing._id === ingredient._id)) {
+      setIngredients(ingredients.filter((ing) => ing._id !== ingredient._id));
     } else {
       if (ingredients.length < 3) {
         setIngredients([...ingredients, ingredient]);
@@ -30,22 +34,24 @@ const NewPairingForm = ({ onAddPairing }) => {
     event.preventDefault();
 
     if (ingredients.length < 2 || !reason) {
-      setError("Please select at least 2 ingredients");
+      setError("Please select at least 2 ingredients and provide a reason.");
       return;
     }
 
     const newPairing = {
-      ingredients,
-      reason,
-      imageUrl:
-        imageUrl ||
-        "https://static.vecteezy.com/system/resources/previews/003/170/825/original/isolated-food-plate-fork-and-spoon-design-free-vector.jpg", // Placeholder image URL if none provided
+      _id: nanoid(),
+      ingredients: ingredients.map((ingredient) => ingredient._id),
+      reason: reason,
+      imgUrl: imgUrl || placeholderImageUrl,
+      rating: 0, // Assuming initial rating
+      comments: [], // Assuming no comments initially
+      isFavorite: false, // Assuming it's not a favorite initially
     };
 
     onAddPairing(newPairing);
     setIngredients([]);
     setReason("");
-    setImageUrl("");
+    setImgUrl("");
     setShowPopup(false);
     setError("");
   };
@@ -66,9 +72,10 @@ const NewPairingForm = ({ onAddPairing }) => {
                     <CheckboxLabel key={ingredient._id}>
                       <Checkbox
                         type="checkbox"
-                        value={ingredient.name}
-                        onChange={() => handleIngredientToggle(ingredient.name)}
-                        checked={ingredients.includes(ingredient.name)}
+                        onChange={() => handleIngredientToggle(ingredient)}
+                        checked={ingredients.some(
+                          (ing) => ing._id === ingredient._id
+                        )}
                       />
                       {ingredient.name}
                     </CheckboxLabel>
@@ -88,9 +95,9 @@ const NewPairingForm = ({ onAddPairing }) => {
                 <Label htmlFor="imageUrl">Image URL:</Label>
                 <Input
                   type="text"
-                  value={imageUrl}
-                  onChange={(event) => setImageUrl(event.target.value)}
-                  placeholder="Enter Image URL"
+                  value={imgUrl}
+                  onChange={(event) => setImgUrl(event.target.value)}
+                  placeholder="Enter image URL"
                 />
               </FormField>
               {error && <ErrorText>{error}</ErrorText>}
@@ -173,19 +180,23 @@ const SubmitButton = styled.button`
   }
 `;
 
-const CancelButton = styled.button`
-  padding: 10px 20px;
-  background-color: #6c757d;
-  color: white;
+const Button = styled.button`
   border: none;
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #0070f3;
   border-radius: 15px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  color: white;
 
   &:hover {
-    background-color: #5a6268;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -218,26 +229,6 @@ const PopupForm = styled.div`
   padding: 20px;
   border-radius: 10px;
   z-index: 999;
-`;
-
-const Button = styled.button`
-  border: none;
-  font-style: italic;
-  font-size: 14px;
-  margin-top: 8px;
-  padding: 8px 16px;
-  background-color: #0070f3;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
-  color: white;
-
-  &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  }
 `;
 
 const ErrorText = styled.p`

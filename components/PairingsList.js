@@ -10,7 +10,6 @@ const PairingsList = ({
 }) => {
   return (
     <>
-      <Title>Pairings</Title>
       <Container>
         <StyledList>
           {pairings.map((pairing) => (

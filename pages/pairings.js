@@ -7,10 +7,11 @@ const PairingsPage = ({
   pairingsInfo,
   pairings,
   updatePairingRating,
-  onAddPairing, // Add this prop
+  onAddPairing,
 }) => {
   return (
     <Container>
+      <Title>Pairings</Title>
       <NewPairingForm onAddPairing={onAddPairing} />
       <PairingsList
         pairings={pairings}
@@ -35,10 +36,23 @@ const Container = styled.div`
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
     0px 1px 2px 0px rgba(0, 0, 0, 0.06);
   display: flex;
-  min-width: 220px;
   flex-direction: column;
   align-items: center;
-  align-self: stretch;
-  padding: 8px;
-  gap: 50px;
+  padding: 20px;
+  gap: 20px;
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  margin-bottom: 20px;
+  border-radius: var(--radius-2xl, 48px);
+  padding: 10px;
+  background: linear-gradient(
+      0deg,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 100%
+    ),
+    var(--Primary-primary, #0d1f28);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
 `;
