@@ -9,14 +9,24 @@ const PairingsList = ({
   pairingsInfo,
   updatePairingRating,
   handleAddComment,
+  handleEditComment,
+  handleDeleteComment,
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [currentPairingId, setCurrentPairingId] = useState(null);
+  const [editCommentId, setEditCommentId] = useState(null);
+  const [commentText, setCommentText] = useState("");
 
   const handleCommentSubmitLocal = (comment) => {
     handleAddComment(currentPairingId, comment);
     setShowCommentPopup(false);
     setCurrentPairingId(null);
+  };
+
+  const handleEditCommentLocal = () => {
+    handleEditComment(currentPairingId, editCommentId, commentText);
+    setEditCommentId(null);
+    setCommentText("");
   };
 
   const comments = pairingsInfo.find(
@@ -68,7 +78,38 @@ const PairingsList = ({
                 {comments.length > 0 &&
                   comments.map((comment) => (
                     <Comment key={comment._id}>
-                      <CommentText>{comment.text}</CommentText>
+                      {editCommentId === comment._id ? (
+                        <>
+                          <TextArea
+                            value={commentText}
+                            onChange={(event) =>
+                              setCommentText(event.target.value)
+                            }
+                          />
+                          <SaveButton onClick={handleEditCommentLocal}>
+                            Save
+                          </SaveButton>
+                        </>
+                      ) : (
+                        <>
+                          <CommentText>{comment.text}</CommentText>
+                          <EditButton
+                            onClick={() => {
+                              setEditCommentId(comment._id);
+                              setCommentText(comment.text);
+                            }}
+                          >
+                            Edit
+                          </EditButton>
+                          <DeleteButton
+                            onClick={() =>
+                              handleDeleteComment(currentPairingId, comment._id)
+                            }
+                          >
+                            Delete
+                          </DeleteButton>
+                        </>
+                      )}
                     </Comment>
                   ))}
               </CommentsList>
@@ -166,4 +207,50 @@ const Comment = styled.li`
 
 const CommentText = styled.p`
   margin: 0;
+`;
+const EditButton = styled.button`
+  background: #fff;
+  color: rgb(156, 156, 156);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+`;
+
+const SaveButton = styled.button`
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: background 0.3s;
+  &:hover {
+    background: #0056b3;
+  }
+`;
+const DeleteButton = styled.button`
+  background: #fff;
+  color: rgb(156, 156, 156);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
 `;

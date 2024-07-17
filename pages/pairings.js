@@ -6,6 +6,8 @@ const PairingsPage = ({
   pairingsInfo,
   pairings,
   handleAddComment,
+  handleEditComment,
+  handleDeleteComment,
 }) => {
   return (
     <Container>
@@ -14,6 +16,8 @@ const PairingsPage = ({
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
         handleAddComment={handleAddComment}
+        handleEditComment={handleEditComment}
+        handleDeleteComment={handleDeleteComment}
       />
     </Container>
   );

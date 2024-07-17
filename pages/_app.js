@@ -42,6 +42,41 @@ export default function App({ Component, pageProps }) {
       })
     );
   }
+  function handleEditComment(pairingId, commentId, updatedText) {
+    setPairingsInfo(
+      pairingsInfo.map((pairing) => {
+        if (pairingId === pairing._id) {
+          return {
+            ...pairing,
+            comments: pairing.comments.map((comment) =>
+              comment._id === commentId
+                ? { ...comment, text: updatedText }
+                : comment
+            ),
+          };
+        } else {
+          return pairing;
+        }
+      })
+    );
+  }
+
+  function handleDeleteComment(pairingId, commentId) {
+    setPairingsInfo(
+      pairingsInfo.map((pairing) => {
+        if (pairingId === pairing._id) {
+          return {
+            ...pairing,
+            comments: pairing.comments.filter(
+              (comment) => comment._id !== commentId
+            ),
+          };
+        } else {
+          return pairing;
+        }
+      })
+    );
+  }
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
     const favoriteIngredient = favorites.find(
@@ -110,6 +145,8 @@ export default function App({ Component, pageProps }) {
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
         handleAddComment={handleAddComment}
+        handleEditComment={handleEditComment}
+        handleDeleteComment={handleDeleteComment}
       />
       <Navigation />
     </>
