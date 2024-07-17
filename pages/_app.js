@@ -30,7 +30,7 @@ export default function App({ Component, pageProps }) {
       if (pairing._id === pairingId) {
         if (commentId) {
           const updatedComments = pairing.comments.map((com) =>
-            comment.id === commentId ? { ...comment, text: comment } : comment
+            com.id === com ? { ...com, text: comment } : com
           );
           return { ...pairing, comments: updatedComments };
         } else {
@@ -42,7 +42,7 @@ export default function App({ Component, pageProps }) {
     });
     setPairingsInfo(updatedPairingsInfo);
   };
-
+  console.log(pairingsInfo);
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
     const favoriteIngredient = favorites.find(
