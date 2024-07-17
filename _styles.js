@@ -480,7 +480,7 @@ export const FavoriteButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${({ isFavorite }) =>
-      isFavorite ? "#a71d2a" : "#0056b3"};
+    background-color: ${({ $isFavorite }) =>
+      $isFavorite ? "#a71d2a" : "#0056b3"};
   }
 `;
