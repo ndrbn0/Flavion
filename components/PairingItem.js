@@ -201,8 +201,7 @@ const CommentEmoji = styled.span`
 `;
 
 const Comments = styled.div`
-  margin-top: 20px;
-  padding: 10px;
+  padding: 8px;
   background: #f9f9f9;
   border-radius: 8px;
 `;

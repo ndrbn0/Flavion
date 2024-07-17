@@ -126,7 +126,7 @@ export const Card = styled.li`
   text-decoration: none;
   color: inherit;
   width: 300px;
-  height: 440px;
+  height: 460px;
   margin: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -143,7 +143,7 @@ export const Card = styled.li`
       var(--Theme-colors-ui-4, rgba(255, 255, 255, 0.82)) 100%
     ),
     var(--Primary-primary, #153f52);
-  padding: 0px 10px 10px 10px;
+  padding: 0px 0px 0px 0px;
   background: linear-gradient(
       0deg,
       var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
@@ -469,18 +469,19 @@ export const Reason = styled.p`
 export const FavoriteButton = styled.button`
   display: flex;
   position: relative;
-  margin-left: 85%;
-  margin-top: 15px;
-  background-color: ${({ isFavorite }) => (isFavorite ? "#dc3545" : "#007bff")};
-  color: white;
+  margin-left: 82%;
+  margin-top: 5px;
+  background-color: ${({ isFavorite }) =>
+    isFavorite ? "#dc3545" : "transparent"};
+  color: red;
   border: none;
   border-radius: 15px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  font-size: 2rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 
   &:hover {
-    background-color: ${({ isFavorite }) =>
-      isFavorite ? "#a71d2a" : "#0056b3"};
+    transform: scale(1.1);
+    z-index: 1;
   }
 `;
