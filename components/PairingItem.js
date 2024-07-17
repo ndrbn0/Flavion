@@ -31,12 +31,14 @@ const PairingItem = ({
   const [ingredientDetails, setIngredientDetails] = useState([]);
 
   useEffect(() => {
-    if (pairing && pairing.ingredients && Array.isArray(pairing.ingredients)) {
+    if (
+      pairing &&
+      pairing.ingredients &&
+      Array.isArray(pairing.ingredients) &&
+      ingredients
+    ) {
       const ingredientsList = pairing.ingredients
-        .map((id) => {
-          const ingredient = ingredients.find((ing) => ing._id === id);
-          return ingredient;
-        })
+        .map((id) => ingredients.find((ing) => ing._id === id))
         .filter((ingredient) => ingredient);
       setIngredientDetails(ingredientsList);
     }

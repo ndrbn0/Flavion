@@ -63,6 +63,7 @@ const FavoritesPage = ({
                     )?.isFavorite
                   }
                   updatePairingRating={updatePairingRating} //  prop
+                  ingredients={ingredients}
                 />
               );
             }
