@@ -128,7 +128,7 @@ export default function App({ Component, pageProps }) {
         pairingsInfo={pairingsInfo}
         comments={comments}
         updatePairingRating={updatePairingRating}
-        onDeletePairing={deletePairing} // Pass the delete function
+        onDeletePairing={deletePairing}
       />
       <Navigation />
     </>

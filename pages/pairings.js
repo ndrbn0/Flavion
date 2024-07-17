@@ -15,7 +15,7 @@ const PairingsPage = ({
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
         updatePairingRating={updatePairingRating}
-        onDeletePairing={onDeletePairing} // Pass the delete function
+        onDeletePairing={onDeletePairing}
       />
     </Container>
   );
