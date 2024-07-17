@@ -121,7 +121,7 @@ const SubmitButton = styled.button`
     background: #0056b3;
   }
 `;
-const CommentsList = styled.div`
+const CommentsList = styled.ul`
   margin-top: 20px;
 `;
 
