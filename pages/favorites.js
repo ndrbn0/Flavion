@@ -9,7 +9,7 @@ const FavoritesPage = ({
   toggleFavoritePairing,
   pairingsInfo,
   pairings,
-  updatePairingRating, // Destr. prop
+  updatePairingRating,
 }) => {
   const favoriteIngredients = ingredients.filter((ingredient) =>
     favorites.find(

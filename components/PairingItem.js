@@ -14,7 +14,6 @@ import {
   Ingredient,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
-import ingredientsData from "@/assets/ingredients.json";
 import CommentPopup from "@/components/CommentPopup";
 import StarRating from "./RatingStar";
 
@@ -22,25 +21,26 @@ const PairingItem = ({
   pairing,
   toggleFavoritePairing,
   isFavorite,
-  updatePairingRating, // prop
+  updatePairingRating,
+  ingredients,
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
 
-  const [ingredients, setIngredients] = useState([]);
+  const [ingredientDetails, setIngredientDetails] = useState([]);
 
   useEffect(() => {
     if (pairing && pairing.ingredients && Array.isArray(pairing.ingredients)) {
       const ingredientsList = pairing.ingredients
         .map((id) => {
-          const ingredient = ingredientsData.find((ing) => ing._id === id);
+          const ingredient = ingredients.find((ing) => ing._id === id);
           return ingredient;
         })
         .filter((ingredient) => ingredient);
-      setIngredients(ingredientsList);
+      setIngredientDetails(ingredientsList);
     }
-  }, [pairing]);
+  }, [pairing, ingredients]);
 
   const handleCommentSubmit = (commentText, commentId) => {
     if (commentId) {
@@ -87,7 +87,7 @@ const PairingItem = ({
       <StyledContent>
         <ul>
           <Ingredients>
-            {ingredients.map((ingredient) => (
+            {ingredientDetails.map((ingredient) => (
               <Ingredient key={ingredient._id}>{ingredient.name}</Ingredient>
             ))}
           </Ingredients>
@@ -95,7 +95,7 @@ const PairingItem = ({
         <Reason>{pairing.reason}</Reason>
       </StyledContent>
       <CardFooter>
-        {ingredients.map((ingredient) => (
+        {ingredientDetails.map((ingredient) => (
           <Flavors
             $color={flavorColors[ingredient.flavor]}
             key={ingredient._id}

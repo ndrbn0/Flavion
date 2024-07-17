@@ -8,16 +8,24 @@ const PairingsPage = ({
   pairings,
   updatePairingRating,
   onAddPairing,
+  addIngredient,
+  ingredients,
+  deleteIngredient,
+  updateIngredient,
 }) => {
   return (
     <Container>
       <Title>Pairings</Title>
-      <NewPairingForm onAddPairing={onAddPairing} />
+      <NewPairingForm onAddPairing={onAddPairing} ingredients={ingredients} />
       <PairingsList
         pairings={pairings}
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
         updatePairingRating={updatePairingRating}
+        ingredients={ingredients}
+        addIngredient={addIngredient}
+        deleteIngredient={deleteIngredient}
+        updateIngredient={updateIngredient}
       />
     </Container>
   );

@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ingredientsData from "@/assets/ingredients.json";
 import { nanoid } from "nanoid";
 
 const placeholderImageUrl =
   "https://static.vecteezy.com/system/resources/previews/003/170/825/original/isolated-food-plate-fork-and-spoon-design-free-vector.jpg";
 
-const NewPairingForm = ({ onAddPairing }) => {
-  const [ingredients, setIngredients] = useState([]);
+const NewPairingForm = ({ onAddPairing, ingredients }) => {
+  // Accept ingredients as a prop
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [reason, setReason] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [showPopup, setShowPopup] = useState(false);
@@ -19,11 +19,13 @@ const NewPairingForm = ({ onAddPairing }) => {
   };
 
   const handleIngredientToggle = (ingredient) => {
-    if (ingredients.some((ing) => ing._id === ingredient._id)) {
-      setIngredients(ingredients.filter((ing) => ing._id !== ingredient._id));
+    if (selectedIngredients.some((ing) => ing._id === ingredient._id)) {
+      setSelectedIngredients(
+        selectedIngredients.filter((ing) => ing._id !== ingredient._id)
+      );
     } else {
-      if (ingredients.length < 3) {
-        setIngredients([...ingredients, ingredient]);
+      if (selectedIngredients.length < 3) {
+        setSelectedIngredients([...selectedIngredients, ingredient]);
       } else {
         setError("Maximum of 3 ingredients can be selected.");
       }
@@ -33,14 +35,14 @@ const NewPairingForm = ({ onAddPairing }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (ingredients.length < 2 || !reason) {
+    if (selectedIngredients.length < 2 || !reason) {
       setError("Please select at least 2 ingredients and provide a reason.");
       return;
     }
 
     const newPairing = {
       _id: nanoid(),
-      ingredients: ingredients.map((ingredient) => ingredient._id),
+      ingredients: selectedIngredients.map((ingredient) => ingredient._id),
       reason: reason,
       imgUrl: imgUrl || placeholderImageUrl,
       rating: 0, // Assuming initial rating
@@ -49,7 +51,7 @@ const NewPairingForm = ({ onAddPairing }) => {
     };
 
     onAddPairing(newPairing);
-    setIngredients([]);
+    setSelectedIngredients([]);
     setReason("");
     setImgUrl("");
     setShowPopup(false);
@@ -68,18 +70,22 @@ const NewPairingForm = ({ onAddPairing }) => {
               <FormField>
                 <Label htmlFor="ingredients">Select Ingredients:</Label>
                 <Multiselect>
-                  {ingredientsData.map((ingredient) => (
-                    <CheckboxLabel key={ingredient._id}>
-                      <Checkbox
-                        type="checkbox"
-                        onChange={() => handleIngredientToggle(ingredient)}
-                        checked={ingredients.some(
-                          (ing) => ing._id === ingredient._id
-                        )}
-                      />
-                      {ingredient.name}
-                    </CheckboxLabel>
-                  ))}
+                  {ingredients.map(
+                    (
+                      ingredient // Use ingredients from props
+                    ) => (
+                      <CheckboxLabel key={ingredient._id}>
+                        <Checkbox
+                          type="checkbox"
+                          onChange={() => handleIngredientToggle(ingredient)}
+                          checked={selectedIngredients.some(
+                            (ing) => ing._id === ingredient._id
+                          )}
+                        />
+                        {ingredient.name}
+                      </CheckboxLabel>
+                    )
+                  )}
                 </Multiselect>
               </FormField>
               <FormField>
@@ -122,92 +128,76 @@ const Headline = styled.h2`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  border-radius: 24px;
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.97) 0%,
-    rgba(255, 255, 255, 0.97) 100%
-  );
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
-    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-  padding: 24px;
+  border-radius: 8px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const FormField = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+`;
+
+const Label = styled.label`
+  margin-bottom: 5px;
+  font-weight: bold;
 `;
 
 const Input = styled.input`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 15px;
-  font-size: 1rem;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 `;
 
 const TextArea = styled.textarea`
-  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
   min-height: 100px;
-  padding: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 15px;
-  font-size: 1rem;
-`;
-
-const Multiselect = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
-const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
-`;
-
-const Checkbox = styled.input`
-  margin-right: 5px;
 `;
 
 const SubmitButton = styled.button`
   padding: 10px 20px;
+  border-radius: 4px;
   background-color: #007bff;
   color: white;
-  border: none;
-  border-radius: 15px;
+  font-size: 16px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-
+  border: none;
+  transition: background-color 0.3s;
   &:hover {
     background-color: #0056b3;
   }
 `;
 
 const Button = styled.button`
-  border: none;
-  font-style: italic;
-  font-size: 14px;
-  margin-top: 8px;
-  padding: 8px 16px;
-  background-color: #0070f3;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: #007bff;
   color: white;
-
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s;
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    background-color: #0056b3;
   }
 `;
 
-const Label = styled.label`
-  font-weight: bold;
-  margin-bottom: 8px;
-  color: #333333;
-`;
-
-const FormField = styled.div`
-  margin-bottom: 16px;
+const PopupForm = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
 `;
 
 const OverlayBackground = styled.div`
@@ -217,22 +207,26 @@ const OverlayBackground = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 998;
-`;
-
-const PopupForm = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
   z-index: 999;
 `;
 
 const ErrorText = styled.p`
   color: red;
-  font-size: 0.9rem;
-  margin-top: 5px;
+  margin-top: 10px;
+`;
+
+const Multiselect = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
+`;
+
+const Checkbox = styled.input`
+  margin-right: 5px;
 `;

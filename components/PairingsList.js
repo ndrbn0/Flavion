@@ -7,6 +7,7 @@ const PairingsList = ({
   pairingsInfo,
   onRate,
   updatePairingRating,
+  ingredients,
 }) => {
   return (
     <>
@@ -24,6 +25,7 @@ const PairingsList = ({
                   (pairingInfo) => pairingInfo._id === pairing._id
                 )?.isFavorite
               }
+              ingredients={ingredients}
             />
           ))}
         </StyledList>
