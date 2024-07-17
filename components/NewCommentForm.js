@@ -69,7 +69,7 @@ const CloseButton = styled.button`
     color: #000;
   }
 `;
-const Content = styled.section`
+const Content = styled.label`
   margin: 20px 0;
 `;
 const TextArea = styled.textarea`
