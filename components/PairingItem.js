@@ -14,7 +14,7 @@ import {
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
 
-const PairingItem = ({ pairing, setShow }) => {
+const PairingItem = ({ pairing, setShow, handleClick }) => {
   const [favorited, setFavorited] = useState(false);
 
   const [ingredients, setIngredients] = useState([]);
@@ -61,7 +61,14 @@ const PairingItem = ({ pairing, setShow }) => {
             #{ingredient.flavor}
           </Flavors>
         ))}
-        <CommentEmoji onClick={() => setShow(true)}>💬</CommentEmoji>
+        <CommentEmoji
+          onClick={() => {
+            setShow(true);
+            handleClick(pairing);
+          }}
+        >
+          💬
+        </CommentEmoji>
       </CardFooter>
     </Card>
   );

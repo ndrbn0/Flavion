@@ -13,6 +13,7 @@ const PairingsList = ({
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [editingComment, setEditingComment] = useState(null);
   const [currentPairingId, setCurrentPairingId] = useState(null);
+  const [currentPairing, setCurrentPairing] = useState();
 
   const handleCommentSubmitLocal = (comment, commentId) => {
     handleCommentSubmit(comment, currentPairingId, commentId);
@@ -30,6 +31,10 @@ const PairingsList = ({
     setEditingComment(commentToEdit);
     setShowCommentPopup(true);
     setCurrentPairingId(pairingId);
+  };
+
+  const handleClick = (pairing) => {
+    setCurrentPairing(pairing);
   };
 
   /*const handlePairingDelete = (_id) => {
@@ -61,6 +66,7 @@ const PairingsList = ({
                   ?.comments || []
               }
               handleEdit={handleEdit}
+              handleClick={handleClick}
             />
           ))}
           <NewCommentForm
@@ -72,7 +78,7 @@ const PairingsList = ({
             }}
             onSubmit={handleCommentSubmitLocal}
             commentToEdit={editingComment}
-            pairingsInfo={pairingsInfo}
+            currentPairing={currentPairing}
           />
         </StyledList>
       </Container>

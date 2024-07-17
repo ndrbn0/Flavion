@@ -8,10 +8,10 @@ const NewCommentForm = ({
   onSubmit,
   commentToEdit,
   onDelete,
-  pairingsInfo,
+  currentPairing,
 }) => {
   const [showPopup, setShowPopup] = useState(false);
-  const [comments, setComments] = useState(pairingsInfo || []);
+  const [comments, setComments] = useState(currentPairing?.comments || []);
   const [comment, setComment] = useState(
     commentToEdit ? commentToEdit.text : ""
   );
@@ -24,7 +24,7 @@ const NewCommentForm = ({
     event.preventDefault();
     const newComment = {
       text: comment,
-      id: commentToEdit ? commentToEdit.id : new Date().getTime(),
+      _id: commentToEdit ? commentToEdit.id : new Date().getTime(),
     };
     onSubmit(comment, commentToEdit ? commentToEdit.id : null);
     setComments((prevComments) =>
@@ -47,7 +47,7 @@ const NewCommentForm = ({
   if (!show) {
     return null;
   }
-
+  console.log(currentPairing);
   return (
     <>
       <Overlay onClick={togglePopup}>
@@ -73,7 +73,7 @@ const NewCommentForm = ({
             <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
           </Footer>
           <CommentsList>
-            {comments.map((pairing) => (
+            {currentPairing?.comments?.map((pairing) => (
               <Comment key={pairing._id}>
                 <CommentText>{pairing.text}</CommentText>
               </Comment>
