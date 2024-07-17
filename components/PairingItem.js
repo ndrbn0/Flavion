@@ -34,7 +34,7 @@ const PairingItem = ({
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority
         />
-        <FavoriteButton onClick={toggleFavoritePairing}>
+ <FavoriteButton onClick={() => toggleFavoritePairing(pairing._id)}>
           {isFavorite ? "★" : "☆"}
         </FavoriteButton>
       </ImageWrapper>
