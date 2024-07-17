@@ -471,7 +471,7 @@ export const FavoriteButton = styled.button`
   position: relative;
   margin-left: 85%;
   margin-top: 15px;
-  background-color: ${({ isFavorite }) => (isFavorite ? "#dc3545" : "#007bff")};
+  background-color: ${({ $isFavorite }) => ($isFavorite ? "#dc3545" : "#007bff")};
   color: white;
   border: none;
   border-radius: 15px;
