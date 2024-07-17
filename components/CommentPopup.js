@@ -94,7 +94,7 @@ const CloseButton = styled.button`
   }
 `;
 
-const Content = styled.section`
+const Content = styled.label`
   margin: 20px 0;
 `;
 
