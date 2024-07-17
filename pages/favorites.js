@@ -62,7 +62,7 @@ const FavoritesPage = ({
                       (pairingInfo) => pairingInfo._id === pairing._id
                     )?.isFavorite
                   }
-                  updatePairingRating={updatePairingRating} //  prop
+                  updatePairingRating={updatePairingRating}
                   ingredients={ingredients}
                 />
               );
