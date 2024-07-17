@@ -125,7 +125,7 @@ const CommentsList = styled.ul`
   margin-top: 20px;
 `;
 
-const Comment = styled.div`
+const Comment = styled.li`
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
