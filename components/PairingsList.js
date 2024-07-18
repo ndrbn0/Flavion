@@ -28,7 +28,6 @@ const PairingsList = ({
               }
               onDeletePairing={onDeletePairing}
               ingredients={ingredients}
-
             />
           ))}
         </StyledList>
