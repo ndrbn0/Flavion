@@ -85,7 +85,7 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
               </FormField>
               <FormField>
                 <Label htmlFor="reason">Reason for Pairing:</Label>
-                <TextArea
+                <TextArea id="reason"
                   placeholder="Enter Reason for Pairing"
                   value={reason}
                   onChange={(event) => setReason(event.target.value)}
