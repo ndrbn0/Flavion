@@ -33,7 +33,6 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
       {showPopup && (
         <>
           <PopupForm>
-            <Headline>Add New Ingredient</Headline>
             <Form onSubmit={handleSubmit}>
               <Headline>Add New Ingredient</Headline>
               <FormField>

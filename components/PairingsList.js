@@ -8,6 +8,7 @@ const PairingsList = ({
   onRate,
   updatePairingRating,
   ingredients,
+
 }) => {
   return (
     <>

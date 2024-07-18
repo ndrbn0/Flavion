@@ -111,7 +111,7 @@ const PairingItem = ({
         <StarRating
           rating={pairing.rating || 0}
           id={pairing._id}
-          updatePairingRating={updatePairingRating} // prop
+          updatePairingRating={updatePairingRating}
         />
       </CardFooter>
       <CommentPopup

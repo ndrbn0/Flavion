@@ -7,6 +7,7 @@ const PairingsPage = ({
   pairingsInfo,
   pairings,
   updatePairingRating,
+
   onAddPairing,
   addIngredient,
   ingredients,
