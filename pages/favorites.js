@@ -37,7 +37,7 @@ const FavoritesPage = ({
                   ?.isFavorite
               }
               toggleFavorite={toggleFavorite}
-              updatePairingRating={updatePairingRating} //  prop
+              updatePairingRating={updatePairingRating}
             />
           ))
         ) : (

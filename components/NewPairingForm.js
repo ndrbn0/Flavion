@@ -67,7 +67,9 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
             <Form onSubmit={handleSubmit}>
               <Headline>Create New Pairing</Headline>
               <FormField>
-                <Label htmlFor="ingredients">Select Ingredients:</Label>
+                <Label htmlFor="ingredients" id="ingredients">
+                  Select Ingredients:
+                </Label>
                 <Multiselect>
                   {ingredients.map((ingredient) => (
                     <CheckboxLabel key={ingredient._id}>
@@ -85,7 +87,8 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
               </FormField>
               <FormField>
                 <Label htmlFor="reason">Reason for Pairing:</Label>
-                <TextArea id="reason"
+                <TextArea
+                  id="reason"
                   placeholder="Enter Reason for Pairing"
                   value={reason}
                   onChange={(event) => setReason(event.target.value)}
@@ -93,7 +96,9 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
                 />
               </FormField>
               <FormField>
-                <Label htmlFor="imageUrl">Image URL:</Label>
+                <Label htmlFor="imageUrl" id="imageUrl">
+                  Image URL:
+                </Label>
                 <Input
                   type="text"
                   value={imgUrl}
