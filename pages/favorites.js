@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PairingItem from "@/components/PairingItem";
 import IngredientItem from "@/components/IngredientItem";
+import Link from "next/link";
 
 const FavoritesPage = ({
   favorites,

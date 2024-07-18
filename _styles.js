@@ -468,13 +468,15 @@ export const Reason = styled.p`
 
 export const FavoriteButton = styled.button`
   display: flex;
-  position: relative;
-  margin-left: 82%;
-  margin-top: 5px;
+  position: absolute;
+  margin-left: 80%;
+  margin-top: -20px;
   background-color: ${({ isFavorite }) =>
     isFavorite ? "#dc3545" : "transparent"};
-  color: red;
+  color: gold;
   border: none;
+  padding: 20px 5px 5px 5px;
+  background-color: white;
   border-radius: 15px;
   cursor: pointer;
   font-size: 2rem;
@@ -484,4 +486,8 @@ export const FavoriteButton = styled.button`
     transform: scale(1.1);
     z-index: 1;
   }
+`;
+
+export const FlavorCardContainer = styled.div`
+  margin: 20px;
 `;

@@ -25,6 +25,7 @@ const PairingItem = ({
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
 
@@ -65,10 +66,17 @@ const PairingItem = ({
   const handleDeletePairing = () => {
     onDeletePairing(pairing._id);
     setShowDeletePopup(false);
+    setShowSuccessMessage(true);
+    setTimeout(() => {
+      setShowSuccessMessage(false);
+    }, 3000);
   };
 
   return (
     <Card>
+      {showSuccessMessage && (
+        <SuccessMessage>Pairing successfully deleted!</SuccessMessage>
+      )}
       <ImageWrapper>
         <StyledImage
           src={pairing.imgUrl}
@@ -155,6 +163,17 @@ const PairingItem = ({
 };
 
 export default PairingItem;
+
+const SuccessMessage = styled.div`
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+  z-index: 2000;
+`;
 
 const CardFooter = styled.div`
   display: flex;
