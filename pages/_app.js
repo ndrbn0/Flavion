@@ -5,6 +5,7 @@ import pairingsData from "../assets/pairings.json";
 import Navigation from "@/components/Navigation";
 import SearchComponent from "@/components/SearchComponent";
 import { nanoid } from "nanoid";
+import { useState } from "react";
 
 export default function App({ Component, pageProps }) {
   const [ingredients, setIngredients] = useLocalStorageState("ingredients", {
@@ -24,6 +25,9 @@ export default function App({ Component, pageProps }) {
       comments: [],
     })),
   });
+
+  const [showCommentPopup, setShowCommentPopup] = useState(false);
+  const [currentPairingId, setCurrentPairingId] = useState(null);
 
   function handleAddComment(pairingId, newComment) {
     setPairingsInfo(
@@ -147,6 +151,10 @@ export default function App({ Component, pageProps }) {
         handleAddComment={handleAddComment}
         handleEditComment={handleEditComment}
         handleDeleteComment={handleDeleteComment}
+        showCommentPopup={showCommentPopup}
+        setShowCommentPopup={setShowCommentPopup}
+        currentPairingId={currentPairingId}
+        setCurrentPairingId={setCurrentPairingId}
       />
       <Navigation />
     </>

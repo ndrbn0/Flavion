@@ -11,9 +11,11 @@ const PairingsList = ({
   handleAddComment,
   handleEditComment,
   handleDeleteComment,
+  setShowCommentPopup,
+  showCommentPopup,
+  setCurrentPairingId,
+  currentPairingId,
 }) => {
-  const [showCommentPopup, setShowCommentPopup] = useState(false);
-  const [currentPairingId, setCurrentPairingId] = useState(null);
   const [editCommentId, setEditCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
 
