@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
     defaultValue: ingredientsData,
   });
 
-  const [favorites, setFavorites] = useLocalStorageState("favorite", {
+  const [favorites, setFavorites] = useLocalStorageState("favorites", {
     defaultValue: [],
   });
   const [pairings, setPairings] = useLocalStorageState("parings", {
@@ -64,6 +64,9 @@ export default function App({ Component, pageProps }) {
       })
     );
   }
+  const [comments, setComments] = useLocalStorageState("comments", {
+    defaultValue: [],
+  });
 
   function handleDeleteComment(pairingId, commentId) {
     setPairingsInfo(
@@ -133,6 +136,21 @@ export default function App({ Component, pageProps }) {
     setPairingsInfo(updatedPairingsInfo);
   };
 
+  const deletePairing = (id) => {
+    const updatedPairings = pairings.filter((pairing) => pairing._id !== id);
+    setPairings(updatedPairings);
+  };
+
+  const addNewPairing = (newPairing) => {
+    const pairingWithId = {
+      ...newPairing,
+      _id: nanoid(),
+      rating: 0,
+      totalRatings: 0,
+    };
+    setPairings((prevPairings) => [pairingWithId, ...prevPairings]);
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -155,6 +173,11 @@ export default function App({ Component, pageProps }) {
         setShowCommentPopup={setShowCommentPopup}
         currentPairingId={currentPairingId}
         setCurrentPairingId={setCurrentPairingId}
+        comments={comments}
+        updatePairingRating={updatePairingRating}
+        onDeletePairing={deletePairing}
+        onAddPairing={addNewPairing}
+
       />
       <Navigation />
     </>

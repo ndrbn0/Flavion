@@ -8,6 +8,7 @@ import {
   CardFooter,
   FavoriteButton,
   Card,
+  FlavorCardContainer,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 
@@ -33,9 +34,11 @@ const IngredientItem = ({ ingredient, toggleFavorite, isFavorite }) => {
         <br />
       </StyledContent>
       <CardFooter>
-        <Flavor $color={flavorColors[ingredient.flavor]}>
-          #{ingredient.flavor}
-        </Flavor>
+        <FlavorCardContainer>
+          <Flavor $color={flavorColors[ingredient.flavor]}>
+            #{ingredient.flavor}
+          </Flavor>
+        </FlavorCardContainer>
       </CardFooter>
     </Card>
   );

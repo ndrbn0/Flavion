@@ -116,7 +116,7 @@ export const List = styled.ul`
   justify-content: center;
 `;
 
-export const StyledListItem = styled(Link)`
+export const IngredientDetailsLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 `;
@@ -126,7 +126,7 @@ export const Card = styled.li`
   text-decoration: none;
   color: inherit;
   width: 300px;
-  height: 440px;
+  height: 460px;
   margin: 20px;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -143,7 +143,7 @@ export const Card = styled.li`
       var(--Theme-colors-ui-4, rgba(255, 255, 255, 0.82)) 100%
     ),
     var(--Primary-primary, #153f52);
-  padding: 0px 10px 10px 10px;
+  padding: 0px 0px 0px 0px;
   background: linear-gradient(
       0deg,
       var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
@@ -159,11 +159,10 @@ export const Card = styled.li`
 
 export const CardFooter = styled.div`
   display: flex;
-  padding: 8px 12px 12px 8px;
-  justify-content: flex-end;
+  padding: 0;
+  justify-content: space-evenly;
   align-items: center;
   gap: 8px;
-  align-self: stretch;
 `;
 
 export const DetailsCard = styled.div`
@@ -473,14 +472,28 @@ export const FavoriteButton = styled.button`
   margin-top: 15px;
   background-color: ${({ $isFavorite }) => ($isFavorite ? "#dc3545" : "#007bff")};
   color: white;
+  position: absolute;
+  margin-left: 80%;
+  margin-top: -20px;
+  background-color: ${({ isFavorite }) =>
+    isFavorite ? "#dc3545" : "transparent"};
+  color: gold;
   border: none;
+  padding: 20px 5px 5px 5px;
+  background-color: white;
   border-radius: 15px;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
+  font-size: 2rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 
   &:hover {
     background-color: ${({ $isFavorite }) =>
       $isFavorite ? "#a71d2a" : "#0056b3"};
+    transform: scale(1.1);
+    z-index: 1;
   }
+`;
+
+export const FlavorCardContainer = styled.div`
+  margin: 20px;
 `;

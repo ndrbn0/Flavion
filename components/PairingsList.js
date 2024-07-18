@@ -15,6 +15,9 @@ const PairingsList = ({
   showCommentPopup,
   setCurrentPairingId,
   currentPairingId,
+  onDeletePairing,
+  ingredients,
+
 }) => {
   const [editCommentId, setEditCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
@@ -45,7 +48,6 @@ const PairingsList = ({
 
   return (
     <>
-      <Title>Pairings</Title>
       <Container>
         <StyledList>
           {pairings.map((pairing) => (
@@ -67,6 +69,9 @@ const PairingsList = ({
                   )._id
                 );
               }}
+
+              onDeletePairing={onDeletePairing}
+              ingredients={ingredients}
             />
           ))}
         </StyledList>

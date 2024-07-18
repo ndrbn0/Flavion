@@ -3,6 +3,8 @@ import PairingItem from "@/components/PairingItem";
 import IngredientItem from "@/components/IngredientItem";
 import NewCommentForm from "@/components/NewCommentForm";
 import { useState } from "react";
+import Link from "next/link";
+import { IngredientDetailsLink } from "@/_styles";
 
 const FavoritesPage = ({
   favorites,
@@ -19,6 +21,7 @@ const FavoritesPage = ({
   handleEditComment,
   handleDeleteComment,
   handleAddComment,
+  onDeletePairing,
 }) => {
   const [editCommentId, setEditCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
@@ -62,42 +65,23 @@ const FavoritesPage = ({
   return (
     <Container>
       <Title>Favorites</Title>
-      <StyledList>
-        {favoriteIngredients.length > 0 ? (
-          favoriteIngredients.map((ingredient) => (
-            <IngredientItem
-              key={ingredient._id}
-              ingredient={ingredient}
-              isFavorite={
-                favorites.find((favorite) => favorite._id === ingredient._id)
-                  ?.isFavorite
-              }
-              toggleFavorite={toggleFavorite}
-              updatePairingRating={updatePairingRating}
-            />
-          ))
-        ) : (
-          <NoFavoritesMessage>
-            You have no favorite ingredients yet.
-          </NoFavoritesMessage>
-        )}
-
-        {favoritePairings.length > 0 ? (
-          favoritePairings.map((favorite) => {
-            const pairing = pairings.find(
-              (pairing) => pairing._id === favorite._id
-            );
-            if (pairing) {
-              return (
-                <PairingItem
-                  key={pairing._id}
-                  pairing={pairing}
-                  toggleFavoritePairing={toggleFavoritePairing}
+      <IngredientContainer>
+        <Subtitle>Favorite Ingredients</Subtitle>
+        <StyledList>
+          {favoriteIngredients.length > 0 ? (
+            favoriteIngredients.map((ingredient) => (
+              <IngredientDetailsLink
+                key={ingredient._id}
+                href={`/ingredient/${ingredient._id}`}
+              >
+                <IngredientItem
+                  ingredient={ingredient}
                   isFavorite={
-                    pairingsInfo.find(
-                      (pairingInfo) => pairingInfo._id === pairing._id
+                    favorites.find(
+                      (favorite) => favorite._id === ingredient._id
                     )?.isFavorite
                   }
+                  toggleFavorite={toggleFavorite}
                   updatePairingRating={updatePairingRating}
                   setShow={setShowCommentPopup}
                   onCommentButtonClick={() => {
@@ -107,8 +91,26 @@ const FavoritesPage = ({
                       )._id
                     );
                   }}
+                  onDeletePairing={onDeletePairing}
                 />
+              </IngredientDetailsLink>
+            ))
+          ) : (
+            <NoFavoritesMessage>
+              You have no favorite ingredients yet.
+            </NoFavoritesMessage>
+          )}
+        </StyledList>
+      </IngredientContainer>
+      <PairingContainer>
+        <Subtitle>Favorite Pairings</Subtitle>
+        <StyledList>
+          {favoritePairings.length > 0 ? (
+            favoritePairings.map((favorite) => {
+              const pairing = pairings.find(
+                (pairing) => pairing._id === favorite._id
               );
+
             }
             return null;
           })
@@ -176,6 +178,32 @@ const FavoritesPage = ({
           </Popup>
         </Overlay>
       )}
+              if (pairing) {
+                return (
+                  <PairingItem
+                    key={pairing._id}
+                    pairing={pairing}
+                    toggleFavoritePairing={toggleFavoritePairing}
+                    isFavorite={
+                      pairingsInfo.find(
+                        (pairingInfo) => pairingInfo._id === pairing._id
+                      )?.isFavorite
+                    }
+                    updatePairingRating={updatePairingRating}
+                    ingredients={ingredients}
+                    onDeletePairing={onDeletePairing}
+                  />
+                );
+              }
+              return null;
+            })
+          ) : (
+            <NoFavoritesMessage>
+              You have no favorite pairings yet.
+            </NoFavoritesMessage>
+          )}
+        </StyledList>
+      </PairingContainer>
     </Container>
   );
 };
@@ -193,7 +221,6 @@ const Container = styled.div`
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
     0px 1px 2px 0px rgba(0, 0, 0, 0.06);
   display: flex;
-  min-width: 220px;
   flex-direction: column;
   align-items: center;
   padding: 8px;
@@ -210,7 +237,6 @@ const StyledList = styled.ul`
   overflow: hidden;
   position: relative;
   align-self: stretch;
-  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -230,6 +256,11 @@ const Title = styled.h1`
     var(--Primary-primary, #0d1f28);
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
     0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+`;
+
+const Subtitle = styled.h2`
+  text-align: center;
+  margin-bottom: 10px;
 `;
 
 const NoFavoritesMessage = styled.p`
@@ -315,4 +346,13 @@ const TextArea = styled.textarea`
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
   }
+
+const IngredientContainer = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
+`;
+
+const PairingContainer = styled.div`
+  width: 100%;
+  margin-bottom: 20px;
 `;

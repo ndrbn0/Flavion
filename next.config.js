@@ -32,6 +32,7 @@ const nextConfig = {
       "cdn3.delicesdeselena.com",
       "falasteenifoodie.com",
       "www.sidechef.com",
+      "herayspice.com",
     ],
   },
 };
