@@ -67,23 +67,26 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
             <Form onSubmit={handleSubmit}>
               <Headline>Create New Pairing</Headline>
               <FormField>
-                <Label htmlFor="ingredients" id="ingredients">
-                  Select Ingredients:
-                </Label>
-                <Multiselect>
-                  {ingredients.map((ingredient) => (
-                    <CheckboxLabel key={ingredient._id}>
-                      <Checkbox
-                        type="checkbox"
-                        onChange={() => handleIngredientToggle(ingredient)}
-                        checked={selectedIngredients.some(
-                          (ing) => ing._id === ingredient._id
-                        )}
-                      />
-                      {ingredient.name}
-                    </CheckboxLabel>
-                  ))}
-                </Multiselect>
+                <fieldset>
+                  <Label htmlFor="ingredients" id="ingredients">
+                    Select Ingredients:
+                  </Label>
+                  <Multiselect>
+                    {ingredients.map((ingredient) => (
+                      <CheckboxLabel key={ingredient._id}>
+                        <Checkbox
+                          type="checkbox"
+                          onChange={() => handleIngredientToggle(ingredient)}
+                          checked={selectedIngredients.some(
+                            (ing) => ing._id === ingredient._id
+                          )}
+                          id={`ingredient-${ingredient._id}`}
+                        />
+                        {ingredient.name}
+                      </CheckboxLabel>
+                    ))}
+                  </Multiselect>
+                </fieldset>
               </FormField>
               <FormField>
                 <Label htmlFor="reason">Reason for Pairing:</Label>
@@ -96,10 +99,9 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
                 />
               </FormField>
               <FormField>
-                <Label htmlFor="imageUrl" id="imageUrl">
-                  Image URL:
-                </Label>
+                <Label htmlFor="imageUrl">Image URL:</Label>
                 <Input
+                  id="imageUrl"
                   type="text"
                   value={imgUrl}
                   onChange={(event) => setImgUrl(event.target.value)}
@@ -118,7 +120,7 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
 
 export default NewPairingForm;
 
-const Headline = styled.h2`
+const Headline = styled.legend`
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
