@@ -4,7 +4,6 @@ import IngredientItem from "@/components/IngredientItem";
 import Link from "next/link";
 import { IngredientDetailsLink } from "@/_styles";
 
-
 const FavoritesPage = ({
   favorites,
   toggleFavorite,
@@ -80,6 +79,7 @@ const FavoritesPage = ({
                     }
                     updatePairingRating={updatePairingRating}
                     ingredients={ingredients}
+                    onDeletePairing={onDeletePairing}
                   />
                 );
               }
