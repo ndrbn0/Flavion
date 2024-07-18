@@ -1,6 +1,3 @@
-
-
-import { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   Card,
@@ -9,14 +6,12 @@ import {
   ImageWrapper,
   StyledImage,
   StyledContent,
+  Flavors,
+  CardFooter,
   FavoriteButton,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 import ingredientsData from "@/assets/ingredients.json";
-import CommentPopup from "@/components/CommentPopup";
-import StarRating from "./RatingStar";
-
-
 const PairingItem = ({
   pairing,
   setShow,
@@ -27,76 +22,8 @@ const PairingItem = ({
   const ingredientData = pairing.ingredients.map((id) =>
     ingredientsData.find((ing) => ing._id === id)
   );
-
-  updatePairingRating,
-  onDeletePairing,
-  ingredients,
-}) => {
-  const [showCommentPopup, setShowCommentPopup] = useState(false);
-  const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [comments, setComments] = useState([]);
-  const [editingComment, setEditingComment] = useState(null);
-  const [ingredientDetails, setIngredientDetails] = useState([]);
-
-  useEffect(() => {
-    if (
-      pairing &&
-      pairing.ingredients &&
-      Array.isArray(pairing.ingredients) &&
-      ingredients
-    ) {
-      const ingredientsList = pairing.ingredients
-        .map((id) => ingredients.find((ing) => ing._id === id))
-        .filter((ingredient) => ingredient);
-      setIngredientDetails(ingredientsList);
-    }
-  }, [pairing, ingredients]);
-
-  const handleCommentSubmit = (commentText, commentId) => {
-    if (commentId) {
-      const updatedComments = comments.map((comment) =>
-        comment.id === commentId ? { ...comment, text: commentText } : comment
-      );
-      setComments(updatedComments);
-    } else {
-      setComments([...comments, { id: nanoid(), text: commentText }]);
-    }
-    setShowCommentPopup(false);
-    setEditingComment(null);
-  };
-
-  const handleEdit = (commentId) => {
-    const commentToEdit = comments.find((comment) => comment.id === commentId);
-    if (commentToEdit) {
-      setEditingComment(commentToEdit);
-      setShowCommentPopup(true);
-    }
-  };
-
-  const handleDeleteComment = (commentId) => {
-    const updatedComments = comments.filter(
-      (comment) => comment.id !== commentId
-    );
-    setComments(updatedComments);
-    setShowCommentPopup(false);
-  };
-
-
-  const handleDeletePairing = () => {
-    onDeletePairing(pairing._id);
-    setShowDeletePopup(false);
-    setShowSuccessMessage(true);
-    setTimeout(() => {
-      setShowSuccessMessage(false);
-    }, 3000);
-  };
-
   return (
     <Card>
-      {showSuccessMessage && (
-        <SuccessMessage>Pairing successfully deleted!</SuccessMessage>
-      )}
       <ImageWrapper>
         <StyledImage
           src={pairing.imgUrl}
@@ -135,77 +62,10 @@ const PairingItem = ({
           💬
         </CommentEmoji>
       </CardFooter>
-        <ul>
-          <Ingredients>
-            {ingredientDetails.map((ingredient) => (
-              <Ingredient key={ingredient._id}>{ingredient.name}</Ingredient>
-            ))}
-          </Ingredients>
-        </ul>
-        <Reason>{pairing.reason}</Reason>
-      </StyledContent>
-      <CardFooter>
-        <FlavorContainer>
-          {ingredientDetails.map((ingredient) => (
-            <Flavors
-              $color={flavorColors[ingredient.flavor]}
-              key={ingredient._id}
-            >
-              #{ingredient.flavor}
-            </Flavors>
-          ))}
-        </FlavorContainer>
-        <FooterActions>
-          <StarRating
-            rating={pairing.rating || 0}
-            id={pairing._id}
-            updatePairingRating={updatePairingRating}
-          />
-          <CommentEmoji onClick={() => setShowCommentPopup(true)}>
-            💬
-          </CommentEmoji>
-          <DeleteButton onClick={() => setShowDeletePopup(true)}>
-            🗑️
-          </DeleteButton>
-        </FooterActions>
-      </CardFooter>
-      <CommentPopup
-        show={showCommentPopup}
-        onClose={() => {
-          setShowCommentPopup(false);
-          setEditingComment(null);
-        }}
-        onSubmit={handleCommentSubmit}
-        commentToEdit={editingComment}
-        onDelete={handleDeleteComment}
-      />
-      {showDeletePopup && (
-        <DeletePopup>
-          <DeleteMessage>
-            Are you sure you want to delete this pairing?
-          </DeleteMessage>
-          <ButtonGroup>
-            <ConfirmButton onClick={handleDeletePairing}>Yes</ConfirmButton>
-            <CancelButton onClick={() => setShowDeletePopup(false)}>
-              No
-            </CancelButton>
-          </ButtonGroup>
-        </DeletePopup>
-      )}
-      <Comments>
-        {comments.map((comment) => (
-          <Comment key={comment.id}>
-            {comment.text}
-            <EditButton onClick={() => handleEdit(comment.id)}>Edit</EditButton>
-          </Comment>
-        ))}
-      </Comments>
     </Card>
   );
 };
-
 export default PairingItem;
-
 const SuccessMessage = styled.div`
   background-color: #d4edda;
   color: #155724;
@@ -217,29 +77,10 @@ const SuccessMessage = styled.div`
   z-index: 2000;
 `;
 
-const CardFooter = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 10px;
-  border-top: 1px solid #e0e0e0;
-  background: #f9f9f9;
-`;
-
 const FlavorContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 10px;
-`;
-
-const Flavors = styled.span`
-  background-color: ${(props) => props.$color || "#ccc"};
-  color: #fff;
-  border-radius: 8px;
-  padding: 4px 8px;
-  margin: 4px 4px 0 0;
-  font-size: 12px;
-  white-space: nowrap;
 `;
 
 const FooterActions = styled.div`

@@ -110,16 +110,40 @@ const FavoritesPage = ({
               const pairing = pairings.find(
                 (pairing) => pairing._id === favorite._id
               );
-
-            }
-            return null;
-          })
-        ) : (
-          <NoFavoritesMessage>
-            You have no favorite pairings yet.
-          </NoFavoritesMessage>
-        )}
-      </StyledList>
+              if (pairing) {
+                return (
+                  <PairingItem
+                    key={pairing._id}
+                    pairing={pairing}
+                    toggleFavoritePairing={toggleFavoritePairing}
+                    isFavorite={
+                      pairingsInfo.find(
+                        (pairingInfo) => pairingInfo._id === pairing._id
+                      )?.isFavorite
+                    }
+                    updatePairingRating={updatePairingRating}
+                    ingredients={ingredients}
+                    onDeletePairing={onDeletePairing}
+                    setShow={setShowCommentPopup}
+                    onCommentButtonClick={() => {
+                      setCurrentPairingId(
+                        pairingsInfo.find(
+                          (pairingInfo) => pairingInfo._id === pairing._id
+                        )._id
+                      );
+                    }}
+                  />
+                );
+              }
+              return null;
+            })
+          ) : (
+            <NoFavoritesMessage>
+              You have no favorite pairings yet.
+            </NoFavoritesMessage>
+          )}
+        </StyledList>
+      </PairingContainer>
       {showCommentPopup && (
         <Overlay
           onClick={(event) => {
@@ -178,32 +202,6 @@ const FavoritesPage = ({
           </Popup>
         </Overlay>
       )}
-              if (pairing) {
-                return (
-                  <PairingItem
-                    key={pairing._id}
-                    pairing={pairing}
-                    toggleFavoritePairing={toggleFavoritePairing}
-                    isFavorite={
-                      pairingsInfo.find(
-                        (pairingInfo) => pairingInfo._id === pairing._id
-                      )?.isFavorite
-                    }
-                    updatePairingRating={updatePairingRating}
-                    ingredients={ingredients}
-                    onDeletePairing={onDeletePairing}
-                  />
-                );
-              }
-              return null;
-            })
-          ) : (
-            <NoFavoritesMessage>
-              You have no favorite pairings yet.
-            </NoFavoritesMessage>
-          )}
-        </StyledList>
-      </PairingContainer>
     </Container>
   );
 };
@@ -267,6 +265,7 @@ const NoFavoritesMessage = styled.p`
   text-align: center;
   margin: 20px;
 `;
+
 const Overlay = styled.aside`
   position: fixed;
   top: 0;
@@ -278,6 +277,7 @@ const Overlay = styled.aside`
   justify-content: center;
   align-items: center;
 `;
+
 const Popup = styled.section`
   background: #fff;
   padding: 20px;
@@ -286,6 +286,7 @@ const Popup = styled.section`
   max-width: 90%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
+
 const CommentsList = styled.ul`
   margin-top: 20px;
 `;
@@ -301,6 +302,7 @@ const Comment = styled.li`
 const CommentText = styled.p`
   margin: 0;
 `;
+
 const EditButton = styled.button`
   background: #fff;
   color: rgb(156, 156, 156);
@@ -323,6 +325,7 @@ const SaveButton = styled.button`
     background: #0056b3;
   }
 `;
+
 const DeleteButton = styled.button`
   background: #fff;
   color: rgb(156, 156, 156);
@@ -346,6 +349,7 @@ const TextArea = styled.textarea`
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
   }
+`;
 
 const IngredientContainer = styled.div`
   width: 100%;

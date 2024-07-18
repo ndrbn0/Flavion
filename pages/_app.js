@@ -15,9 +15,26 @@ export default function App({ Component, pageProps }) {
   const [favorites, setFavorites] = useLocalStorageState("favorites", {
     defaultValue: [],
   });
+
   const [pairings, setPairings] = useLocalStorageState("parings", {
     defaultValue: pairingsData,
   });
+
+  const updatePairingRating = (_id, newRating) => {
+    const updatedPairings = pairings.map((pairing) =>
+      pairing._id === _id
+        ? {
+            ...pairing,
+            totalRatings: pairing.totalRatings + 1,
+            rating:
+              (pairing.rating * pairing.totalRatings + newRating) /
+              (pairing.totalRatings + 1),
+          }
+        : pairing
+    );
+    setPairings(updatedPairings);
+  };
+
   const [pairingsInfo, setPairingsInfo] = useLocalStorageState("pairingsInfo", {
     defaultValue: pairingsData.map((pairing) => ({
       ...pairing,
@@ -177,7 +194,6 @@ export default function App({ Component, pageProps }) {
         updatePairingRating={updatePairingRating}
         onDeletePairing={deletePairing}
         onAddPairing={addNewPairing}
-
       />
       <Navigation />
     </>
