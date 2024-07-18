@@ -116,7 +116,7 @@ export const List = styled.ul`
   justify-content: center;
 `;
 
-export const StyledListItem = styled(Link)`
+export const IngredientDetailsLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 `;
@@ -159,11 +159,10 @@ export const Card = styled.li`
 
 export const CardFooter = styled.div`
   display: flex;
-  padding: 8px 12px 12px 8px;
-  justify-content: flex-end;
+  padding: 0;
+  justify-content: space-evenly;
   align-items: center;
   gap: 8px;
-  align-self: stretch;
 `;
 
 export const DetailsCard = styled.div`

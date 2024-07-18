@@ -5,7 +5,7 @@ import NewIngredientForm from "@/components/NewIngredientForm";
 import {
   Container,
   List,
-  StyledListItem,
+  IngredientDetailsLink,
   FilterContainer,
   FilterButton,
   NoMatchMessage,
@@ -54,7 +54,7 @@ const IngredientsList = ({
         {filteredIngredients.length > 0 ? (
           <List>
             {filteredIngredients.map((ingredient) => (
-              <StyledListItem
+              <IngredientDetailsLink
                 key={ingredient._id}
                 href={`/ingredient/${ingredient._id}`}
               >
@@ -69,7 +69,7 @@ const IngredientsList = ({
                   }
                   comments={comments}
                 />
-              </StyledListItem>
+              </IngredientDetailsLink>
             ))}
           </List>
         ) : (

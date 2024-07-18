@@ -109,6 +109,15 @@ export default function App({ Component, pageProps }) {
   const deletePairing = (id) => {
     const updatedPairings = pairings.filter((pairing) => pairing._id !== id);
     setPairings(updatedPairings);
+    
+  const addNewPairing = (newPairing) => {
+    const pairingWithId = {
+      ...newPairing,
+      _id: nanoid(),
+      rating: 0,
+      totalRatings: 0,
+    };
+    setPairings((prevPairings) => [pairingWithId, ...prevPairings]);
   };
 
   return (
@@ -129,6 +138,7 @@ export default function App({ Component, pageProps }) {
         comments={comments}
         updatePairingRating={updatePairingRating}
         onDeletePairing={deletePairing}
+        onAddPairing={addNewPairing}
       />
       <Navigation />
     </>

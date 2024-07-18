@@ -69,6 +69,7 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
                   value={imgUrl}
                   onChange={(event) => setImgUrl(event.target.value)}
                   placeholder="Enter image URL"
+                  alt="imgPlaceholder"
                 />
               </FormField>
               <SubmitButton type="submit">Submit</SubmitButton>
