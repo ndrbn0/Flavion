@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 import {
@@ -14,7 +14,6 @@ import {
   Ingredient,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
-import ingredientsData from "@/assets/ingredients.json";
 import CommentPopup from "@/components/CommentPopup";
 import StarRating from "./RatingStar";
 
@@ -23,15 +22,27 @@ const PairingItem = ({
   toggleFavoritePairing,
   isFavorite,
   updatePairingRating,
+  ingredients,
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
 
-  const ingredients = pairing.ingredients.map((id) => {
-    const ingredient = ingredientsData.find((ing) => ing._id === id);
-    return ingredient;
-  });
+  const [ingredientDetails, setIngredientDetails] = useState([]);
+
+  useEffect(() => {
+    if (
+      pairing &&
+      pairing.ingredients &&
+      Array.isArray(pairing.ingredients) &&
+      ingredients
+    ) {
+      const ingredientsList = pairing.ingredients
+        .map((id) => ingredients.find((ing) => ing._id === id))
+        .filter((ingredient) => ingredient);
+      setIngredientDetails(ingredientsList);
+    }
+  }, [pairing, ingredients]);
 
   const handleCommentSubmit = (commentText, commentId) => {
     if (commentId) {
@@ -78,26 +89,22 @@ const PairingItem = ({
       <StyledContent>
         <ul>
           <Ingredients>
-            {ingredients.map((ingredient) => {
-              return (
-                <Ingredient key={ingredient._id}>{ingredient.name}</Ingredient>
-              );
-            })}
+            {ingredientDetails.map((ingredient) => (
+              <Ingredient key={ingredient._id}>{ingredient.name}</Ingredient>
+            ))}
           </Ingredients>
         </ul>
         <Reason>{pairing.reason}</Reason>
       </StyledContent>
       <CardFooter>
-        {ingredients.map((ingredient) => {
-          return (
-            <Flavors
-              $color={flavorColors[ingredient.flavor]}
-              key={ingredient._id}
-            >
-              #{ingredient.flavor}
-            </Flavors>
-          );
-        })}
+        {ingredientDetails.map((ingredient) => (
+          <Flavors
+            $color={flavorColors[ingredient.flavor]}
+            key={ingredient._id}
+          >
+            #{ingredient.flavor}
+          </Flavors>
+        ))}
         <CommentEmoji onClick={() => setShowCommentPopup(true)}>
           💬
         </CommentEmoji>

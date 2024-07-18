@@ -106,6 +106,16 @@ export default function App({ Component, pageProps }) {
     setPairings(updatedPairings);
   };
 
+  const addNewPairing = (newPairing) => {
+    const pairingWithId = {
+      ...newPairing,
+      _id: nanoid(),
+      rating: 0,
+      totalRatings: 0,
+    };
+    setPairings((prevPairings) => [pairingWithId, ...prevPairings]);
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -123,6 +133,7 @@ export default function App({ Component, pageProps }) {
         pairingsInfo={pairingsInfo}
         comments={comments}
         updatePairingRating={updatePairingRating}
+        onAddPairing={addNewPairing}
       />
       <Navigation />
     </>
