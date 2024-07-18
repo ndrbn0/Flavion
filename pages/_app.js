@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }) {
     defaultValue: ingredientsData,
   });
 
-  const [favorites, setFavorites] = useLocalStorageState("favorite", {
+  const [favorites, setFavorites] = useLocalStorageState("favorites", {
     defaultValue: [],
   });
 
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }) {
     defaultValue: [],
   });
 
-  const [comments, setComments] = useLocalStorageState("comment", {
+  const [comments, setComments] = useLocalStorageState("comments", {
     defaultValue: [],
   });
 
@@ -145,3 +145,4 @@ export default function App({ Component, pageProps }) {
     );
   };
 }
+// actual

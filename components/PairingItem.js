@@ -28,7 +28,6 @@ const PairingItem = ({
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [comments, setComments] = useState([]);
   const [editingComment, setEditingComment] = useState(null);
-
   const [ingredientDetails, setIngredientDetails] = useState([]);
 
   useEffect(() => {
@@ -111,16 +110,14 @@ const PairingItem = ({
       </StyledContent>
       <CardFooter>
         <FlavorContainer>
-          {ingredients.map((ingredient) => {
-            return (
-              <Flavors
-                $color={flavorColors[ingredient.flavor]}
-                key={ingredient._id}
-              >
-                #{ingredient.flavor}
-              </Flavors>
-            );
-          })}
+          {ingredientDetails.map((ingredient) => (
+            <Flavors
+              $color={flavorColors[ingredient.flavor]}
+              key={ingredient._id}
+            >
+              #{ingredient.flavor}
+            </Flavors>
+          ))}
         </FlavorContainer>
         <FooterActions>
           <StarRating
@@ -135,23 +132,6 @@ const PairingItem = ({
             🗑️
           </DeleteButton>
         </FooterActions>
-
-        {ingredientDetails.map((ingredient) => (
-          <Flavors
-            $color={flavorColors[ingredient.flavor]}
-            key={ingredient._id}
-          >
-            #{ingredient.flavor}
-          </Flavors>
-        ))}
-        <CommentEmoji onClick={() => setShowCommentPopup(true)}>
-          💬
-        </CommentEmoji>
-        <StarRating
-          rating={pairing.rating || 0}
-          id={pairing._id}
-          updatePairingRating={updatePairingRating}
-        />
       </CardFooter>
       <CommentPopup
         show={showCommentPopup}

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import PairingsList from "@/components/PairingsList";
 import NewPairingForm from "@/components/NewPairingForm";
-
+// all works
 const PairingsPage = ({
   toggleFavoritePairing,
   pairingsInfo,
