@@ -116,7 +116,7 @@ export const List = styled.ul`
   justify-content: center;
 `;
 
-export const StyledListItem = styled(Link)`
+export const IngredientDetailsLink = styled(Link)`
   text-decoration: none;
   color: inherit;
 `;
