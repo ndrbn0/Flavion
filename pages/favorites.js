@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PairingItem from "@/components/PairingItem";
 import IngredientItem from "@/components/IngredientItem";
+import Link from "next/link";
 import { IngredientDetailsLink } from "@/_styles";
 
 const FavoritesPage = ({
@@ -11,6 +12,7 @@ const FavoritesPage = ({
   pairingsInfo,
   pairings,
   updatePairingRating,
+  onDeletePairing,
 }) => {
   const favoriteIngredients = ingredients.filter((ingredient) =>
     favorites.find(
@@ -45,6 +47,7 @@ const FavoritesPage = ({
                   }
                   toggleFavorite={toggleFavorite}
                   updatePairingRating={updatePairingRating}
+                  onDeletePairing={onDeletePairing}
                 />
               </IngredientDetailsLink>
             ))
@@ -76,6 +79,7 @@ const FavoritesPage = ({
                     }
                     updatePairingRating={updatePairingRating}
                     ingredients={ingredients}
+                    onDeletePairing={onDeletePairing}
                   />
                 );
               }

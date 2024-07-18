@@ -7,7 +7,7 @@ const PairingsPage = ({
   pairingsInfo,
   pairings,
   updatePairingRating,
-
+  onDeletePairing,
   onAddPairing,
   addIngredient,
   ingredients,
@@ -23,6 +23,7 @@ const PairingsPage = ({
         toggleFavoritePairing={toggleFavoritePairing}
         pairingsInfo={pairingsInfo}
         updatePairingRating={updatePairingRating}
+        onDeletePairing={onDeletePairing}
         ingredients={ingredients}
         addIngredient={addIngredient}
         deleteIngredient={deleteIngredient}

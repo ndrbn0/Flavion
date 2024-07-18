@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }) {
     defaultValue: ingredientsData,
   });
 
-  const [favorites, setFavorites] = useLocalStorageState("favorite", {
+  const [favorites, setFavorites] = useLocalStorageState("favorites", {
     defaultValue: [],
   });
 
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }) {
     defaultValue: [],
   });
 
-  const [comments, setComments] = useLocalStorageState("comment", {
+  const [comments, setComments] = useLocalStorageState("comments", {
     defaultValue: [],
   });
 
@@ -106,6 +106,11 @@ export default function App({ Component, pageProps }) {
     setPairings(updatedPairings);
   };
 
+  const deletePairing = (id) => {
+    const updatedPairings = pairings.filter((pairing) => pairing._id !== id);
+    setPairings(updatedPairings);
+  };
+
   const addNewPairing = (newPairing) => {
     const pairingWithId = {
       ...newPairing,
@@ -133,6 +138,7 @@ export default function App({ Component, pageProps }) {
         pairingsInfo={pairingsInfo}
         comments={comments}
         updatePairingRating={updatePairingRating}
+        onDeletePairing={deletePairing}
         onAddPairing={addNewPairing}
       />
       <Navigation />
