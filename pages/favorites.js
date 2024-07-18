@@ -38,37 +38,6 @@ const FavoritesPage = ({
               >
                 <IngredientItem
                   ingredient={ingredient}
-      <StyledList>
-        {favoriteIngredients.length > 0 ? (
-          favoriteIngredients.map((ingredient) => (
-            <IngredientItem
-              key={ingredient._id}
-              ingredient={ingredient}
-              isFavorite={
-                favorites.find((favorite) => favorite._id === ingredient._id)
-                  ?.isFavorite
-              }
-              toggleFavorite={toggleFavorite}
-              updatePairingRating={updatePairingRating}
-            />
-          ))
-        ) : (
-          <NoFavoritesMessage>
-            You have no favorite ingredients yet.
-          </NoFavoritesMessage>
-        )}
-
-        {favoritePairings.length > 0 ? (
-          favoritePairings.map((favorite) => {
-            const pairing = pairings.find(
-              (pairing) => pairing._id === favorite._id
-            );
-            if (pairing) {
-              return (
-                <PairingItem
-                  key={pairing._id}
-                  pairing={pairing}
-                  toggleFavoritePairing={toggleFavoritePairing}
                   isFavorite={
                     favorites.find(
                       (favorite) => favorite._id === ingredient._id
@@ -152,7 +121,6 @@ const StyledList = styled.ul`
   overflow: hidden;
   position: relative;
   align-self: stretch;
-  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
