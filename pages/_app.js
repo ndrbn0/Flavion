@@ -43,6 +43,7 @@ export default function App({ Component, pageProps }) {
   });
 
   function handleAddComment(pairingId, newComment) {
+    console.log("Adding comment:", pairingId, newComment);
     setPairingsInfo(
       pairingsInfo.map((pairing) => {
         if (pairingId === pairing._id) {
@@ -61,6 +62,7 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleEditComment(pairingId, commentId, updatedText) {
+    console.log("Editing comment:", pairingId, commentId, updatedText);
     setPairingsInfo(
       pairingsInfo.map((pairing) => {
         if (pairingId === pairing._id) {
@@ -80,6 +82,7 @@ export default function App({ Component, pageProps }) {
   }
 
   function handleDeleteComment(pairingId, commentId) {
+    console.log("Deleting comment:", pairingId, commentId);
     setPairingsInfo(
       pairingsInfo.map((pairing) => {
         if (pairingId === pairing._id) {
@@ -96,12 +99,9 @@ export default function App({ Component, pageProps }) {
     );
   }
 
-  const [comments, setComments] = useLocalStorageState("comments", {
-    defaultValue: [],
-  });
-
   const toggleFavorite = (event, _id) => {
     event.preventDefault();
+    console.log("Toggling favorite for:", _id);
     const favoriteIngredient = favorites.find(
       (ingredient) => ingredient._id === _id
     );
@@ -120,6 +120,7 @@ export default function App({ Component, pageProps }) {
   };
 
   const addIngredient = (newIngredient) => {
+    console.log("Adding ingredient:", newIngredient);
     const updatedIngredients = [
       { _id: nanoid(), ...newIngredient },
       ...ingredients,
@@ -128,6 +129,7 @@ export default function App({ Component, pageProps }) {
   };
 
   const deleteIngredient = (id) => {
+    console.log("Deleting ingredient:", id);
     const updatedIngredients = ingredients.filter(
       (ingredient) => ingredient._id !== id
     );
@@ -135,6 +137,7 @@ export default function App({ Component, pageProps }) {
   };
 
   const updateIngredient = (id, updatedIngredient) => {
+    console.log("Updating ingredient:", id, updatedIngredient);
     const updatedIngredients = ingredients.map((ingredient) =>
       ingredient._id === id
         ? { ...ingredient, ...updatedIngredient }
@@ -144,6 +147,7 @@ export default function App({ Component, pageProps }) {
   };
 
   const toggleFavoritePairing = (_id) => {
+    console.log("Toggling favorite pairing for:", _id);
     const foundPairing = pairingsInfo.find((pairing) => pairing._id === _id);
 
     if (foundPairing) {
@@ -160,6 +164,7 @@ export default function App({ Component, pageProps }) {
   };
 
   const updatePairingRating = (_id, newRating) => {
+    console.log("Updating pairing rating for:", _id, newRating);
     const updatedPairings = pairings.map((pairing) =>
       pairing._id === _id
         ? {
@@ -176,11 +181,13 @@ export default function App({ Component, pageProps }) {
   };
 
   const deletePairing = (id) => {
+    console.log("Deleting pairing:", id);
     const updatedPairings = pairings.filter((pairing) => pairing._id !== id);
     setPairings(updatedPairings);
   };
 
   const addNewPairing = (newPairing) => {
+    console.log("Adding new pairing:", newPairing);
     const pairingWithId = {
       ...newPairing,
       _id: nanoid(),
@@ -190,30 +197,22 @@ export default function App({ Component, pageProps }) {
     setPairings((prevPairings) => [pairingWithId, ...prevPairings]);
   };
 
-  const handleSaveChanges = (pairingId) => {
-    if (editData.reason || editData.imgUrl || editData.ingredients.length) {
-      setPairingsInfo((prevPairingsInfo) =>
-        prevPairingsInfo.map((pairing) =>
-          pairing._id === pairingId
-            ? {
-                ...pairing,
-                ...editData,
-                ingredients: editData.ingredients.length
-                  ? editData.ingredients
-                  : pairing.ingredients,
-              }
-            : pairing
-        )
-      );
-      setEditMode(false);
-    } else {
-      alert("Please provide at least one field to update.");
-    }
-  };
+  function handleEditPairing(updatedPairing, pairingId) {
+    console.log("Editing pairing:", pairingId, updatedPairing);
+    setPairings(
+      pairings.map((pairing) => {
+        if (pairing._id === pairingId) {
+          return { ...pairing, ...updatedPairing };
+        } else {
+          return pairing;
+        }
+      })
+    );
+  }
 
-  const handleEditClick = () => {
-    setEditMode(!editMode);
-  };
+  const [comments, setComments] = useLocalStorageState("comments", {
+    defaultValue: [],
+  });
 
   return (
     <>
@@ -245,7 +244,7 @@ export default function App({ Component, pageProps }) {
         setEditMode={setEditMode}
         editData={editData}
         setEditData={setEditData}
-        handleSaveChanges={handleSaveChanges}
+        handleEditPairing={handleEditPairing}
       />
       <Navigation />
     </>

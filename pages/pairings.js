@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import PairingsList from "@/components/PairingsList";
 import NewPairingForm from "@/components/NewPairingForm";
-// all works
+
 const PairingsPage = ({
   toggleFavoritePairing,
   pairingsInfo,
@@ -20,6 +20,7 @@ const PairingsPage = ({
   setShowCommentPopup,
   currentPairingId,
   setCurrentPairingId,
+  handleEditPairing,
 }) => {
   return (
     <Container>
@@ -42,6 +43,7 @@ const PairingsPage = ({
         setShowCommentPopup={setShowCommentPopup}
         currentPairingId={currentPairingId}
         setCurrentPairingId={setCurrentPairingId}
+        handleEditPairing={handleEditPairing}
       />
     </Container>
   );

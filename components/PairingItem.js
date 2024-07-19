@@ -12,7 +12,6 @@ import {
 } from "@/_styles";
 import { flavorColors } from "@/utils";
 import StarRating from "./RatingStar";
-import EditPairing from "@/components/EditPairing";
 
 const PairingItem = ({
   pairing = {},
@@ -22,18 +21,12 @@ const PairingItem = ({
   isFavorite,
   updatePairingRating,
   onDeletePairing,
-  onUpdatePairing,
+
   ingredients = [],
+  onEditButtonClick = () => {},
 }) => {
-  const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [editData, setEditData] = useState({
-    reason: pairing.reason || "",
-    imgUrl: pairing.imgUrl || "",
-    ingredients: pairing.ingredients || [],
-  });
   const [ingredientDetails, setIngredientDetails] = useState([]);
 
   useEffect(() => {
@@ -48,38 +41,6 @@ const PairingItem = ({
       setIngredientDetails(ingredientsList);
     }
   }, [pairing, ingredients]);
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setEditData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleIngredientChange = (ingredientId) => {
-    setEditData((prevState) => ({
-      ...prevState,
-      ingredients: prevState.ingredients.includes(ingredientId)
-        ? prevState.ingredients.filter((id) => id !== ingredientId)
-        : [...prevState.ingredients, ingredientId],
-    }));
-  };
-
-  const handleSaveChanges = () => {
-    if (editData.reason || editData.imgUrl || editData.ingredients.length) {
-      onUpdatePairing(pairing._id, {
-        ...pairing,
-        ...editData,
-        ingredients: editData.ingredients.length
-          ? editData.ingredients
-          : pairing.ingredients,
-      });
-      setEditModalOpen(false);
-    } else {
-      alert("Please provide at least one field to update.");
-    }
-  };
 
   const handleDeletePairing = () => {
     onDeletePairing(pairing._id);
@@ -141,7 +102,7 @@ const PairingItem = ({
           >
             💬
           </CommentEmoji>
-          <EditButton onClick={() => setEditModalOpen(true)}>✏️</EditButton>
+          <EditButton onClick={() => onEditButtonClick()}>✏️</EditButton>
           <DeleteButton onClick={() => setShowDeletePopup(true)}>
             🗑️
           </DeleteButton>
@@ -161,17 +122,6 @@ const PairingItem = ({
           </ButtonGroup>
         </DeletePopup>
       )}
-
-      {/* Render the EditPairing modal */}
-      <EditPairing
-        isOpen={editModalOpen}
-        onClose={() => setEditModalOpen(false)}
-        editData={editData}
-        onInputChange={handleInputChange}
-        onIngredientChange={handleIngredientChange}
-        onSave={handleSaveChanges}
-        ingredients={ingredients}
-      />
     </Card>
   );
 };

@@ -1,35 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const placeholderImageUrl =
   "https://static.vecteezy.com/system/resources/previews/003/170/825/original/isolated-food-plate-fork-and-spoon-design-free-vector.jpg";
 
-const EditPairing = ({
-  isOpen,
-  onClose,
-  editData,
-  onInputChange,
-  onIngredientChange,
-  onSave,
-  ingredients,
-}) => {
-  const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const [reason, setReason] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
+const EditPairing = ({ isOpen, onClose, editData, onSave, ingredients }) => {
+  console.log(ingredients);
+  console.log(editData);
+  const [selectedIngredients, setSelectedIngredients] = useState(
+    ingredients.filter((ingredient) =>
+      editData.ingredients.includes(ingredient._id)
+    )
+  );
   const [error, setError] = useState("");
-
-  // Initialize form fields if editing an existing pairing
-  useEffect(() => {
-    if (editData) {
-      setSelectedIngredients(
-        ingredients.filter((ingredient) =>
-          editData.ingredients.includes(ingredient._id)
-        )
-      );
-      setReason(editData.reason || "");
-      setImgUrl(editData.imgUrl || "");
-    }
-  }, [editData, ingredients]);
 
   const handleIngredientToggle = (ingredient) => {
     if (selectedIngredients.some((ing) => ing._id === ingredient._id)) {
@@ -48,22 +31,26 @@ const EditPairing = ({
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (selectedIngredients.length < 2 || !reason) {
+    const form = event.target;
+    const formElements = form.elements;
+    const reason = formElements.reason.value;
+    const imgUrl = formElements.imgUrl.value || placeholderImageUrl;
+
+    if (selectedIngredients.length < 2 || !form.elements.reason) {
       setError("Please select at least 2 ingredients and provide a reason.");
       return;
     }
 
     const pairingData = {
       ingredients: selectedIngredients.map((ingredient) => ingredient._id),
-      reason: reason,
-      imgUrl: imgUrl || placeholderImageUrl,
+      reason,
+      imgUrl,
     };
 
     onSave(pairingData);
 
     setSelectedIngredients([]);
-    setReason("");
-    setImgUrl("");
+    form.reset();
     setError("");
     onClose();
   };
@@ -103,9 +90,9 @@ const EditPairing = ({
             <TextArea
               id="reason"
               placeholder="Enter Reason for Pairing"
-              value={reason}
-              onChange={(event) => setReason(event.target.value)}
+              defaultValue={editData.reason || ""}
               required
+              name="reason"
             />
           </FormField>
           <FormField>
@@ -113,8 +100,8 @@ const EditPairing = ({
             <Input
               id="imageUrl"
               type="text"
-              value={imgUrl}
-              onChange={(event) => setImgUrl(event.target.value)}
+              name="imgUrl"
+              defaultValue={editData.imgUrl || ""}
               placeholder="Enter image URL"
             />
           </FormField>
