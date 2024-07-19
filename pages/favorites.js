@@ -40,7 +40,10 @@ const FavoritesPage = ({
 
   const handleDeleteCommentLocal = (pairingId, commentId) => {
     handleDeleteComment(pairingId, commentId);
-    if (comments.length === 1) {
+    const comments = pairingsInfo.find(
+      (pairing) => pairing._id === pairingId
+    )?.comments;
+    if (comments?.length === 1) {
       setShowCommentPopup(false);
       setCurrentPairingId(null);
     }
@@ -49,6 +52,7 @@ const FavoritesPage = ({
   const comments = pairingsInfo.find(
     (pairing) => pairing._id === currentPairingId
   )?.comments;
+
   const favoriteIngredients = ingredients.filter((ingredient) =>
     favorites.find(
       (favorite) => favorite._id === ingredient._id && favorite.isFavorite
@@ -148,7 +152,8 @@ const FavoritesPage = ({
                 onClose={() => setShowCommentPopup(false)}
               />
               <CommentsList>
-                {comments.length > 0 &&
+                {comments &&
+                  comments.length > 0 &&
                   comments.map((comment) => (
                     <Comment key={comment._id}>
                       {editCommentId === comment._id ? (

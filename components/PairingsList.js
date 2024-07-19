@@ -55,6 +55,7 @@ const PairingsList = ({
             <PairingItem
               key={pairing._id}
               pairing={pairing}
+              ingredients={ingredients}
               onRate={onRate}
               updatePairingRating={updatePairingRating}
               toggleFavoritePairing={toggleFavoritePairing}
