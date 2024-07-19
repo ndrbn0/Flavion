@@ -142,7 +142,7 @@ const FavoritesPage = ({
           <Overlay
             onClick={(event) => {
               if (event.target === event.currentTarget) {
-                setShowCommentPopup(!showCommentPopup);
+                setShowCommentPopup(false);
               }
             }}
           >
@@ -271,17 +271,25 @@ const PairingContainer = styled.div`
   width: 100%;
   margin-bottom: 20px;
 `;
+
 const Overlay = styled.aside`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(
+    0,
+    0,
+    0,
+    0.85
+  ); /* Increased opacity for better dimming effect */
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000; /* Ensure it is behind the Popup */
 `;
+
 const Popup = styled.section`
   background: #fff;
   padding: 20px;
@@ -289,7 +297,9 @@ const Popup = styled.section`
   width: 400px;
   max-width: 90%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001; /* Ensure it is on top of the Overlay */
 `;
+
 const CommentsList = styled.ul`
   margin-top: 20px;
 `;
@@ -305,6 +315,7 @@ const Comment = styled.li`
 const CommentText = styled.p`
   margin: 0;
 `;
+
 const EditButton = styled.button`
   background: #fff;
   color: rgb(156, 156, 156);
@@ -327,6 +338,7 @@ const SaveButton = styled.button`
     background: #0056b3;
   }
 `;
+
 const DeleteButton = styled.button`
   background: #fff;
   color: rgb(156, 156, 156);

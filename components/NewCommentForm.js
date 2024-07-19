@@ -28,25 +28,6 @@ const NewCommentForm = ({ onSubmit, onClose }) => {
 };
 export default NewCommentForm;
 
-const Overlay = styled.aside`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-const Popup = styled.section`
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-`;
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -59,6 +40,7 @@ const Title = styled.h2`
   margin: 0;
   font-size: 20px;
 `;
+
 const CloseButton = styled.button`
   background: none;
   border: none;
@@ -69,9 +51,11 @@ const CloseButton = styled.button`
     color: #000;
   }
 `;
+
 const Content = styled.label`
   margin: 20px 0;
 `;
+
 const TextArea = styled.textarea`
   width: 100%;
   height: 100px;
@@ -87,24 +71,13 @@ const TextArea = styled.textarea`
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
   }
 `;
+
 const Footer = styled.section`
   display: flex;
   justify-content: flex-end;
   align-items: center;
 `;
-const DeleteButton = styled.button`
-  background: #dc3545;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-right: 8px;
-  transition: background 0.3s;
-  &:hover {
-    background: #c82333;
-  }
-`;
+
 const SubmitButton = styled.button`
   background: #007bff;
   color: #fff;
@@ -120,17 +93,4 @@ const SubmitButton = styled.button`
   &:hover:not(:disabled) {
     background: #0056b3;
   }
-`;
-const CommentsList = styled.ul`
-  margin-top: 20px;
-`;
-
-const Comment = styled.li`
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-`;
-
-const CommentText = styled.p`
-  margin: 0;
 `;

@@ -65,7 +65,6 @@ const PairingsList = ({
                 )?.isFavorite
               }
               onDeletePairing={onDeletePairing}
-              ingrediesetShow={setShowCommentPopup}
               setShow={setShowCommentPopup}
               onCommentButtonClick={() => {
                 setCurrentPairingId(
@@ -158,21 +157,6 @@ const StyledList = styled.ul`
   justify-content: center;
 `;
 
-const Title = styled.h1`
-  text-align: center;
-  margin-bottom: 20px;
-  border-radius: var(--radius-2xl, 48px);
-  padding: 10px;
-  background: linear-gradient(
-      0deg,
-      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
-      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 100%
-    ),
-    var(--Primary-primary, #0d1f28);
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
-    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
-`;
-
 const Container = styled.div`
   border-radius: var(--radius-md, 24px);
   background: linear-gradient(
@@ -191,17 +175,20 @@ const Container = styled.div`
   gap: 5px;
   margin-bottom: 15%;
 `;
+
 const Overlay = styled.aside`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 `;
+
 const Popup = styled.section`
   background: #fff;
   padding: 20px;
@@ -209,7 +196,9 @@ const Popup = styled.section`
   width: 400px;
   max-width: 90%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
 `;
+
 const CommentsList = styled.ul`
   margin-top: 20px;
 `;
@@ -225,6 +214,7 @@ const Comment = styled.li`
 const CommentText = styled.p`
   margin: 0;
 `;
+
 const EditButton = styled.button`
   background: #fff;
   color: rgb(156, 156, 156);
@@ -247,6 +237,7 @@ const SaveButton = styled.button`
     background: #0056b3;
   }
 `;
+
 const DeleteButton = styled.button`
   background: #fff;
   color: rgb(156, 156, 156);
