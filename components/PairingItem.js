@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { nanoid } from "nanoid";
 import {
   Card,
   Ingredients,
@@ -12,29 +11,33 @@ import {
   Ingredient,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
-import CommentPopup from "@/components/CommentPopup";
 import StarRating from "./RatingStar";
+import EditPairing from "@/components/EditPairing";
 
 const PairingItem = ({
-  pairing,
+  pairing = {},
   setShow,
   onCommentButtonClick,
   toggleFavoritePairing,
   isFavorite,
   updatePairingRating,
   onDeletePairing,
-  ingredients,
+  onUpdatePairing,
+  ingredients = [],
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [comments, setComments] = useState([]);
-  const [editingComment, setEditingComment] = useState(null);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editData, setEditData] = useState({
+    reason: pairing.reason || "",
+    imgUrl: pairing.imgUrl || "",
+    ingredients: pairing.ingredients || [],
+  });
   const [ingredientDetails, setIngredientDetails] = useState([]);
 
   useEffect(() => {
     if (
-      pairing &&
       pairing.ingredients &&
       Array.isArray(pairing.ingredients) &&
       ingredients
@@ -45,6 +48,38 @@ const PairingItem = ({
       setIngredientDetails(ingredientsList);
     }
   }, [pairing, ingredients]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleIngredientChange = (ingredientId) => {
+    setEditData((prevState) => ({
+      ...prevState,
+      ingredients: prevState.ingredients.includes(ingredientId)
+        ? prevState.ingredients.filter((id) => id !== ingredientId)
+        : [...prevState.ingredients, ingredientId],
+    }));
+  };
+
+  const handleSaveChanges = () => {
+    if (editData.reason || editData.imgUrl || editData.ingredients.length) {
+      onUpdatePairing(pairing._id, {
+        ...pairing,
+        ...editData,
+        ingredients: editData.ingredients.length
+          ? editData.ingredients
+          : pairing.ingredients,
+      });
+      setEditModalOpen(false);
+    } else {
+      alert("Please provide at least one field to update.");
+    }
+  };
 
   const handleDeletePairing = () => {
     onDeletePairing(pairing._id);
@@ -62,8 +97,8 @@ const PairingItem = ({
       )}
       <ImageWrapper>
         <StyledImage
-          src={pairing.imgUrl}
-          alt={pairing.reason}
+          src={pairing.imgUrl || ""}
+          alt={pairing.reason || "No description"}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
@@ -79,13 +114,13 @@ const PairingItem = ({
             ))}
           </Ingredients>
         </ul>
-        <Reason>{pairing.reason}</Reason>
+        <Reason>{pairing.reason || "No reason provided"}</Reason>
       </StyledContent>
       <CardFooter>
         <FlavorContainer>
           {ingredientDetails.map((ingredient) => (
             <Flavors
-              $color={flavorColors[ingredient.flavor]}
+              $color={flavorColors[ingredient.flavor] || "#ccc"}
               key={ingredient._id}
             >
               #{ingredient.flavor}
@@ -106,6 +141,7 @@ const PairingItem = ({
           >
             💬
           </CommentEmoji>
+          <EditButton onClick={() => setEditModalOpen(true)}>✏️</EditButton>
           <DeleteButton onClick={() => setShowDeletePopup(true)}>
             🗑️
           </DeleteButton>
@@ -125,6 +161,17 @@ const PairingItem = ({
           </ButtonGroup>
         </DeletePopup>
       )}
+
+      {/* Render the EditPairing modal */}
+      <EditPairing
+        isOpen={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        editData={editData}
+        onInputChange={handleInputChange}
+        onIngredientChange={handleIngredientChange}
+        onSave={handleSaveChanges}
+        ingredients={ingredients}
+      />
     </Card>
   );
 };
@@ -186,18 +233,55 @@ const CommentEmoji = styled.span`
   }
 `;
 
-const Comments = styled.div`
-  padding: 8px;
-  background: #f9f9f9;
+const DeletePopup = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  border: 1px solid #ccc;
   border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 1000;
 `;
 
-const Comment = styled.div`
-  background: #ffffff;
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+const DeleteMessage = styled.p`
+  font-size: 16px;
+  margin-bottom: 20px;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+const ConfirmButton = styled.button`
+  background-color: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #cc0000;
+  }
+`;
+
+const CancelButton = styled.button`
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #bbb;
+  }
 `;
 
 const EditButton = styled.button`
@@ -247,74 +331,5 @@ const DeleteButton = styled.button`
 
   &:active {
     color: #990000;
-  }
-`;
-
-const DeletePopup = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  z-index: 1000;
-`;
-
-const DeleteMessage = styled.p`
-  font-size: 16px;
-  margin-bottom: 20px;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
-
-const ConfirmButton = styled.button`
-  background-color: #ff0000;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #cc0000;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5);
-  }
-
-  &:active {
-    background-color: #990000;
-  }
-`;
-
-const CancelButton = styled.button`
-  background-color: #ccc;
-  color: #333;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #bbb;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(200, 200, 200, 0.5);
-  }
-
-  &:active {
-    background-color: #aaa;
   }
 `;

@@ -23,6 +23,7 @@ export default function App({ Component, pageProps }) {
       totalRatings: 0,
     })),
   });
+
   const [pairingsInfo, setPairingsInfo] = useLocalStorageState("pairingsInfo", {
     defaultValue: pairingsData.map((pairing) => ({
       ...pairing,
@@ -33,6 +34,13 @@ export default function App({ Component, pageProps }) {
 
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [currentPairingId, setCurrentPairingId] = useState(null);
+
+  const [editMode, setEditMode] = useState(false);
+  const [editData, setEditData] = useState({
+    reason: "",
+    imgUrl: "",
+    ingredients: [],
+  });
 
   function handleAddComment(pairingId, newComment) {
     setPairingsInfo(
@@ -51,6 +59,7 @@ export default function App({ Component, pageProps }) {
       })
     );
   }
+
   function handleEditComment(pairingId, commentId, updatedText) {
     setPairingsInfo(
       pairingsInfo.map((pairing) => {
@@ -181,6 +190,31 @@ export default function App({ Component, pageProps }) {
     setPairings((prevPairings) => [pairingWithId, ...prevPairings]);
   };
 
+  const handleSaveChanges = (pairingId) => {
+    if (editData.reason || editData.imgUrl || editData.ingredients.length) {
+      setPairingsInfo((prevPairingsInfo) =>
+        prevPairingsInfo.map((pairing) =>
+          pairing._id === pairingId
+            ? {
+                ...pairing,
+                ...editData,
+                ingredients: editData.ingredients.length
+                  ? editData.ingredients
+                  : pairing.ingredients,
+              }
+            : pairing
+        )
+      );
+      setEditMode(false);
+    } else {
+      alert("Please provide at least one field to update.");
+    }
+  };
+
+  const handleEditClick = () => {
+    setEditMode(!editMode);
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -207,9 +241,13 @@ export default function App({ Component, pageProps }) {
         setShowCommentPopup={setShowCommentPopup}
         currentPairingId={currentPairingId}
         setCurrentPairingId={setCurrentPairingId}
+        editMode={editMode}
+        setEditMode={setEditMode}
+        editData={editData}
+        setEditData={setEditData}
+        handleSaveChanges={handleSaveChanges}
       />
       <Navigation />
     </>
   );
 }
-// actual

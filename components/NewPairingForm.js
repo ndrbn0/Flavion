@@ -1,16 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 
 const placeholderImageUrl =
   "https://static.vecteezy.com/system/resources/previews/003/170/825/original/isolated-food-plate-fork-and-spoon-design-free-vector.jpg";
 
-const NewPairingForm = ({ onAddPairing, ingredients }) => {
+const NewPairingForm = ({
+  onAddPairing,
+  onUpdatePairing,
+  ingredients,
+  existingPairing,
+}) => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [reason, setReason] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState("");
+
+  // Initialize form fields if editing an existing pairing
+  useEffect(() => {
+    if (existingPairing) {
+      setSelectedIngredients(
+        ingredients.filter((ingredient) =>
+          existingPairing.ingredients.includes(ingredient._id)
+        )
+      );
+      setReason(existingPairing.reason);
+      setImgUrl(existingPairing.imgUrl);
+    }
+  }, [existingPairing, ingredients]);
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
@@ -39,17 +57,25 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
       return;
     }
 
-    const newPairing = {
-      _id: nanoid(),
+    const pairingData = {
       ingredients: selectedIngredients.map((ingredient) => ingredient._id),
       reason: reason,
       imgUrl: imgUrl || placeholderImageUrl,
-      rating: 0,
-      comments: [],
-      isFavorite: false,
     };
 
-    onAddPairing(newPairing);
+    if (existingPairing) {
+      onUpdatePairing(existingPairing._id, pairingData);
+    } else {
+      const newPairing = {
+        _id: nanoid(),
+        ...pairingData,
+        rating: 0,
+        comments: [],
+        isFavorite: false,
+      };
+      onAddPairing(newPairing);
+    }
+
     setSelectedIngredients([]);
     setReason("");
     setImgUrl("");
@@ -59,13 +85,17 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
 
   return (
     <>
-      <Button onClick={togglePopup}>Create Pairing</Button>
+      <Button onClick={togglePopup}>
+        {existingPairing ? "Edit Pairing" : "Create Pairing"}
+      </Button>
       {showPopup && (
         <>
           <OverlayBackground onClick={togglePopup} />
           <PopupForm>
             <Form onSubmit={handleSubmit}>
-              <Headline>Create New Pairing</Headline>
+              <Headline>
+                {existingPairing ? "Edit Pairing" : "Create New Pairing"}
+              </Headline>
               <FormField>
                 <fieldset>
                   <Label htmlFor="ingredients" id="ingredients">
