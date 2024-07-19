@@ -17,6 +17,8 @@ import StarRating from "./RatingStar";
 
 const PairingItem = ({
   pairing,
+  setShow,
+  onCommentButtonClick,
   toggleFavoritePairing,
   isFavorite,
   updatePairingRating,
@@ -43,35 +45,6 @@ const PairingItem = ({
       setIngredientDetails(ingredientsList);
     }
   }, [pairing, ingredients]);
-
-  const handleCommentSubmit = (commentText, commentId) => {
-    if (commentId) {
-      const updatedComments = comments.map((comment) =>
-        comment.id === commentId ? { ...comment, text: commentText } : comment
-      );
-      setComments(updatedComments);
-    } else {
-      setComments([...comments, { id: nanoid(), text: commentText }]);
-    }
-    setShowCommentPopup(false);
-    setEditingComment(null);
-  };
-
-  const handleEdit = (commentId) => {
-    const commentToEdit = comments.find((comment) => comment.id === commentId);
-    if (commentToEdit) {
-      setEditingComment(commentToEdit);
-      setShowCommentPopup(true);
-    }
-  };
-
-  const handleDeleteComment = (commentId) => {
-    const updatedComments = comments.filter(
-      (comment) => comment.id !== commentId
-    );
-    setComments(updatedComments);
-    setShowCommentPopup(false);
-  };
 
   const handleDeletePairing = () => {
     onDeletePairing(pairing._id);
@@ -125,7 +98,12 @@ const PairingItem = ({
             id={pairing._id}
             updatePairingRating={updatePairingRating}
           />
-          <CommentEmoji onClick={() => setShowCommentPopup(true)}>
+          <CommentEmoji
+            onClick={() => {
+              setShow(true);
+              onCommentButtonClick();
+            }}
+          >
             💬
           </CommentEmoji>
           <DeleteButton onClick={() => setShowDeletePopup(true)}>
@@ -133,16 +111,7 @@ const PairingItem = ({
           </DeleteButton>
         </FooterActions>
       </CardFooter>
-      <CommentPopup
-        show={showCommentPopup}
-        onClose={() => {
-          setShowCommentPopup(false);
-          setEditingComment(null);
-        }}
-        onSubmit={handleCommentSubmit}
-        commentToEdit={editingComment}
-        onDelete={handleDeleteComment}
-      />
+
       {showDeletePopup && (
         <DeletePopup>
           <DeleteMessage>
@@ -156,14 +125,6 @@ const PairingItem = ({
           </ButtonGroup>
         </DeletePopup>
       )}
-      <Comments>
-        {comments.map((comment) => (
-          <Comment key={comment.id}>
-            {comment.text}
-            <EditButton onClick={() => handleEdit(comment.id)}>Edit</EditButton>
-          </Comment>
-        ))}
-      </Comments>
     </Card>
   );
 };
