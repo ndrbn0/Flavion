@@ -13,6 +13,13 @@ const PairingsPage = ({
   ingredients,
   deleteIngredient,
   updateIngredient,
+  handleAddComment,
+  handleEditComment,
+  handleDeleteComment,
+  showCommentPopup,
+  setShowCommentPopup,
+  currentPairingId,
+  setCurrentPairingId,
 }) => {
   return (
     <Container>
@@ -28,6 +35,13 @@ const PairingsPage = ({
         addIngredient={addIngredient}
         deleteIngredient={deleteIngredient}
         updateIngredient={updateIngredient}
+        handleAddComment={handleAddComment}
+        handleEditComment={handleEditComment}
+        handleDeleteComment={handleDeleteComment}
+        showCommentPopup={showCommentPopup}
+        setShowCommentPopup={setShowCommentPopup}
+        currentPairingId={currentPairingId}
+        setCurrentPairingId={setCurrentPairingId}
       />
     </Container>
   );
