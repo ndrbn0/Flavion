@@ -45,8 +45,6 @@ const PairingsList = ({
   const comments =
     pairingsInfo.find((pairing) => pairing._id === currentPairingId)
       ?.comments ?? [];
-  console.log(pairingsInfo);
-  console.log(pairings);
   return (
     <>
       <Container>
