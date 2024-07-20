@@ -35,21 +35,28 @@ export default function App({ Component, pageProps }) {
   const [currentPairingId, setCurrentPairingId] = useState(null);
 
   function handleAddComment(pairingId, newComment) {
-    setPairingsInfo(
-      pairingsInfo.map((pairing) => {
-        if (pairingId === pairing._id) {
-          return {
-            ...pairing,
-            comments: [
-              ...(pairing.comments || []),
-              { _id: nanoid(), text: newComment },
-            ],
-          };
-        } else {
-          return pairing;
-        }
-      })
-    );
+    if (pairingsInfo.find((pairingInfo) => pairingInfo._id === pairingId)) {
+      setPairingsInfo(
+        pairingsInfo.map((pairing) => {
+          if (pairingId === pairing._id) {
+            return {
+              ...pairing,
+              comments: [
+                ...(pairing.comments || []),
+                { _id: nanoid(), text: newComment },
+              ],
+            };
+          } else {
+            return pairing;
+          }
+        })
+      );
+    } else {
+      setPairingsInfo([
+        ...pairingsInfo,
+        { _id: pairingId, comments: [{ _id: nanoid(), text: newComment }] },
+      ]);
+    }
   }
   function handleEditComment(pairingId, commentId, updatedText) {
     setPairingsInfo(
@@ -181,6 +188,18 @@ export default function App({ Component, pageProps }) {
     setPairings((prevPairings) => [pairingWithId, ...prevPairings]);
   };
 
+  function handleEditPairing(updatedPairing, id) {
+    setPairings(
+      pairings.map((pairing) => {
+        if (pairing._id === id) {
+          return { ...pairing, ...updatedPairing };
+        } else {
+          return pairing;
+        }
+      })
+    );
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -207,6 +226,7 @@ export default function App({ Component, pageProps }) {
         setShowCommentPopup={setShowCommentPopup}
         currentPairingId={currentPairingId}
         setCurrentPairingId={setCurrentPairingId}
+        handleEditPairing={handleEditPairing}
       />
       <Navigation />
     </>

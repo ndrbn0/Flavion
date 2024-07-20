@@ -2,6 +2,7 @@ import styled from "styled-components";
 import PairingItem from "./PairingItem";
 import NewCommentForm from "./NewCommentForm";
 import { useState } from "react";
+import EditPairingForm from "./EditPairingForm";
 
 const PairingsList = ({
   pairings,
@@ -18,9 +19,11 @@ const PairingsList = ({
   showCommentPopup,
   setCurrentPairingId,
   currentPairingId,
+  handleEditPairing,
 }) => {
   const [editCommentId, setEditCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
+  const [showEditPopup, setShowEditPopup] = useState(false);
 
   const handleCommentSubmitLocal = (comment) => {
     handleAddComment(currentPairingId, comment);
@@ -70,6 +73,10 @@ const PairingsList = ({
                     (pairingInfo) => pairingInfo._id === pairing._id
                   )?._id
                 );
+              }}
+              onEditButtonClick={() => {
+                setCurrentPairingId(pairing._id);
+                setShowEditPopup(true);
               }}
             />
           ))}
@@ -129,6 +136,28 @@ const PairingsList = ({
                     </Comment>
                   ))}
               </CommentsList>
+            </Popup>
+          </Overlay>
+        )}
+        {showEditPopup && (
+          <Overlay
+            onClick={(event) => {
+              if (event.target === event.currentTarget) {
+                setShowEditPopup(!showEditPopup);
+              }
+            }}
+          >
+            <Popup>
+              <EditPairingForm
+                ingredients={ingredients}
+                defaultData={pairings.find(
+                  (pairing) => pairing._id === currentPairingId
+                )}
+                onSubmit={(updatedPairing) => {
+                  handleEditPairing(updatedPairing, currentPairingId);
+                  setShowEditPopup(false);
+                }}
+              />
             </Popup>
           </Overlay>
         )}

@@ -24,6 +24,7 @@ const PairingItem = ({
   updatePairingRating,
   onDeletePairing,
   ingredients,
+  onEditButtonClick,
 }) => {
   const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
@@ -106,6 +107,7 @@ const PairingItem = ({
           >
             💬
           </CommentEmoji>
+          <CommentEmoji onClick={onEditButtonClick}>✏️</CommentEmoji>
           <DeleteButton onClick={() => setShowDeletePopup(true)}>
             🗑️
           </DeleteButton>
