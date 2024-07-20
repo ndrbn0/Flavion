@@ -188,46 +188,6 @@ const CommentEmoji = styled.span`
   }
 `;
 
-const Comments = styled.div`
-  padding: 8px;
-  background: #f9f9f9;
-  border-radius: 8px;
-`;
-
-const Comment = styled.div`
-  background: #ffffff;
-  padding: 12px;
-  border-radius: 8px;
-  margin-top: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const EditButton = styled.button`
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  margin-left: 8px;
-  font-size: 14px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.3s, color 0.3s;
-
-  &:hover {
-    background-color: #007bff;
-    color: #fff;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
-  }
-
-  &:active {
-    background-color: #0056b3;
-  }
-`;
-
 const DeleteButton = styled.button`
   background: none;
   border: none;

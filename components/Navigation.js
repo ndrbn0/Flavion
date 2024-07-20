@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styled from "styled-components";
+import { CiStar, CiLink, CiIceCream } from "react-icons/ci";
 
 const Navigation = () => {
   const router = useRouter();
@@ -8,13 +9,13 @@ const Navigation = () => {
   return (
     <NavBar>
       <StyledLink href="/" $active={router.pathname === "/"}>
-        I
+        <CiIceCream />
       </StyledLink>
       <StyledLink href="/pairings" $active={router.pathname === "/pairings"}>
-        P
+        <CiLink />
       </StyledLink>
       <StyledLink href="/favorites" $active={router.pathname === "/favorites"}>
-        F
+        <CiStar />
       </StyledLink>
     </NavBar>
   );
@@ -30,27 +31,28 @@ const NavBar = styled.nav`
   border-radius: 25px;
   display: flex;
   justify-content: space-around;
-  background-color: #fff;
+  background-color: #ff7f50;
   box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
   padding: 10px 0;
 `;
 
 const StyledLink = styled(Link)`
-  border: 1px solid #007bff;
+  border: 1px solid #fff;
   padding: 10px;
   border-radius: 50%;
-  background-color: ${({ $active }) => ($active ? "#007bff" : "transparent")};
-  color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
+  background-color: ${({ $active }) => ($active ? "#E57248" : "transparent")};
+  color: ${({ $active }) => ($active ? "#fff" : "#fff")};
   width: 50px;
   height: 50px;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
+  font-size: 40px;
+  font-weight: bold;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #ff6347;
     color: #fff;
   }
 `;

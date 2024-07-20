@@ -4,14 +4,6 @@ import Link from "next/link";
 
 export const Container = styled.div`
   border-radius: var(--radius-md, 24px);
-  background: linear-gradient(
-      0deg,
-      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
-      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 100%
-    ),
-    var(--Primary-primary, #0d1f28);
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
-    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
   display: flex;
   min-width: 220px;
   flex-direction: column;
@@ -20,6 +12,7 @@ export const Container = styled.div`
   padding: 8px;
   gap: 5 0px;
   margin-bottom: 15%;
+  background-color: #f5e4b5;
 `;
 
 export const ImageWrapper = styled.div`
@@ -391,12 +384,11 @@ export const NoMatchMessage = styled.p`
   margin-top: 20px;
 `;
 export const SearchContainer = styled.div`
-  position: relative;
-  max-width: 600px;
-  margin: 20px auto;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 10px 20px;
   overflow: hidden;
 
   ul {
@@ -406,29 +398,25 @@ export const SearchContainer = styled.div`
     max-height: 300px;
     overflow-y: auto;
     border-top: 1px solid #e0e0e0;
+    background-color: #e0e0e0;
   }
 `;
 
 export const SearchInput = styled.input`
   width: 100%;
-  padding: 15px 20px;
-  font-size: 18px;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-around;
+  background-color: #f59673;
+  box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
   border: none;
-  outline: none;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-
-  &::placeholder {
-    color: #aaa;
-  }
-
-  &:focus {
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
 `;
+
 export const ResultsList = styled.ul`
   list-style-type: none;
   padding: 0;
+  border-radius: 14px;
 `;
 
 export const SearchResult = styled.li`
