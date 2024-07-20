@@ -5,6 +5,7 @@ import Link from "next/link";
 import { IngredientDetailsLink } from "@/_styles";
 import NewCommentForm from "@/components/NewCommentForm";
 import { useState } from "react";
+import EditPairingForm from "@/components/EditPairingForm";
 
 const FavoritesPage = ({
   favorites,
@@ -22,9 +23,11 @@ const FavoritesPage = ({
   handleEditComment,
   handleDeleteComment,
   handleAddComment,
+  handleEditPairing,
 }) => {
   const [editCommentId, setEditCommentId] = useState(null);
   const [commentText, setCommentText] = useState("");
+  const [showEditPopup, setShowEditPopup] = useState(false);
 
   const handleCommentSubmitLocal = (comment) => {
     handleAddComment(currentPairingId, comment);
@@ -127,6 +130,10 @@ const FavoritesPage = ({
                         )._id
                       );
                     }}
+                    onEditButtonClick={() => {
+                      setCurrentPairingId(pairing._id);
+                      setShowEditPopup(true);
+                    }}
                   />
                 );
               }
@@ -194,6 +201,28 @@ const FavoritesPage = ({
                     </Comment>
                   ))}
               </CommentsList>
+            </Popup>
+          </Overlay>
+        )}
+        {showEditPopup && (
+          <Overlay
+            onClick={(event) => {
+              if (event.target === event.currentTarget) {
+                setShowEditPopup(!showEditPopup);
+              }
+            }}
+          >
+            <Popup>
+              <EditPairingForm
+                ingredients={ingredients}
+                defaultData={pairings.find(
+                  (pairing) => pairing._id === currentPairingId
+                )}
+                onSubmit={(updatedPairing) => {
+                  handleEditPairing(updatedPairing, currentPairingId);
+                  setShowEditPopup(false);
+                }}
+              />
             </Popup>
           </Overlay>
         )}

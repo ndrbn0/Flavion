@@ -20,6 +20,7 @@ const PairingsPage = ({
   setShowCommentPopup,
   currentPairingId,
   setCurrentPairingId,
+  handleEditPairing,
 }) => {
   return (
     <Container>
@@ -42,6 +43,7 @@ const PairingsPage = ({
         setShowCommentPopup={setShowCommentPopup}
         currentPairingId={currentPairingId}
         setCurrentPairingId={setCurrentPairingId}
+        handleEditPairing={handleEditPairing}
       />
     </Container>
   );

@@ -21,7 +21,7 @@ const EditIngredient = ({ ingredients, updateIngredient, flavors }) => {
     imgUrl: "",
     flavor: "",
   });
-
+  console.log(ingredients);
   useEffect(() => {
     if (ingredient) {
       setFormData({
