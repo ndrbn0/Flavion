@@ -52,9 +52,9 @@ const NewIngredientForm = ({ onAddIngredient, flavors }) => {
                   onChange={(event) => setFlavor(event.target.value)}
                   required
                 >
-                  <option value="" disabled>
+                  <Option value="" disabled>
                     Select Flavor
-                  </option>
+                  </Option>
                   {flavors.map((flavor) => (
                     <option key={flavor} value={flavor}>
                       {flavor}
@@ -146,7 +146,7 @@ const Select = styled.select`
   width: 100%;
   padding: 10px;
   border: 1px solid #cccccc;
-  border-radius: 4px;
+  border-radius: 15px;
   font-size: 1rem;
 
   @media (max-width: 768px) {
@@ -157,6 +157,14 @@ const Select = styled.select`
   @media (max-width: 480px) {
     padding: 6px;
     font-size: 0.8rem;
+  }
+`;
+
+const Option = styled.option`
+  height: 10px;
+
+  &:hover {
+    background-color: #ff7f50;
   }
 `;
 
