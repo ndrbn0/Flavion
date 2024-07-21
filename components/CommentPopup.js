@@ -135,7 +135,7 @@ const DeleteButton = styled.button`
 `;
 
 const SubmitButton = styled.button`
-  background: #007bff;
+  background: #ff7f50;
   color: #fff;
   border: none;
   padding: 8px 16px;
@@ -147,6 +147,6 @@ const SubmitButton = styled.button`
     cursor: not-allowed;
   }
   &:hover:not(:disabled) {
-    background: #0056b3;
+    background: #ff7f50;
   }
 `;
