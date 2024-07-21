@@ -171,7 +171,7 @@ const SubmitButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #de663a;
+    background-color: #b05e3f;
   }
 
   @media (max-width: 768px) {

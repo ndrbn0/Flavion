@@ -40,7 +40,7 @@ const StyledLink = styled(Link)`
   border: 1px solid #fff;
   padding: 10px;
   border-radius: 50%;
-  background-color: ${({ $active }) => ($active ? "#E57248" : "transparent")};
+  background-color: ${({ $active }) => ($active ? "#b05e3f" : "transparent")};
   color: ${({ $active }) => ($active ? "#fff" : "#fff")};
   width: 50px;
   height: 50px;
@@ -52,7 +52,7 @@ const StyledLink = styled(Link)`
   font-weight: bold;
 
   &:hover {
-    background-color: #ff6347;
+    background-color: #b05e3f;
     color: #fff;
   }
 `;

@@ -12,7 +12,6 @@ import {
   Ingredient,
 } from "@/_styles";
 import { flavorColors } from "@/utils";
-import CommentPopup from "@/components/CommentPopup";
 import StarRating from "./RatingStar";
 
 const PairingItem = ({
@@ -26,11 +25,8 @@ const PairingItem = ({
   ingredients,
   onEditButtonClick,
 }) => {
-  const [showCommentPopup, setShowCommentPopup] = useState(false);
   const [showDeletePopup, setShowDeletePopup] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [comments, setComments] = useState([]);
-  const [editingComment, setEditingComment] = useState(null);
   const [ingredientDetails, setIngredientDetails] = useState([]);
 
   useEffect(() => {
@@ -171,46 +167,50 @@ const Flavors = styled.span`
 
 const FooterActions = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   margin-top: 10px;
 `;
 
-const CommentEmoji = styled.span`
-  cursor: pointer;
-  margin-left: 10px;
+const IconWrapper = styled.span`
+  display: flex;
+  align-items: center;
   font-size: 24px;
+  cursor: pointer;
   transition: transform 0.3s, color 0.3s;
 
   &:hover {
     transform: scale(1.2);
     color: #007bff;
   }
-`;
-
-const DeleteButton = styled.button`
-  background: none;
-  border: none;
-  color: #ff0000;
-  cursor: pointer;
-  margin-left: 10px;
-  font-size: 24px;
-  transition: transform 0.3s, color 0.3s;
-
-  &:hover {
-    transform: scale(1.2);
-    color: #cc0000;
-  }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5);
+  }
+
+  &:active {
+    color: #0056b3;
+  }
+`;
+
+const DeleteButton = styled(IconWrapper)`
+  color: #ff0000;
+
+  &:hover {
+    color: #cc0000;
   }
 
   &:active {
     color: #990000;
   }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5);
+  }
 `;
+
+const CommentEmoji = styled(IconWrapper)``;
 
 const DeletePopup = styled.div`
   position: fixed;

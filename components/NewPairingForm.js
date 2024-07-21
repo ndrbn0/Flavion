@@ -14,8 +14,14 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const togglePopup = () => {
+    if (!showPopup) {
+      // Reset the state only when opening the popup
+      setSelectedIngredients([]);
+      setReason("");
+      setImgUrl("");
+      setError("");
+    }
     setShowPopup(!showPopup);
-    setError("");
   };
 
   const toggleDropdown = () => {
@@ -151,6 +157,8 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
 
 export default NewPairingForm;
 
+// Styled components definitions follow
+
 const Headline = styled.legend`
   text-align: center;
   margin-bottom: 20px;
@@ -254,7 +262,7 @@ const SubmitButton = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: #b05e3f;
   }
 
   @media (max-width: 768px) {

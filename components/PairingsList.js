@@ -246,7 +246,7 @@ const EditButton = styled.button`
 `;
 
 const SaveButton = styled.button`
-  background: #007bff;
+  background: #ff7f50;
   color: #fff;
   border: none;
   padding: 4px 8px;
@@ -255,7 +255,7 @@ const SaveButton = styled.button`
   font-size: 12px;
   transition: background 0.3s;
   &:hover {
-    background: #0056b3;
+    background: #b05e3f;
   }
 `;
 

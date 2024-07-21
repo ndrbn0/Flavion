@@ -240,29 +240,53 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8px;
-  gap: 5px;
+  padding: 16px;
+  gap: 20px;
   margin-bottom: 15%;
+
+  @media (max-width: 768px) {
+    padding: 8px;
+    gap: 10px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 4px;
+    gap: 5px;
+    margin-bottom: 20%;
+  }
 `;
 
 const Section = styled.div`
   width: 100%;
   margin-bottom: 20px;
   padding: 0 10px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+    padding: 0 5px;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 5px;
+    padding: 0 2px;
+  }
 `;
 
 const StyledList = styled.ul`
   list-style: none;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  position: relative;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
 `;
 
 const Title = styled.h1`
@@ -272,19 +296,36 @@ const Title = styled.h1`
   border-radius: 18px;
   padding: 10px;
   background-color: #f5e4b5;
+
+  @media (max-width: 768px) {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 5px;
+    padding: 2px;
+  }
 `;
 
 const Subtitle = styled.h2`
   text-align: center;
   margin-bottom: 10px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 5px;
+  }
+
+  @media (max-width: 480px) {
+    margin-bottom: 2px;
+  }
 `;
 
 const NoFavoritesMessage = styled.p`
   text-align: center;
-  margin: 20px;
 `;
 
-const Overlay = styled.div`
+const Overlay = styled.aside`
   position: fixed;
   top: 0;
   left: 0;
@@ -294,47 +335,143 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 `;
 
-const Popup = styled.div`
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+const Popup = styled.section`
+  background: #fff;
   padding: 20px;
-  width: 80%;
-  max-width: 500px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+
+  @media (max-width: 768px) {
+    width: 300px;
+    padding: 16px;
+  }
+
+  @media (max-width: 480px) {
+    width: 260px;
+    padding: 12px;
+  }
 `;
 
-const CommentsList = styled.div`
+const CommentsList = styled.ul`
   margin-top: 20px;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 5px;
+  }
 `;
 
-const Comment = styled.div`
+const Comment = styled.li`
   background: #ffffff;
   padding: 12px;
   border-radius: 8px;
   margin-top: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    padding: 8px;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 6px;
+    margin-top: 6px;
+  }
 `;
 
 const CommentText = styled.p`
   margin: 0;
 `;
 
-const TextArea = styled.textarea`
-  width: 100%;
-  margin-bottom: 10px;
+const EditButton = styled.button`
+  background: #fff;
+  color: rgb(156, 156, 156);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
   border-radius: 4px;
-  border: 1px solid #ddd;
-  padding: 8px;
+
+  @media (max-width: 768px) {
+    padding: 6px 12px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 4px 8px;
+  }
 `;
 
 const SaveButton = styled.button`
-  margin-right: 10px;
+  background: #ff7f50;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 12px;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #b05e3f;
+  }
+
+  @media (max-width: 768px) {
+    padding: 3px 6px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2px 4px;
+  }
 `;
 
-const EditButton = styled.button`
-  margin-right: 10px;
+const DeleteButton = styled.button`
+  background: #fff;
+  color: rgb(156, 156, 156);
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 4px;
+
+  @media (max-width: 768px) {
+    padding: 6px 12px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 4px 8px;
+  }
 `;
 
-const DeleteButton = styled.button``;
+const TextArea = styled.textarea`
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+
+  @media (max-width: 768px) {
+    height: 50px;
+    padding: 8px;
+  }
+
+  @media (max-width: 480px) {
+    height: 40px;
+    padding: 6px;
+  }
+`;
