@@ -86,8 +86,9 @@ const IngredientsList = ({
 export default IngredientsList;
 
 const Title = styled.h1`
+  margin-top: 15px;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border-radius: var(--radius-2xl, 48px);
   background: linear-gradient(
       0deg,

@@ -366,10 +366,22 @@ export const FilterContainer = styled.div`
 `;
 
 export const FilterButton = styled.button`
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
+  transition: background-color 0.3s ease;
   cursor: pointer;
+  border: 2px solid var(--color-gray-300);
+
+  margin: 0 !important;
+
+  top: 35px;
+  left: 167.5px;
+  border-radius: var(--br-lg);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px 20px;
+
   background-color: ${(props) => (props.$active ? props.$color : "#f0f0f0")};
   color: ${(props) => (props.$active ? "#000000" : "#333")};
   transition: background-color 0.3s ease;
@@ -388,8 +400,11 @@ export const SearchContainer = styled.div`
   left: 0;
   width: 100%;
   max-width: 100%;
-  margin: 0;
-  padding: 10px 20px;
+
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+
   overflow: hidden;
 
   ul {
@@ -405,10 +420,10 @@ export const SearchContainer = styled.div`
 
 export const SearchInput = styled.input`
   width: 100%;
-  border-radius: 25px;
+  border-radius: 24px;
   display: flex;
   justify-content: space-around;
-  background-color: #f59673;
+  background-color: var(--color-whitesmoke-100);
   box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border: none;
