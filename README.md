@@ -90,3 +90,5 @@ Culinary Ingredient Explorer is a web application designed for culinary enthusia
    npm install react
    npm install react-icons --save
    ```
+
+   // local
