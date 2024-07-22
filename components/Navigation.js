@@ -84,13 +84,11 @@ const NavigationmenuIngredient = styled(Link)`
   padding: var(--padding-lg);
   box-sizing: border-box;
   cursor: pointer;
-  background-color: ${({ $active }) =>
-    $active ? "var(--color-seagreen-100)" : "transparent"};
+  background-color: ${({ $active }) => ($active ? "#000" : "transparent")};
   color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
 
   &:hover {
-    background-color: ${({ $active }) =>
-      $active ? "var(--color-seagreen-100)" : "#0056b3"};
+    background-color: ${({ $active }) => ($active ? "#000" : "#0000006b")};
   }
 `;
 
@@ -105,13 +103,11 @@ const NavigationmenuFavorites = styled(Link)`
   padding: var(--padding-lg);
   box-sizing: border-box;
   cursor: pointer;
-  background-color: ${({ $active }) =>
-    $active ? "var(--color-seagreen-100)" : "transparent"};
+  background-color: ${({ $active }) => ($active ? "#000" : "transparent")};
   color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
 
   &:hover {
-    background-color: ${({ $active }) =>
-      $active ? "var(--color-seagreen-100)" : "#0056b3"};
+    background-color: ${({ $active }) => ($active ? "000#" : "#0000006b")};
   }
 `;
 
@@ -138,13 +134,11 @@ const NavigationmenuMatches = styled(Link)`
   justify-content: flex-start;
   padding: var(--padding-lg);
   box-sizing: border-box;
-  background-color: ${({ $active }) =>
-    $active ? "var(--color-seagreen-100)" : "transparent"};
+  background-color: ${({ $active }) => ($active ? "#000" : "transparent")};
   color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
 
   &:hover {
-    background-color: ${({ $active }) =>
-      $active ? "var(--color-seagreen-100)" : "#0056b3"};
+    background-color: ${({ $active }) => ($active ? "#000" : "#0000006b")};
   }
 `;
 const NavigationRoot = styled.nav`
@@ -156,7 +150,7 @@ const NavigationRoot = styled.nav`
 
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: var(--br-56xl);
-  background-color: #d8dfe2;
+  background-color: #fffffff7;
   display: flex;
   flex-direction: row;
   align-items: flex-start;

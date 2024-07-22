@@ -368,7 +368,7 @@ export const FilterContainer = styled.div`
 export const FilterButton = styled.button`
   transition: background-color 0.3s ease;
   cursor: pointer;
-  border: 2px solid var(--color-gray-300);
+  border: 1px solid var(--color-gray-300);
 
   margin: 0 !important;
 
@@ -423,7 +423,7 @@ export const SearchInput = styled.input`
   border-radius: 24px;
   display: flex;
   justify-content: space-around;
-  background-color: var(--color-whitesmoke-100);
+  background-color: var(--color-lightgray);
   box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border: none;
