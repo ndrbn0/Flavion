@@ -278,8 +278,7 @@ const SubmitButton = styled.button`
 
 const Button = styled.button`
   border: none;
-  margin-top: -14px;
-  font-size: 16px;
+  font-size: 14px;
   padding: 8px 16px;
   background-color: #ff7f50;
   border-radius: 15px;
@@ -290,6 +289,7 @@ const Button = styled.button`
   color: white;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: poppins;
 
   &:hover {
     transform: scale(1.05);
