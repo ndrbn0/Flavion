@@ -9,7 +9,7 @@ const IngredientPage = ({
   favorites,
 }) => {
   return (
-    <>
+    <StyledContainer>
       <IngredientDetails
         ingredients={ingredients}
         deleteIngredient={deleteIngredient}
@@ -17,7 +17,7 @@ const IngredientPage = ({
         toggleFavorite={toggleFavorite}
         favorites={favorites}
       />
-    </>
+    </StyledContainer>
   );
 };
 

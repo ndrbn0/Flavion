@@ -89,16 +89,6 @@ const Headline = styled.h2`
   margin-bottom: 20px;
   font-size: 24px;
   color: #333;
-
-  @media (max-width: 768px) {
-    font-size: 20px;
-    margin-bottom: 16px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
 `;
 
 const Form = styled.form`
@@ -113,15 +103,8 @@ const Form = styled.form`
     var(--Primary-primary, #0d1f28);
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
     0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+  display: flex;
   padding: 24px;
-
-  @media (max-width: 768px) {
-    padding: 20px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 16px;
-  }
 `;
 
 const Input = styled.input`
@@ -130,16 +113,6 @@ const Input = styled.input`
   border: 1px solid #cccccc;
   border-radius: 15px;
   font-size: 1rem;
-
-  @media (max-width: 768px) {
-    padding: 8px;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 6px;
-    font-size: 0.8rem;
-  }
 `;
 
 const Select = styled.select`
@@ -148,21 +121,11 @@ const Select = styled.select`
   border: 1px solid #cccccc;
   border-radius: 4px;
   font-size: 1rem;
-
-  @media (max-width: 768px) {
-    padding: 8px;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 6px;
-    font-size: 0.8rem;
-  }
 `;
 
 const SubmitButton = styled.button`
   padding: 10px 20px;
-  background-color: #ff7f50;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 15px;
@@ -171,17 +134,7 @@ const SubmitButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #b05e3f;
-  }
-
-  @media (max-width: 768px) {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-  }
-
-  @media (max-width: 480px) {
-    padding: 6px 12px;
-    font-size: 0.8rem;
+    background-color: #0056b3;
   }
 `;
 
@@ -189,14 +142,6 @@ const Label = styled.label`
   font-weight: bold;
   margin-bottom: 8px;
   color: #333333;
-
-  @media (max-width: 768px) {
-    margin-bottom: 6px;
-  }
-
-  @media (max-width: 480px) {
-    margin-bottom: 4px;
-  }
 `;
 
 const FormField = styled.div`
@@ -207,16 +152,6 @@ const FormField = styled.div`
   align-items: flex-start;
   gap: 15px;
   align-self: stretch;
-
-  @media (max-width: 768px) {
-    padding: 12px;
-    margin-bottom: 12px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 10px;
-    margin-bottom: 8px;
-  }
 `;
 
 const OverlayBackground = styled.div`
@@ -225,8 +160,8 @@ const OverlayBackground = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 998;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent gray */
+  z-index: 998; /* Ensure it's below the popup */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -244,50 +179,22 @@ const PopupForm = styled.div`
   background: #ffffff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-
-  @media (max-width: 768px) {
-    width: 80%;
-    padding: 20px;
-  }
-
-  @media (max-width: 480px) {
-    width: 90%;
-    padding: 15px;
-  }
 `;
-
 const Button = styled.button`
-  width: 200px;
-  font-size: 14px;
-  padding: 10px 20px;
-  font-family: poppins;
-
   border: none;
-
+  font-style: italic;
+  font-size: 14px;
   margin-top: 8px;
   padding: 8px 16px;
-  background-color: #ff7f50;
+  background-color: #0070f3;
   border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 300px;
   color: white;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
   &:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    width: 250px;
-    font-size: 14px;
-  }
-
-  @media (max-width: 480px) {
-    width: 200px;
-    font-size: 12px;
   }
 `;

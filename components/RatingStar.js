@@ -27,7 +27,6 @@ const Stars = styled.div`
   display: flex;
   align-items: center;
   margin-left: auto;
-  margin-right: 15px;
 `;
 
 const Star = styled.span`

@@ -177,6 +177,7 @@ const StyledList = styled.ul`
   overflow: hidden;
   position: relative;
   align-self: stretch;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -185,13 +186,20 @@ const StyledList = styled.ul`
 
 const Container = styled.div`
   border-radius: var(--radius-md, 24px);
+  background: linear-gradient(
+      0deg,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
+      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 100%
+    ),
+    var(--Primary-primary, #0d1f28);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
   display: flex;
   min-width: 220px;
   flex-direction: column;
   align-items: center;
-  align-self: stretch;
   padding: 8px;
-  gap: 5 0px;
+  gap: 5px;
   margin-bottom: 15%;
 `;
 
@@ -244,7 +252,7 @@ const EditButton = styled.button`
 `;
 
 const SaveButton = styled.button`
-  background: #ff7f50;
+  background: #007bff;
   color: #fff;
   border: none;
   padding: 4px 8px;
@@ -253,7 +261,7 @@ const SaveButton = styled.button`
   font-size: 12px;
   transition: background 0.3s;
   &:hover {
-    background: #b05e3f;
+    background: #0056b3;
   }
 `;
 

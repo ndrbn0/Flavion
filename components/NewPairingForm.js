@@ -11,24 +11,13 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
   const [imgUrl, setImgUrl] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [error, setError] = useState("");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const togglePopup = () => {
-    if (!showPopup) {
-      // Reset the state only when opening the popup
-      setSelectedIngredients([]);
-      setReason("");
-      setImgUrl("");
-      setError("");
-    }
     setShowPopup(!showPopup);
+    setError("");
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const handleIngredientSelect = (ingredient) => {
+  const handleIngredientToggle = (ingredient) => {
     if (selectedIngredients.some((ing) => ing._id === ingredient._id)) {
       setSelectedIngredients(
         selectedIngredients.filter((ing) => ing._id !== ingredient._id)
@@ -40,13 +29,6 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
         setError("Maximum of 3 ingredients can be selected.");
       }
     }
-    setIsDropdownOpen(false);
-  };
-
-  const handleRemoveIngredient = (ingredient) => {
-    setSelectedIngredients(
-      selectedIngredients.filter((ing) => ing._id !== ingredient._id)
-    );
   };
 
   const handleSubmit = (event) => {
@@ -85,46 +67,26 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
             <Form onSubmit={handleSubmit}>
               <Headline>Create New Pairing</Headline>
               <FormField>
-                <Label htmlFor="ingredients">Select Ingredients:</Label>
-                <DropdownWrapper>
-                  <DropdownButton onClick={toggleDropdown}>
-                    {selectedIngredients.length
-                      ? selectedIngredients.map((ing) => ing.name).join(", ")
-                      : "Select Ingredients"}
-                  </DropdownButton>
-                  {isDropdownOpen && (
-                    <DropdownMenu>
-                      {ingredients.map((ingredient) => (
-                        <DropdownItem
-                          key={ingredient._id}
-                          onClick={() => handleIngredientSelect(ingredient)}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={selectedIngredients.some(
-                              (ing) => ing._id === ingredient._id
-                            )}
-                            readOnly
-                          />
-                          {ingredient.name}
-                        </DropdownItem>
-                      ))}
-                    </DropdownMenu>
-                  )}
-                  <SelectedTags>
-                    {selectedIngredients.map((ingredient) => (
-                      <Tag key={ingredient._id}>
+                <fieldset>
+                  <Label htmlFor="ingredients" id="ingredients">
+                    Select Ingredients:
+                  </Label>
+                  <Multiselect>
+                    {ingredients.map((ingredient) => (
+                      <CheckboxLabel key={ingredient._id}>
+                        <Checkbox
+                          type="checkbox"
+                          onChange={() => handleIngredientToggle(ingredient)}
+                          checked={selectedIngredients.some(
+                            (ing) => ing._id === ingredient._id
+                          )}
+                          id={`ingredient-${ingredient._id}`}
+                        />
                         {ingredient.name}
-                        <RemoveTagButton
-                          onClick={() => handleRemoveIngredient(ingredient)}
-                        >
-                          &#x2716; {/* Cross icon */}
-                        </RemoveTagButton>
-                      </Tag>
+                      </CheckboxLabel>
                     ))}
-                  </SelectedTags>
-                </DropdownWrapper>
-                {error && <ErrorText>{error}</ErrorText>}
+                  </Multiselect>
+                </fieldset>
               </FormField>
               <FormField>
                 <Label htmlFor="reason">Reason for Pairing:</Label>
@@ -146,6 +108,7 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
                   placeholder="Enter image URL"
                 />
               </FormField>
+              {error && <ErrorText>{error}</ErrorText>}
               <SubmitButton type="submit">Submit</SubmitButton>
             </Form>
           </PopupForm>
@@ -157,23 +120,11 @@ const NewPairingForm = ({ onAddPairing, ingredients }) => {
 
 export default NewPairingForm;
 
-// Styled components definitions follow
-
 const Headline = styled.legend`
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
   color: #333;
-
-  @media (max-width: 768px) {
-    font-size: 20px;
-    margin-bottom: 16px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 18px;
-    margin-bottom: 12px;
-  }
 `;
 
 const Form = styled.form`
@@ -183,55 +134,23 @@ const Form = styled.form`
   background-color: #f0f0f0;
   padding: 20px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-
-  @media (max-width: 768px) {
-    padding: 16px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 12px;
-  }
 `;
 
 const FormField = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
-
-  @media (max-width: 768px) {
-    margin-bottom: 8px;
-  }
-
-  @media (max-width: 480px) {
-    margin-bottom: 6px;
-  }
 `;
 
 const Label = styled.label`
   margin-bottom: 5px;
   font-weight: bold;
-
-  @media (max-width: 768px) {
-    margin-bottom: 4px;
-  }
-
-  @media (max-width: 480px) {
-    margin-bottom: 3px;
-  }
 `;
 
 const Input = styled.input`
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
-
-  @media (max-width: 768px) {
-    padding: 6px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 4px;
-  }
 `;
 
 const TextArea = styled.textarea`
@@ -239,71 +158,33 @@ const TextArea = styled.textarea`
   border-radius: 4px;
   border: 1px solid #ccc;
   min-height: 100px;
-
-  @media (max-width: 768px) {
-    padding: 6px;
-    min-height: 80px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 4px;
-    min-height: 60px;
-  }
 `;
 
 const SubmitButton = styled.button`
   padding: 10px 20px;
-  border-radius: 14px;
-  background-color: #ff7f50;
+  border-radius: 4px;
+  background-color: #007bff;
   color: white;
   font-size: 16px;
   cursor: pointer;
   border: none;
   transition: background-color 0.3s;
-
   &:hover {
-    background-color: #b05e3f;
-  }
-
-  @media (max-width: 768px) {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 6px 12px;
-    font-size: 12px;
+    background-color: #0056b3;
   }
 `;
 
 const Button = styled.button`
-  border: none;
-  font-size: 14px;
-  padding: 8px 16px;
-  background-color: #ff7f50;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 300px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: #007bff;
   color: white;
+  font-size: 16px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  font-family: poppins;
-
+  border: none;
+  transition: background-color 0.3s;
   &:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    width: 250px;
-    font-size: 14px;
-  }
-
-  @media (max-width: 480px) {
-    width: 200px;
-    font-size: 12px;
+    background-color: #0056b3;
   }
 `;
 
@@ -319,16 +200,6 @@ const PopupForm = styled.div`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   width: 100%;
-
-  @media (max-width: 768px) {
-    padding: 16px;
-    max-width: 90%;
-  }
-
-  @media (max-width: 480px) {
-    padding: 12px;
-    max-width: 95%;
-  }
 `;
 
 const OverlayBackground = styled.div`
@@ -338,138 +209,26 @@ const OverlayBackground = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 998;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 999;
 `;
 
 const ErrorText = styled.p`
   color: red;
   margin-top: 10px;
-
-  @media (max-width: 768px) {
-    margin-top: 8px;
-  }
-
-  @media (max-width: 480px) {
-    margin-top: 6px;
-  }
 `;
 
-const DropdownWrapper = styled.div`
-  position: relative;
-`;
-
-const DropdownButton = styled.button`
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  text-align: left;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  @media (max-width: 768px) {
-    padding: 8px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 6px;
-  }
-`;
-
-const DropdownMenu = styled.div`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  z-index: 1000;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 2px;
-
-  @media (max-width: 768px) {
-    max-height: 150px;
-  }
-
-  @media (max-width: 480px) {
-    max-height: 120px;
-  }
-`;
-
-const DropdownItem = styled.div`
-  padding: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-
-  &:hover {
-    background-color: #f0f0f0;
-  }
-
-  input {
-    margin-right: 8px;
-  }
-
-  @media (max-width: 768px) {
-    padding: 6px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 4px;
-  }
-`;
-
-const SelectedTags = styled.div`
+const Multiselect = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
 `;
 
-const Tag = styled.div`
-  background-color: #ff7f50;
-  border-radius: 15px;
-  padding: 6px 8px;
-  margin: 2px;
+const CheckboxLabel = styled.label`
   display: flex;
   align-items: center;
-
-  @media (max-width: 768px) {
-    padding: 4px 8px;
-    margin: 1px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 2px 6px;
-    margin: 1px;
-  }
+  margin-right: 10px;
+  margin-bottom: 10px;
 `;
 
-const RemoveTagButton = styled.button`
-  border: none;
-  background: none;
-  color: red;
-  font-size: 16px;
-  cursor: pointer;
-  margin-left: 8px;
-
-  &:hover {
-    color: darkred;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
-
-  @media (max-width: 480px) {
-    font-size: 12px;
-  }
+const Checkbox = styled.input`
+  margin-right: 5px;
 `;
