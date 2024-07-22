@@ -277,9 +277,12 @@ const SubmitButton = styled.button`
 `;
 
 const Button = styled.button`
+  width: 200px;
+  font-size: 14px;
+  padding: 10px 20px;
+  font-family: poppins;
   border: none;
-  margin-top: -14px;
-  font-size: 16px;
+  margin-top: -4px;
   padding: 8px 16px;
   background-color: #ff7f50;
   border-radius: 15px;

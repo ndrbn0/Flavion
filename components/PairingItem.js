@@ -103,7 +103,7 @@ const PairingItem = ({
           >
             💬
           </CommentEmoji>
-          <CommentEmoji onClick={onEditButtonClick}>✏️</CommentEmoji>
+          <EditEmoji onClick={onEditButtonClick}>✏️</EditEmoji>
           <DeleteButton onClick={() => setShowDeletePopup(true)}>
             🗑️
           </DeleteButton>
@@ -209,6 +209,8 @@ const DeleteButton = styled(IconWrapper)`
     box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.5);
   }
 `;
+
+const EditEmoji = styled(IconWrapper)``;
 
 const CommentEmoji = styled(IconWrapper)``;
 

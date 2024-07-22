@@ -19,9 +19,8 @@ const EditPairingForm = ({
   const [showPopup, setShowPopup] = useState(true);
   const [error, setError] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const popupRef = useRef(null); // Ref to track the popup
+  const popupRef = useRef(null);
 
-  // Close the popup if clicked outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
@@ -35,12 +34,12 @@ const EditPairingForm = ({
   }, []);
 
   const toggleDropdown = (event) => {
-    event.stopPropagation(); // Prevent event bubbling to the overlay
+    event.stopPropagation();
     setIsDropdownOpen(!isDropdownOpen);
   };
 
   const handleIngredientSelect = (ingredient, event) => {
-    event.stopPropagation(); // Prevent event bubbling to the overlay
+    event.stopPropagation();
     if (selectedIngredients.some((ing) => ing._id === ingredient._id)) {
       setSelectedIngredients(
         selectedIngredients.filter((ing) => ing._id !== ingredient._id)

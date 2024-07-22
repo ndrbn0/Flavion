@@ -76,22 +76,40 @@ export const Flavors = styled.span`
 `;
 
 export const BackLink = styled(Link)`
-  cursor: pointer;
-  font-size: 16px;
-  color: white;
-  margin: 32px 16px;
-  text-decoration: none;
-  font-style: italic;
+  width: 200px;
   font-size: 14px;
+  padding: 10px 20px;
+  font-family: poppins;
+
+  border: none;
+
   margin-top: 8px;
-  margin-left: 8px;
   padding: 8px 16px;
-  background-color: #000000;
+  background-color: #ff7f50;
   border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 300px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    width: 250px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 480px) {
+    width: 200px;
+    font-size: 12px;
+  }
 `;
 
 export const List = styled.ul`
