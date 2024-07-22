@@ -79,18 +79,16 @@ const Footer = styled.section`
 `;
 
 const SubmitButton = styled.button`
-  background: #007bff;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
+  padding: 10px 20px;
+  border-radius: 14px;
+  background-color: #ff7f50;
+  color: white;
+  font-size: 16px;
   cursor: pointer;
-  border-radius: 4px;
-  transition: background 0.3s;
-  &:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
-  &:hover:not(:disabled) {
-    background: #0056b3;
+  border: none;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #b05e3f;
   }
 `;

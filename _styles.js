@@ -4,14 +4,6 @@ import Link from "next/link";
 
 export const Container = styled.div`
   border-radius: var(--radius-md, 24px);
-  background: linear-gradient(
-      0deg,
-      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 0%,
-      var(--Theme-colors-ui-1, rgba(255, 255, 255, 0.97)) 100%
-    ),
-    var(--Primary-primary, #0d1f28);
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
-    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
   display: flex;
   min-width: 220px;
   flex-direction: column;
@@ -20,6 +12,8 @@ export const Container = styled.div`
   padding: 8px;
   gap: 5 0px;
   margin-bottom: 15%;
+  background-color: #f5e4b5;
+  background-image: url("https://images.unsplash.com/32/Mc8kW4x9Q3aRR3RkP5Im_IMG_4417.jpg?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"); /* Add this line */
 `;
 
 export const ImageWrapper = styled.div`
@@ -372,10 +366,22 @@ export const FilterContainer = styled.div`
 `;
 
 export const FilterButton = styled.button`
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
+  transition: background-color 0.3s ease;
   cursor: pointer;
+  border: 1px solid var(--color-gray-300);
+
+  margin: 0 !important;
+
+  top: 35px;
+  left: 167.5px;
+  border-radius: var(--br-lg);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px 20px;
+
   background-color: ${(props) => (props.$active ? props.$color : "#f0f0f0")};
   color: ${(props) => (props.$active ? "#000000" : "#333")};
   transition: background-color 0.3s ease;
@@ -391,12 +397,14 @@ export const NoMatchMessage = styled.p`
   margin-top: 20px;
 `;
 export const SearchContainer = styled.div`
-  position: relative;
-  max-width: 600px;
-  margin: 20px auto;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+
+  padding-top: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+
   overflow: hidden;
 
   ul {
@@ -406,29 +414,25 @@ export const SearchContainer = styled.div`
     max-height: 300px;
     overflow-y: auto;
     border-top: 1px solid #e0e0e0;
+    background-color: #e0e0e0;
   }
 `;
 
 export const SearchInput = styled.input`
   width: 100%;
-  padding: 15px 20px;
-  font-size: 18px;
+  border-radius: 24px;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--color-lightgray);
+  box-shadow: 0px -1px 5px rgba(0, 0, 0, 0.1);
+  padding: 10px;
   border: none;
-  outline: none;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-
-  &::placeholder {
-    color: #aaa;
-  }
-
-  &:focus {
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
 `;
+
 export const ResultsList = styled.ul`
   list-style-type: none;
   padding: 0;
+  border-radius: 14px;
 `;
 
 export const SearchResult = styled.li`
