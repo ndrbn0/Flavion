@@ -84,11 +84,11 @@ const NavigationmenuIngredient = styled(Link)`
   padding: var(--padding-lg);
   box-sizing: border-box;
   cursor: pointer;
-  background-color: ${({ $active }) => ($active ? "#000" : "transparent")};
+  background-color: ${({ $active }) => ($active ? "#ff7f50" : "transparent")};
   color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
 
   &:hover {
-    background-color: ${({ $active }) => ($active ? "#000" : "#0000006b")};
+    background-color: ${({ $active }) => ($active ? "#ff7f50" : "#0000006b")};
   }
 `;
 
@@ -103,11 +103,12 @@ const NavigationmenuFavorites = styled(Link)`
   padding: var(--padding-lg);
   box-sizing: border-box;
   cursor: pointer;
-  background-color: ${({ $active }) => ($active ? "#000" : "transparent")};
+  background-color: ${({ $active }) => ($active ? "#ff7f50" : "transparent")};
   color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
 
   &:hover {
-    background-color: ${({ $active }) => ($active ? "000#" : "#0000006b")};
+    background-color: ${({ $active }) =>
+      $active ? "#ff7f50000#" : "#0000006b"};
   }
 `;
 
@@ -134,11 +135,11 @@ const NavigationmenuMatches = styled(Link)`
   justify-content: flex-start;
   padding: var(--padding-lg);
   box-sizing: border-box;
-  background-color: ${({ $active }) => ($active ? "#000" : "transparent")};
+  background-color: ${({ $active }) => ($active ? "#ff7f50" : "transparent")};
   color: ${({ $active }) => ($active ? "#fff" : "#007bff")};
 
   &:hover {
-    background-color: ${({ $active }) => ($active ? "#000" : "#0000006b")};
+    background-color: ${({ $active }) => ($active ? "#ff7f50" : "#0000006b")};
   }
 `;
 const NavigationRoot = styled.nav`
