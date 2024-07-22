@@ -76,22 +76,21 @@ export const Flavors = styled.span`
 `;
 
 export const BackLink = styled(Link)`
-  cursor: pointer;
-  font-size: 16px;
-  color: white;
-  margin: 32px 16px;
-  text-decoration: none;
-  font-style: italic;
+  width: 200px;
   font-size: 14px;
+  padding: 10px;
+  border: none;
   margin-top: 8px;
-  margin-left: 8px;
   padding: 8px 16px;
-  background-color: #000000;
+  background-color: #ff7f50;
   border-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 300px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 `;
 
 export const List = styled.ul`

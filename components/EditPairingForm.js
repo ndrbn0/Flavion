@@ -82,7 +82,7 @@ const EditPairingForm = ({
     setShowPopup(false);
     setError("");
   };
-
+  console.log("this is the pop up:", showPopup);
   return (
     <>
       {showPopup && (
