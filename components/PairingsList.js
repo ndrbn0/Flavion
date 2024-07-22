@@ -181,7 +181,6 @@ const StyledList = styled.ul`
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: center;
-  background-color: #f5e4b5;
 `;
 
 const Container = styled.div`
@@ -194,7 +193,6 @@ const Container = styled.div`
   padding: 8px;
   gap: 5 0px;
   margin-bottom: 15%;
-  background-color: #f5e4b5;
 `;
 
 const Overlay = styled.aside`

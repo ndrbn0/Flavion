@@ -265,8 +265,13 @@ const PopupForm = styled.div`
 `;
 
 const Button = styled.button`
+  width: 200px;
+  font-size: 14px;
+  padding: 10px 20px;
+  font-family: poppins;
+
   border: none;
-  font-size: 16px;
+
   margin-top: 8px;
   padding: 8px 16px;
   background-color: #ff7f50;
